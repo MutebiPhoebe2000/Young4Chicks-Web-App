@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Young For Chicks</title>
+
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  </head>
+  <body>
+    <!-- The Navigation Bar-->
+
+ 
+   <!-- NAVBAR -->
+<nav class="whole-bar navbar-expand-md">
+
+    <span class="initials fw bold text-secondary">
+      YC
+    </span><div class="container-xxl">
+  <a href="#intro" class="navbar-brand">
+  </a>
+  <!-- toggle button for mobile nav -->
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+  data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false"
+  aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    <!-- contact icon
+     <i class="bi bi-person-lines-fill"></i> -->
+</button>
+
+
+        
+<div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+  <ul class="navbar-nav">
+
+    <a class="navbar-brand" href="#">
+      <img src="Young4chicks-images/if-logo.jpg" alt="Young4Chicks" width="50" height="50">
+    </a>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#topics">Home</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#reviews">About Us</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#chicks">Chicks</a>
+    </li>
+    
+
+
+  </ul>
+</div>
+</div>
+ </nav>
+
+
+    <!-- I have commented removed cards from display in css and i have given them display none-->
+
+    <div class="dashboard-bigger container">
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <h2>Admin Navigation</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="#admin-overview" class="sidebar-active">Overview</a>
+            </li>
+            <li><a href="#manage-requests">Manage Requests</a></li>
+            <li><a href="#manage-payments">Manage Payments</a></li>
+            <li><a href="#manage-products">Manage Products</a></li>
+            <li><a href="#" id="sidebarAdminLogoutBtn">Logout</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="dashboard-content">
+        <section id="admin-overview" class="dashboard-section active">
+          <h2>Welcome, <span id="adminUserName">Admin</span>!</h2>
+          <p>
+            This is your central hub for managing the Young For Chicks platform.
+          </p>
+
+          <div class="cards-grid">
+            <div class="card">
+              <h3>Total Pending Requests</h3>
+              <p id="totalPendingRequests">0</p>
+            </div>
+            <div class="card">
+              <h3>Total Completed Requests</h3>
+              <p id="totalCompletedRequests">0</p>
+            </div>
+            <div class="card">
+              <h3>Total Farmers</h3>
+              <p id="totalFarmers">0</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="requests" class="dash-sec">
+          <h2>Manage Farmer Requests</h2>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Request ID</th>
+                  <th>Farmer Name</th>
+                  <th>Chick Type</th>
+                  <th>Quantity</th>
+                  <th>Delivery Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminRequestsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="payments" class="dash-sec">
+          <h2>Manage Farmer Payments</h2>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Payment ID</th>
+                  <th>Request ID</th>
+                  <th>Farmer Name</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminPaymentsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="manage-prodts" class="dash-sec">
+          <h2>Manage Products</h2>
+          <div class="prodt-management">
+            <h3>Add New Product</h3>
+            <form id="prodtForm">
+              <div class="form-group">
+                <label for="newProductName">Product Name:</label>
+                <input type="text" id="newProductName" required />
+              </div>
+
+
+              <!---Farmer Request Form-->
+
+              <div class="form-group">
+                <label for="newProductCategory">Category:</label>
+                <select id="newProductCategory" required>
+                  <option value="">Select Category</option>
+                  <option value="chick-types">Chick Types</option>
+                  <option value="feeds">Feeds</option>
+                  <option value="vaccines">Vaccines & Supplements</option>
+                </select>
+              </div>
+
+             
+
+            
+        </section>
+      </main>
+    </div>
+
+     <footer class="whole-footer">
+            <div class="container">
+             <div class="row text-center text-md-start">
+
+                <div class="col-md-4 mb-3">
+                    <h3>Quick Links</h3>
+
+                </div>
+                <ul class="list-unstyled">
+                    <li><a href="home.html" class="text-white">Home</a></li>
+                    <li><a href="about.html" class="text-white">About</a></li>
+                    <li><a href="chicks.html" class="text-white">Chicks</a></li>
+                    <li><a href="login.html" class="text-white">Login</a></li>
+                </ul>
+            </div>
+
+
+    <!-- social media -->
+     <div class="col-md-4 mb-3">
+      <h5>Join Us</h5>    
+        </div>
+        <div class="d-flex justify-content-center justify-content-md-start">
+          
+          <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=" alt="LinkedIn"></a>
+                </div>
+    
+    
+                </div>
+ </div>
+     
+            </div>
+           <hr class="border-light">
+            <p class="text-center mb-0">&copy; 2025 Young4Chicks. All rights reserved.</p>
+        </div>
+        </footer>
+
+      <!-- https://www.linkedin.com/in/phoebe-mutebi-25844226a -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script>
+      const tooltips = document.querySelectorAll('.tt')
+      tooltips.forEach(t => {
+        new bootstrap.Tooltip(t)
+      })
+    </script>
+    <script src="admin-dashboard.js"></script>
+  </body>
+</html>

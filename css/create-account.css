@@ -1,0 +1,115 @@
+body{
+     background: linear-gradient(to right, #f9d423, #ff4e50);
+}
+
+.whole-footer{
+    background-color: #895129;
+    text-emphasis-color: white;
+    padding-top: 4px;
+    padding-bottom: 3px;
+}
+
+.button{
+    background-color: #D9362D;
+}
+
+#pricing{
+    color: #C29938;
+}
+
+
+h1{
+    color: #D9362D;
+}
+
+.whole-bar{
+    font-weight: 500;
+    background-color: #895129;
+    font-size: 25px;  
+}
+
+
+.nav-link{
+    margin-left: 20px;
+    list-style: none;
+    display: inline-block;
+ 
+}
+/* navbar navbar-expand-md navbar-dark bg-primary fw-bolder */
+.btn{
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #D9362D;
+    color: white;
+    border-radius: 5px;
+    border-color: #C29938;
+}
+
+.display-2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.head{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    font-size: 80px;
+}
+
+.navbar-brand{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.initials{
+    justify-content: center;
+    padding-top: 109;
+}
+
+/* #main-nav{
+    justify-content: center;
+    padding-top: 109;
+} */
+
+/* "display-5 my-4 fw-bold" */
+.display-5{
+    margin: 4;
+    font-weight: bold;
+    color: #C29938;
+}
+
+/* card border-primary border-2 */
+
+/* .card-border{
+    color: #C29938;
+    border: 2px;
+} */
+#bigcard{
+    border-color: #C29938;
+}
+
+#form1{
+    display: inline;
+    margin: 50px auto;         
+    max-width: 800px;       
+    width: 100%;
+}
+
+/* .form-control{
+    size: 10px;
+    margin: 3px auto;         
+    max-width: 800px;       
+    width: 100%;
+    justify-items: center;
+}  */
+
+/* #pheebz1{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+#pheebz2{
+    
+} */

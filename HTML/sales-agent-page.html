@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/css/sales-agent-page.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<style>
+  section{
+    padding: 60px 0;
+  }
+</style>
+
+</head>
+<body>
+    
+    <!-- NAVBAR -->
+<nav class="whole-bar navbar-expand-md">
+
+    <span class="initials fw bold text-secondary">
+      YC
+    </span><div class="container-xxl">
+  <a href="#intro" class="navbar-brand">
+  </a>
+  <!-- toggle button for mobile nav -->
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+  data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false"
+  aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    <!-- contact icon
+     <i class="bi bi-person-lines-fill"></i> -->
+</button>
+
+
+        
+<div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+  <ul class="navbar-nav">
+
+    <a class="navbar-brand" href="#">
+      <img src="Young4chicks-images/if-logo.jpg" alt="Young4Chicks" width="50" height="50">
+    </a>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#topics">Home</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#reviews">About Us</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#chicks">Chicks</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="#contact">Contact Us</a>
+    </li>
+
+  </ul>
+</div>
+</div>
+ </nav>
+
+ <h1>Young4Chicks</h1>
+
+ <section id="intro">
+  <div class="container-lg">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-5 text-center text-md-start">
+      <h1>
+        <div class="display-2">Sales</div> <!--as if bold-->
+        <div class="displat-5 text-muted">View approved farmer requests and mark them as completed after chicks are picked</div> <!--as if blurry-->
+      </h1>
+      <br>
+    </div>
+    <div class="col-md-5 text-center d-none d-md-block"> <!--screen size-->
+      <span class="tt" data-bs-placement="bottom" title="Young4Chicks">
+      <img class="img-fluid"src="Young4chicks-images/yellow-chick-in-broken-shell-2eggs-side-by-side.jpg" alt="account">
+      </span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Young4chicks images/login-hero.jpg -->
+
+ </section>
+
+
+<!-- table -->
+
+ 
+<div class="table-responsive">
+  <table class="table align-middle">
+    <thead class="table-light">
+      <tr>
+    
+        <th>Agent Name</th>
+        <th>Farmer Name</th>
+        <th>Number of Chicks</th>
+        <th>Breed Type</th>
+        <th>Pickup Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       <tbody>
+            <tr>
+              <td><input type="text" class="form-control" name="agentName" placeholder="Enter agent name"></td>
+              <td><input type="text" class="form-control" name="customerName" placeholder="Enter customer name"></td>
+              <td><input type="number" class="form-control" name="chickCount" placeholder="Enter number"></td>
+              <td>
+                <select class="form-control" name="breedType">
+                  <option value="">Select breed</option>
+                  <option value="broilers">Broilers</option>
+                  <option value="layers">Layers</option>
+                  <option value="kuroilers">Kuroilers</option>
+                </select>
+              </td>
+              <td><input type="date" class="form-control" name="pickupDate"></td>
+              <td><span class="badge bg-warnng text-dark">Pending</span></td>
+              <td><button type="submit" class="btn btn-success">Mark as Completed</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+        
+
+
+     
+  <footer class="whole-footer">
+            <div class="container">
+             <div class="row text-center text-md-start">
+
+                <div class="col-md-4 mb-3">
+                    <h3>Quick Links</h3>
+
+                </div>
+                <ul class="list-unstyled">
+                    <li><a href="home.html" class="text-white">Home</a></li>
+                    <li><a href="about.html" class="text-white">About</a></li>
+                    <li><a href="chicks.html" class="text-white">Chicks</a></li>
+                    <li><a href="login.html" class="text-white">Login</a></li>
+                </ul>
+            </div>
+    
+
+
+    <!-- social media -->
+     <div class="col-md-4 mb-3">
+      <h5>Join Us</h5>    
+        </div>
+        <div class="d-flex justify-content-center justify-content-md-start">
+          
+          <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=" alt="LinkedIn"></a>
+                </div>
+    
+    
+                </div>
+ </div>
+     
+            </div>
+           <hr class="border-light">
+            <p class="text-center mb-0">&copy; 2025 Young4Chicks. All rights reserved.</p>
+        </div>
+        </footer>
+   
+    <!-- https://www.linkedin.com/in/phoebe-mutebi-25844226a -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script>
+      const tooltips = document.querySelectorAll('.tt')
+      tooltips.forEach(t => {
+        new bootstrap.Tooltip(t)
+      })
+    </script>
+    <script src="sales-agent-page.js"></script>
+</body>
+</html>

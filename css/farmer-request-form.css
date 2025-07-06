@@ -1,0 +1,91 @@
+body{
+    background-color: beige;
+}
+
+.whole-footer{
+    background-color: #895129;
+    text-emphasis-color: white;
+    padding-top: 4px;
+    padding-bottom: 3px;
+}
+
+button{
+    background-color: #D9362D;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.prices{
+    color: #C29938;
+}
+
+.btn{
+   background-color: #D9362D;
+   
+}
+
+body{
+    background-color: beige;
+}
+
+.whole-footer{
+    background-color: #895129;
+    text-emphasis-color: white;
+    padding-top: 4px;
+    padding-bottom: 3px;
+}
+
+.button{
+    background-color: #D9362D;
+}
+
+#pricing{
+    color: #C29938;
+}
+
+
+h1{
+    color: #D9362D;
+}
+
+.whole-bar{
+    font-weight: 500;
+    background-color: #895129;
+    font-size: 25px;  
+}
+
+
+.nav-link{
+    margin-left: 20px;
+    list-style: none;
+    display: inline-block;
+ 
+}
+/* navbar navbar-expand-md navbar-dark bg-primary fw-bolder */
+.btn{
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #D9362D;
+    color: white;
+    border-radius: 5px;
+    border-color: #C29938;
+}
+
+.display-2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.head{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    font-size: 80px;
+}
+
+.navbar-brand{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
