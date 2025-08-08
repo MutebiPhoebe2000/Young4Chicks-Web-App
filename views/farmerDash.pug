@@ -1,0 +1,325 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Farmer Dashboard - Young For Chicks
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css')
+  link(rel='stylesheet' href='/css/farmer.css')
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4ChickS
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link(href='index.html') Home
+        li.nav-item
+          a.nav-link(href='about.html') About
+        li.nav-item
+          a.nav-link(href='contact.html') Contact Us
+        li.nav-item
+          a.nav-link(href='chick-request-form.html') Chicks
+      button#logoutBtn.btn.btn-outline-light(type='button' title='Logout')
+        i.bi.bi-box-arrow-right
+        |  Logout
+// Dashboard Container
+.dashboard-container
+  // Sidebar
+  aside.sidebar
+    h4
+      i.bi.bi-person-circle
+      |  Farmer Panel
+    ul
+      li
+        a.sidebar-link.active(href='#' data-section='overview')
+          i.bi.bi-house-door
+          |  Overview
+      li
+        a.sidebar-link(href='#' data-section='my-requests')
+          i.bi.bi-clipboard-check
+          |  My Requests
+      li
+        a.sidebar-link(href='#' data-section='new-request')
+          i.bi.bi-plus-circle
+          |  New Request
+      li
+        a.sidebar-link(href='#' data-section='my-payments')
+          i.bi.bi-credit-card
+          |  My Payments
+      li
+        a.sidebar-link(href='#' data-section='my-deliveries')
+          i.bi.bi-truck
+          |  My Deliveries
+      li
+        a.sidebar-link(href='#' data-section='profile')
+          i.bi.bi-person-gear
+          |  Profile
+  // Main Content
+  main.main-content
+    // Overview Section
+    section#overview.dashboard-section.active
+      h2.mb-4
+        | Welcome, 
+        span#farmerName Farmer
+        | !
+      .stats-cards
+        .stat-card
+          h3 Total Requests
+          #totalRequestsCount.number 0
+        .stat-card
+          h3 Pending Requests
+          #pendingRequestsCount.number 0
+        .stat-card
+          h3 Completed Orders
+          #completedOrdersCount.number 0
+        .stat-card
+          h3 Total Spent
+          #totalSpentAmount.number $0
+      .alert.alert-info
+        i.bi.bi-info-circle
+        |           Welcome to your dashboard! Use the sidebar to navigate between different sections.
+    // My Requests Section
+    section#my-requests.dashboard-section
+      h3.mb-3 My Requests
+      .card
+        .card-body
+          .table-responsive
+            table.table.table-striped
+              thead
+                tr
+                  th Date
+                  th Request ID
+                  th Chick Type
+                  th Quantity
+                  th Status
+                  th Actions
+              tbody#farmerRequestsTable
+                tr
+                  td 2025-01-15
+                  td REQ001
+                  td Broiler
+                  td 100
+                  td
+                    span.badge.bg-warning Pending
+                  td
+                    button.btn.btn-sm.btn-info View
+    // New Request Section
+    section#new-request.dashboard-section
+      h3.mb-3 Submit New Request
+      .card
+        .card-body
+          form#newRequestForm.farmerReg(action='' method='post' onsubmit='return validateForm()')
+            .row
+              .col-md-6.mb-3
+                label.form-label(for='chickType') Chick Type
+                select#chickType.form-select(name='chickType' required='')
+                  option(value='') Select Type
+                  option(value='Broiler') Broiler
+                  option(value='Layer') Layer
+                  option(value='Kuroiler') Kuroiler
+                #chickTypeErr.showerr
+              .col-md-6.mb-3
+                label.form-label(for='quantity') Quantity
+                input#quantity.form-control(type='number' name='quantity' min='1')
+                #quantityErr.showerr
+            .mb-3
+              label.form-label(for='deliveryDate') Preferred Delivery Date
+              input#deliveryDate.form-control(type='date' name='deliveryDate')
+              #deliveryDateErr.showerr
+            .mb-3
+              label.form-label(for='notes') Additional Notes
+              textarea#notes.form-control(name='notes' rows='3')
+              #notesErr.showerr
+            button.btn.btn-success(type='submit')
+              i.bi.bi-send
+              |  Submit Request
+    // Payments Section
+    section#my-payments.dashboard-section
+      h3.mb-3 My Payments
+      .card
+        .card-body
+          .table-responsive
+            table.table.table-bordered
+              thead
+                tr
+                  th Date
+                  th Payment ID
+                  th Request ID
+                  th Amount
+                  th Status
+              tbody#farmerPaymentsTable
+                tr
+                  td 2025-01-10
+                  td PAY001
+                  td REQ001
+                  td $500
+                  td
+                    span.badge.bg-success Paid
+    // Deliveries Section
+    section#my-deliveries.dashboard-section
+      h3.mb-3 My Deliveries
+      .card
+        .card-body
+          .table-responsive
+            table.table.table-hover
+              thead
+                tr
+                  th Delivery Date
+                  th Product
+                  th Quantity
+                  th Status
+                  th Tracking
+              tbody#farmerDeliveriesTable
+                tr
+                  td 2025-01-20
+                  td Broiler Chicks
+                  td 100
+                  td
+                    span.badge.bg-info In Transit
+                  td
+                    button.btn.btn-sm.btn-outline-primary Track
+    // Profile Section
+    section#profile.dashboard-section
+      h3.mb-3 My Profile
+      .row
+        .col-md-8
+          .card
+            .card-body
+              form#profileForm.profileForm(action='' method='post' onsubmit='return validateForm()')
+                .row
+                  .col-md-6.mb-3
+                    label.form-label(for='fullName') Full Name
+                    input#fullName.form-control(type='text' name='fullName' value='John Farmer')
+                    #fullNameErr.showerr
+                  .col-md-6.mb-3
+                    label.form-label(for='email') Email
+                    input#email.form-control(type='email' name='email' value='pheebz@example.com')
+                    #emailErr.showerr
+                .row
+                  .col-md-6.mb-3
+                    label.form-label(for='phone') Phone Number
+                    input#phone.form-control(type='tel' name='phone' value='+256700000000')
+                    #phoneErr.showerr
+                  .col-md-6.mb-3
+                    label.form-label(for='location') Farm Location
+                    input#location.form-control(type='text' name='location' value='Kampala, Uganda')
+                    #locationErr.showerr
+                button.btn.btn-primary(type='submit')
+                  i.bi.bi-save
+                  |  Update Profile
+// Footer
+footer.whole-footer
+  .container
+    .row.text-center.text-md-start
+      .container.mb-3.text-center
+        h3 Quick Links
+      ul.container.list-unstyled.text-center
+        li
+          a.text-white(href='index.html') Home
+        li
+          a.text-white(href='about.html') About
+        li
+          a.text-white(href='chick-request-form.html') Chicks
+        li
+          a.text-white(href='login.html') Login
+    .container.mb-3.text-center
+      h5 Join Us
+    .d-flex.justify-content-center
+      a(href='#')
+        img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
+    hr.border-light
+    p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+// Scripts
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js')
+script.
+  // Simple sidebar navigation
+  document.addEventListener('DOMContentLoaded', function () {
+  // Listen for clicks on sidebar links
+  document.querySelectorAll('.sidebar-link').forEach(link => {
+  link.addEventListener('click', function (e) {
+  e.preventDefault();
+  // Get which section to show
+  const section = this.getAttribute('data-section');
+  // Hide all sections
+  document.querySelectorAll('.dashboard-section').forEach(s => {
+  s.classList.remove('active');
+  });
+  // Remove active from all sidebar links
+  document.querySelectorAll('.sidebar-link').forEach(l => {
+  l.classList.remove('active');
+  });
+  // Show the clicked section
+  document.getElementById(section).classList.add('active');
+  // Make the clicked link active
+  this.classList.add('active');
+  });
+  });
+  });
+  function validateForm() {
+  let quantity = document.getElementById('quantity').value;
+  let deliveryDate = document.getElementById('deliveryDate').value;
+  let notes = document.getElementById('notes').value;
+  let email = document.getElementById('email').value;
+  let fullName = document.getElementById('fullName').value;
+  let phone = document.getElementById('phone').value;
+  let location = document.getElementById('location').value;
+  let quantityErr = document.getElementById('quantityErr');
+  let deliveryDateErr = document.getElementById('deliveryDateErr');
+  let notesErr = document.getElementById('notesErr');
+  let emailErr = document.getElementById('emailErr');
+  let fullNameErr = document.getElementById('fullNameErr');
+  let phoneErr = document.getElementById('phoneErr');
+  let errFlag = false;
+  // Quantity validation (must be number and >0)
+  if (quantity === "" || isNaN(quantity) || Number(quantity) <= 0) {
+  quantityErr.innerHTML = "Quantity must be a valid number!!!";
+  errFlag = true;
+  }
+  // Delivery Date validation (required and not in the past)
+  if (deliveryDate.length === 0) {
+  deliveryDateErr.innerHTML = "Delivery Date is Required!!!";
+  errFlag = true;
+  } else {
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  let selectedDate = new Date(deliveryDate);
+  if (selectedDate < today) {
+  deliveryDateErr.innerHTML = "Delivery Date can't be in the past!!!";
+  errFlag = true;
+  }
+  }
+  // Notes validation (required)
+  if (notes.length === 0) {
+  notesErr.innerHTML = "Notes are Required!!!";
+  errFlag = true;
+  }
+  // Email validation (must be valid format)
+  if (email.length === 0) {
+  emailErr.innerHTML = "Email is Required!!!";
+  errFlag = true;
+  } else if (!/^[^\\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  emailErr.innerHTML = "Enter a valid Email!!!";
+  errFlag = true;
+  }
+  // Full Name validation (required)
+  if (fullName.length === 0) {
+  fullNameErr.innerHTML = "Full Name is Required!!!";
+  errFlag = true;
+  }
+  // Phone validation (required and must be digits)
+  if (phone.length === 0) {
+  phoneErr.innerHTML = "Phone is Required!!!";
+  errFlag = true;
+  } else if (!/^\\+?\d[\d\s]{7,14}$/.test(phone)) {
+  phoneErr.innerHTML = "Enter a valid Phone number!!!";
+  errFlag = true;
+  }
+  // Location validation (required)
+  if (location.length === 0) {
+  locationErr.innerHTML = "Location is Required!!!";
+  errFlag = true;
+  }
+  return !errFlag;
+  }

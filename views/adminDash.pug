@@ -1,0 +1,1090 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Admin Dashboard - Young For Chicks
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css')
+  link(rel='stylesheet' href='/css/admin.css')
+// Top Navigation Bar
+nav.navbar.navbar-expand-lg.navbar-dark.navbar-custom
+  .container-fluid
+    a.navbar-brand.d-flex.align-items-center(href='#')
+      i.bi.bi-shield-check.me-2
+      strong Young For Chicks - Admin Panel
+    .d-flex.align-items-center
+      span.text-light.me-3
+        | Welcome, 
+        strong#adminName Administrator
+      button#logoutBtn.btn.btn-outline-light
+        i.bi.bi-box-arrow-right
+        |  Logout
+.container-fluid
+  .row
+    // Sidebar Navigation
+    .col-md-2.sidebar
+      h5.text-center
+        i.bi.bi-gear-fill
+        |  Admin Menu
+      a.nav-link.active(href='#' data-section='overview')
+        i.bi.bi-speedometer2
+        |  Dashboard Overview
+      a.nav-link(href='#' data-section='requests')
+        i.bi.bi-clipboard-check
+        |  Manage Requests
+      a.nav-link(href='#' data-section='payments')
+        i.bi.bi-credit-card
+        |  Payment Management
+      a.nav-link(href='#' data-section='users')
+        i.bi.bi-people
+        |  User Management
+      a.nav-link(href='#' data-section='products')
+        i.bi.bi-box-seam
+        |  Product Management
+      a.nav-link(href='#' data-section='inventory')
+        i.bi.bi-boxes
+        |  Inventory Control
+      a.nav-link(href='#' data-section='orders')
+        i.bi.bi-cart-check
+        |  Order Management
+      a.nav-link(href='#' data-section='reports')
+        i.bi.bi-graph-up
+        |  Reports &amp; Analytics
+      a.nav-link(href='#' data-section='notifications')
+        i.bi.bi-bell
+        |  Notifications
+      a.nav-link(href='#' data-section='settings')
+        i.bi.bi-gear
+        |  System Settings
+    // Main Content Area
+    .col-md-10.p-4
+      // Dashboard Overview Section
+      #overview.section.active
+        h2
+          i.bi.bi-speedometer2
+          |  Dashboard Overview
+        p.text-muted Welcome to your admin control center. Here&apos;s what&apos;s happening today.
+        // Quick Stats Bar
+        .quick-stats.mb-4
+          .row.text-center
+            .col-md-3
+              h4#todayOrders 10
+              small Orders Today
+            .col-md-3
+              h4#todayRevenue 125,000
+              small Revenue Today (UGX)
+            .col-md-3
+              h4#activeUsers 15
+              small Active Users
+            .col-md-3
+              h4#lowStock 3
+              small Low Stock Items
+        // Main Statistics Cards
+        .row
+          .col-md-3
+            .dashboard-card.text-center.stat-card-1
+              i.bi.bi-clipboard-check(style='font-size: 2rem; color: #e74c3c;')
+              h5.mt-3 Pending Requests
+              #pendingRequests.stat-number 18
+              small.text-muted Awaiting approval
+          .col-md-3
+            .dashboard-card.text-center.stat-card-2
+              i.bi.bi-people-fill(style='font-size: 2rem; color: #2ecc71;')
+              h5.mt-3 Total Farmers
+              #totalFarmers.stat-number 247
+              small.text-muted Registered users
+          .col-md-3
+            .dashboard-card.text-center.stat-card-3
+              i.bi.bi-check-circle-fill(style='font-size: 2rem; color: #3498db;')
+              h5.mt-3 Completed Orders
+              #completedOrders.stat-number 1,456
+              small.text-muted This month
+          .col-md-3
+            .dashboard-card.text-center.stat-card-4
+              i.bi.bi-currency-exchange(style='font-size: 2rem; color: #f39c12;')
+              h5.mt-3 Monthly Revenue
+              #monthlyRevenue.stat-number 15.2M
+              small.text-muted UGX this month
+        // Recent Activity
+        .row
+          .col-md-6
+            .dashboard-card
+              h5
+                i.bi.bi-clock-history
+                |  Recent Activities
+              ul.list-unstyled
+                li.mb-2
+                  i.bi.bi-dot.text-success
+                  |  New order from John Mukasa - 100 Broiler Chicks
+                li.mb-2
+                  i.bi.bi-dot.text-warning
+                  |  Payment pending verification - REQ-2025-045
+                li.mb-2
+                  i.bi.bi-dot.text-info
+                  |  New farmer registration - Mary Nakato
+                li.mb-2
+                  i.bi.bi-dot.text-danger
+                  |  Low stock alert - Layer feed (50kg)
+          .col-md-6
+            .dashboard-card
+              h5
+                i.bi.bi-exclamation-triangle
+                |  Alerts &amp; Notifications
+              ul.list-unstyled
+                li.mb-2
+                  span.badge.bg-danger Urgent
+                  |  3 payment confirmations needed
+                li.mb-2
+                  span.badge.bg-warning Warning
+                  |  Layer chicks stock running low
+                li.mb-2
+                  span.badge.bg-info Info
+                  |  5 new farmer applications
+                li.mb-2
+                  span.badge.bg-success Success
+                  |  Weekly backup completed
+      // Manage Requests Section
+      #requests.section
+        h2
+          i.bi.bi-clipboard-check
+          |  Manage Farmer Requests
+        p.text-muted Review and process farmer requests for chicks and supplies.
+        .table-container
+          .d-flex.justify-content-between.align-items-center.mb-3
+            h5 Farmer Requests
+            div
+              button#approveAllBtn.btn.btn-success.btn-sm
+                i.bi.bi-check-all
+                |  Approve All Pending
+              button#exportRequestsBtn.btn.btn-primary.btn-sm
+                i.bi.bi-download
+                |  Export
+          table.table.table-striped
+            thead.table-dark
+              tr
+                th Request ID
+                th Date
+                th Farmer Name
+                th Product
+                th Quantity
+                th Total Amount
+                th Status
+                th Actions
+            tbody#requestsTable
+              tr
+                td REQ-2025-001
+                td 2025-07-28
+                td John Mukasa
+                td Broiler Chicks
+                td 100
+                td 500,000 UGX
+                td
+                  span.badge.status-pending Pending
+                td
+                  button.btn.btn-success.btn-action.approve-btn(data-id='REQ-2025-001')
+                    i.bi.bi-check
+                    |  Approve
+                  button.btn.btn-danger.btn-action.reject-btn(data-id='REQ-2025-001')
+                    i.bi.bi-x
+                    |  Reject
+                  button.btn.btn-info.btn-action.details-btn(data-id='REQ-2025-001')
+                    i.bi.bi-eye
+                    |  Details
+              tr
+                td REQ-2025-002
+                td 2025-07-27
+                td Mary Nakato
+                td Layer Chicks
+                td 50
+                td 300,000 UGX
+                td
+                  span.badge.status-approved Approved
+                td
+                  button.btn.btn-info.btn-action.details-btn(data-id='REQ-2025-002')
+                    i.bi.bi-eye
+                    |  Details
+                  button.btn.btn-secondary.btn-action.complete-btn(data-id='REQ-2025-002')
+                    i.bi.bi-check-circle
+                    |  Mark Complete
+              tr
+                td REQ-2025-003
+                td 2025-07-26
+                td Peter Ssali
+                td Broiler Feed (50kg)
+                td 10
+                td 450,000 UGX
+                td
+                  span.badge.status-completed Completed
+                td
+                  button.btn.btn-info.btn-action.details-btn(data-id='REQ-2025-003')
+                    i.bi.bi-eye
+                    |  Details
+      // Payment Management Section
+      #payments.section
+        h2
+          i.bi.bi-credit-card
+          |  Payment Management
+        p.text-muted Monitor and verify farmer payments.
+        .row.mb-4
+          .col-md-4
+            .dashboard-card.text-center
+              h6 Pending Payments
+              .stat-number.text-warning 8
+          .col-md-4
+            .dashboard-card.text-center
+              h6 Today&apos;s Revenue
+              .stat-number.text-success 2.1M UGX
+          .col-md-4
+            .dashboard-card.text-center
+              h6 Failed Payments
+              .stat-number.text-danger 2
+        .table-container
+          table.table.table-striped
+            thead.table-dark
+              tr
+                th Payment ID
+                th Request ID
+                th Farmer Name
+                th Amount
+                th Payment Method
+                th Date
+                th Status
+                th Actions
+            tbody
+              tr
+                td PAY-001
+                td REQ-2025-001
+                td John Mukasa
+                td 500,000 UGX
+                td Mobile Money
+                td 2025-07-28
+                td
+                  span.badge.status-pending Pending
+                td
+                  button.btn.btn-success.btn-action.confirm-payment-btn(data-id='PAY-001')
+                    i.bi.bi-check
+                    |  Confirm
+                  button.btn.btn-info.btn-action.payment-details-btn(data-id='PAY-001')
+                    i.bi.bi-eye
+                    |  Details
+              tr
+                td PAY-002
+                td REQ-2025-002
+                td Mary Nakato
+                td 300,000 UGX
+                td Bank Transfer
+                td 2025-07-27
+                td
+                  span.badge.status-completed Completed
+                td
+                  button.btn.btn-secondary.btn-action.receipt-btn(data-id='PAY-002')
+                    i.bi.bi-receipt
+                    |  Receipt
+      // User Management Section
+      #users.section
+        h2
+          i.bi.bi-people
+          |  User Management
+        p.text-muted Manage farmer accounts and user permissions.
+        .table-container
+          .d-flex.justify-content-between.align-items-center.mb-3
+            h5 Registered Users
+            button#exportUsersBtn.btn.btn-primary.btn-sm
+              i.bi.bi-download
+              |  Export Users
+          table.table.table-striped
+            thead.table-dark
+              tr
+                th User ID
+                th Name
+                th Email
+                th Phone
+                th Location
+                th Join Date
+                th Status
+                th Actions
+            tbody
+              tr
+                td USR-001
+                td John Mukasa
+                td john@example.com
+                td +256 700 123456
+                td Kampala
+                td 2025-01-15
+                td
+                  span.badge.status-active Active
+                td
+                  button.btn.btn-info.btn-action.user-profile-btn(data-id='USR-001')
+                    i.bi.bi-person
+                    |  Profile
+                  button.btn.btn-warning.btn-action.suspend-user-btn(data-id='USR-001')
+                    i.bi.bi-pause
+                    |  Suspend
+              tr
+                td USR-002
+                td Mary Nakato
+                td mary@example.com
+                td +256 701 789012
+                td Entebbe
+                td 2025-02-20
+                td
+                  span.badge.status-active Active
+                td
+                  button.btn.btn-info.btn-action.user-profile-btn(data-id='USR-002')
+                    i.bi.bi-person
+                    |  Profile
+                  button.btn.btn-warning.btn-action.suspend-user-btn(data-id='USR-002')
+                    i.bi.bi-pause
+                    |  Suspend
+              tr
+                td USR-003
+                td Peter Ssali
+                td peter@example.com
+                td +256 702 345678
+                td Jinja
+                td 2025-03-10
+                td
+                  span.badge.status-active Active
+                td
+                  button.btn.btn-info.btn-action.user-profile-btn(data-id='USR-003')
+                    i.bi.bi-person
+                    |  Profile
+                  button.btn.btn-warning.btn-action.suspend-user-btn(data-id='USR-003')
+                    i.bi.bi-pause
+                    |  Suspend
+      // Product Management Section
+      #products.section
+        h2
+          i.bi.bi-box-seam
+          |  Product Management
+        p.text-muted Add, edit, and manage your products catalog.
+        .row
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-plus-circle
+                |  Add New Product
+              form#productForm.productForm(action='' method='post' onsubmit='return validateProductForm()' novalidate='')
+                .mb-3
+                  label.form-label(for='productName') Product Name
+                  input#productName.form-control(type='text' name='productName' placeholder='Enter a product')
+                  #productNameError.showerr
+                .mb-3
+                  label.form-label(for='productCategory') Category
+                  select#productCategory.form-select(name='productCategory')
+                    option(value='') Select Category
+                    option(value='chicks') Chick Types
+                    option(value='feeds') Feeds &amp; Nutrition
+                    option(value='vaccines') Vaccines &amp; Medicine
+                    option(value='equipment') Farm Equipment
+                  #productCategoryError.showerr
+                .mb-3
+                  label.form-label(for='productPrice') Price (UGX)
+                  input#productPrice.form-control(type='number' name='productPrice')
+                  #productPriceError.showerr
+                .mb-3
+                  label.form-label(for='productStock') Initial Stock
+                  input#productStock.form-control(type='number' name='productStock')
+                  #productStockError.showerr
+                .mb-3
+                  label.form-label(for='productDescription') Description
+                  textarea#productDescription.form-control(rows='3' name='productDescription')
+                  #productDescriptionError.showerr
+                button.btn.btn-primary(type='submit')
+                  i.bi.bi-plus
+                  |  Add Product
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-list-ul
+                |  Current Products
+              #productsList
+                .card.mb-2
+                  .card-body.p-3
+                    .d-flex.justify-content-between.align-items-center
+                      div
+                        h6.mb-1 Broiler Chicks
+                        small.text-muted 5,000 UGX each &bull; Stock: 500
+                      div
+                        button.btn.btn-sm.btn-outline-primary.edit-product-btn(data-id='PROD-001')
+                          i.bi.bi-pencil
+                        button.btn.btn-sm.btn-outline-danger.delete-product-btn(data-id='PROD-001')
+                          i.bi.bi-trash
+                .card.mb-2
+                  .card-body.p-3
+                    .d-flex.justify-content-between.align-items-center
+                      div
+                        h6.mb-1 Layer Chicks
+                        small.text-muted 6,000 UGX each &bull; Stock: 300
+                      div
+                        button.btn.btn-sm.btn-outline-primary.edit-product-btn(data-id='PROD-002')
+                          i.bi.bi-pencil
+                        button.btn.btn-sm.btn-outline-danger.delete-product-btn(data-id='PROD-002')
+                          i.bi.bi-trash
+                .card.mb-2
+                  .card-body.p-3
+                    .d-flex.justify-content-between.align-items-center
+                      div
+                        h6.mb-1 Broiler Feed (50kg)
+                        small.text-muted 45,000 UGX per bag &bull; Stock: 150
+                      div
+                        button.btn.btn-sm.btn-outline-primary.edit-product-btn(data-id='PROD-003')
+                          i.bi.bi-pencil
+                        button.btn.btn-sm.btn-outline-danger.delete-product-btn(data-id='PROD-003')
+                          i.bi.bi-trash
+      // Inventory Control Section
+      #inventory.section
+        h2
+          i.bi.bi-boxes
+          |  Inventory Control
+        p.text-muted Monitor stock levels and manage inventory.
+        .row.mb-4
+          .col-md-3
+            .dashboard-card.text-center
+              h6 Total Products
+              .stat-number.text-primary 24
+          .col-md-3
+            .dashboard-card.text-center
+              h6 Low Stock Alerts
+              .stat-number.text-warning 3
+          .col-md-3
+            .dashboard-card.text-center
+              h6 Out of Stock
+              .stat-number.text-danger 1
+          .col-md-3
+            .dashboard-card.text-center
+              h6 Total Value
+              .stat-number.text-success 8.5M
+        .table-container
+          h5
+            i.bi.bi-clipboard-data
+            |  Stock Status
+          table.table.table-striped
+            thead.table-dark
+              tr
+                th Product ID
+                th Product Name
+                th Category
+                th Current Stock
+                th Minimum Level
+                th Status
+                th Last Updated
+                th Actions
+            tbody
+              tr
+                td PROD-001
+                td Broiler Chicks
+                td Chicks
+                td 500
+                td 100
+                td
+                  span.badge.bg-success Good Stock
+                td 2025-07-29
+                td
+                  button.btn.btn-primary.btn-action.update-stock-btn(data-id='PROD-001')
+                    i.bi.bi-arrow-up
+                    |  Update
+              tr
+                td PROD-002
+                td Layer Feed (50kg)
+                td Feeds
+                td 25
+                td 50
+                td
+                  span.badge.bg-warning Low Stock
+                td 2025-07-28
+                td
+                  button.btn.btn-warning.btn-action.reorder-stock-btn(data-id='PROD-002')
+                    i.bi.bi-cart-plus
+                    |  Reorder
+              tr
+                td PROD-003
+                td Vaccination Kit
+                td Vaccines
+                td 0
+                td 20
+                td
+                  span.badge.bg-danger Out of Stock
+                td 2025-07-27
+                td
+                  button.btn.btn-danger.btn-action.urgent-reorder-btn(data-id='PROD-003')
+                    i.bi.bi-exclamation-triangle
+                    |  Urgent
+      // Order Management Section
+      #orders.section
+        h2
+          i.bi.bi-cart-check
+          |  Order Management
+        p.text-muted Track and manage all customer orders.
+        .table-container
+          .d-flex.justify-content-between.align-items-center.mb-3
+            h5 Recent Orders
+            div
+              select#orderStatusFilter.form-select.form-select-sm.d-inline-block.w-auto.me-2
+                option(value='') All Orders
+                option(value='pending') Pending
+                option(value='processing') Processing
+                option(value='shipped') Shipped
+                option(value='delivered') Delivered
+              button#exportOrdersBtn.btn.btn-primary.btn-sm
+                i.bi.bi-download
+                |  Export
+          table.table.table-striped
+            thead.table-dark
+              tr
+                th Order ID
+                th Customer
+                th Products
+                th Total Amount
+                th Order Date
+                th Delivery Date
+                th Status
+                th Actions
+            tbody
+              tr
+                td ORD-2025-001
+                td John Mukasa
+                td 100x Broiler Chicks
+                td 500,000 UGX
+                td 2025-07-28
+                td 2025-08-02
+                td
+                  span.badge.bg-info Processing
+                td
+                  button.btn.btn-success.btn-action.ship-order-btn(data-id='ORD-2025-001')
+                    i.bi.bi-truck
+                    |  Ship
+                  button.btn.btn-info.btn-action.order-details-btn(data-id='ORD-2025-001')
+                    i.bi.bi-eye
+                    |  Details
+              tr
+                td ORD-2025-002
+                td Mary Nakato
+                td 50x Layer Chicks, 5x Feed
+                td 525,000 UGX
+                td 2025-07-27
+                td 2025-08-01
+                td
+                  span.badge.bg-success Delivered
+                td
+                  button.btn.btn-secondary.btn-action.invoice-btn(data-id='ORD-2025-002')
+                    i.bi.bi-receipt
+                    |  Invoice
+              tr
+                td ORD-2025-003
+                td Peter Ssali
+                td 200x Broiler Chicks
+                td 1,000,000 UGX
+                td 2025-07-29
+                td 2025-08-05
+                td
+                  span.badge.bg-warning Pending
+                td
+                  button.btn.btn-primary.btn-action.process-order-btn(data-id='ORD-2025-003')
+                    i.bi.bi-play
+                    |  Process
+                  button.btn.btn-info.btn-action.order-details-btn(data-id='ORD-2025-003')
+                    i.bi.bi-eye
+                    |  Details
+      // Reports & Analytics Section
+      #reports.section
+        h2
+          i.bi.bi-graph-up
+          |  Reports &amp; Analytics
+        p.text-muted Generate reports and view business analytics.
+        .row
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-file-earmark-text
+                |  Generate Reports
+              form#reportForm(onsubmit='return validateReportForm()' novalidate='')
+                .mb-3
+                  label.form-label(for='reportType') Report Type
+                  select#reportType.form-select(name='reportType')
+                    option(value='') Select Report Type
+                    option(value='sales') Sales Report
+                    option(value='inventory') Inventory Report
+                    option(value='customers') Customer Report
+                    option(value='financial') Financial Report
+                  #reportTypeError.showerr
+                .mb-3
+                  label.form-label(for='reportPeriod') Time Period
+                  select#reportPeriod.form-select(name='reportPeriod' required='')
+                    option(value='') Select Period
+                    option(value='today') Today
+                    option(value='week') This Week
+                    option(value='month') This Month
+                    option(value='quarter') This Quarter
+                    option(value='year') This Year
+                    option(value='custom') Custom Range
+                  #reportPeriodError.showerr
+                #customDateRange.mb-3(style='display: none;')
+                  .row
+                    .col-md-6
+                      label.form-label(for='startDate') Start Date
+                      input#startDate.form-control(type='date' name='startDate')
+                      #startDateError.showerr
+                    .col-md-6
+                      label.form-label(for='endDate') End Date
+                      input#endDate.form-control(type='date' name='endDate')
+                      #endDateError.showerr
+                button.btn.btn-primary(type='submit')
+                  i.bi.bi-file-earmark-arrow-down
+                  |  Generate Report
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-graph-up-arrow
+                |  Quick Analytics
+              .row.text-center
+                .col-6.mb-3
+                  .border.rounded.p-3
+                    h4.text-primary 15.2M
+                    small Monthly Revenue
+                .col-6.mb-3
+                  .border.rounded.p-3
+                    h4.text-success 247
+                    small Active Customers
+                .col-6.mb-3
+                  .border.rounded.p-3
+                    h4.text-info 1,456
+                    small Orders Completed
+                .col-6.mb-3
+                  .border.rounded.p-3
+                    h4.text-warning 96%
+                    small Customer Satisfaction
+        .table-container
+          h5
+            i.bi.bi-file-earmark-text
+            |  Generated Reports
+          table.table.table-striped
+            thead.table-dark
+              tr
+                th Report ID
+                th Report Name
+                th Type
+                th Generated Date
+                th Period
+                th Status
+                th Actions
+            tbody
+              tr
+                td RPT-001
+                td July Sales Summary
+                td Sales
+                td 2025-07-29
+                td July 2025
+                td
+                  span.badge.bg-success Ready
+                td
+                  button.btn.btn-primary.btn-action.download-report-btn(data-id='RPT-001')
+                    i.bi.bi-download
+                    |  Download
+              tr
+                td RPT-002
+                td Inventory Status Report
+                td Inventory
+                td 2025-07-28
+                td Current
+                td
+                  span.badge.bg-success Ready
+                td
+                  button.btn.btn-primary.btn-action.download-report-btn(data-id='RPT-002')
+                    i.bi.bi-download
+                    |  Download
+      // Notifications Section
+      #notifications.section
+        h2
+          i.bi.bi-bell
+          |  Notifications Center
+        p.text-muted Manage system notifications and alerts.
+        .row
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-bell-fill
+                |  Send Notification
+              form#notificationForm(onsubmit='return validateNotificationForm()' novalidate='')
+                .mb-3
+                  label.form-label(for='notificationType') Notification Type
+                  select#notificationType.form-select(name='notificationType')
+                    option(value='') Select Type
+                    option(value='general') General Announcement
+                    option(value='promotional') Promotional
+                    option(value='alert') System Alert
+                    option(value='reminder') Reminder
+                  #notificationTypeError.showerr
+                .mb-3
+                  label.form-label(for='notificationTarget') Send To
+                  select#notificationTarget.form-select(name='notificationTarget')
+                    option(value='') Select Recipients
+                    option(value='all') All Users
+                    option(value='farmers') All Farmers
+                    option(value='active') Active Users Only
+                    option(value='specific') Specific User
+                  #notificationTargetError.showerr
+                .mb-3
+                  label.form-label(for='notificationTitle') Title
+                  input#notificationTitle.form-control(type='text' name='notificationTitle')
+                  #notificationTitleError.showerr
+                .mb-3
+                  label.form-label(for='notificationMessage') Message
+                  textarea#notificationMessage.form-control(rows='4' name='notificationMessage')
+                  #notificationMessageError.showerr
+                button.btn.btn-primary(type='submit')
+                  i.bi.bi-send
+                  |  Send Notification
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-list-ul
+                |  Recent Notifications
+              .list-group
+                .list-group-item
+                  .d-flex.w-100.justify-content-between
+                    h6.mb-1 New Product Launch
+                    small 2 hours ago
+                  p.mb-1 Layer feed now available at competitive prices.
+                  small.text-muted Sent to: All Farmers
+                .list-group-item
+                  .d-flex.w-100.justify-content-between
+                    h6.mb-1 System Maintenance
+                    small 1 day ago
+                  p.mb-1 Scheduled maintenance on August 1st, 2025.
+                  small.text-muted Sent to: All Users
+                .list-group-item
+                  .d-flex.w-100.justify-content-between
+                    h6.mb-1 Stock Alert
+                    small 2 days ago
+                  p.mb-1 Low stock alert for vaccination kits.
+                  small.text-muted Internal Alert
+      // System Settings Section
+      #settings.section
+        h2
+          i.bi.bi-gear
+          |  System Settings
+        p.text-muted Configure system preferences and settings.
+        .row
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-sliders
+                |  General Settings
+              form#settingsForm(onsubmit='return validateSettingsForm()' novalidate='')
+                .mb-3
+                  label.form-label(for='siteName') Site Name
+                  input#siteName.form-control(type='text' value='Young4Chicks' name='siteName')
+                  #siteNameError.showerr
+                .mb-3
+                  label.form-label(for='contactEmail') Contact Email
+                  input#contactEmail.form-control(type='email' value='admin@young4chicks.com' name='email')
+                  #contactEmailError.showerr
+                .mb-3
+                  label.form-label(for='contactPhone') Contact Phone
+                  input#contactPhone.form-control(type='tel' value='+256 700 000000' name='phone')
+                  #contactPhoneError.showerr
+                .mb-3
+                  label.form-label(for='defaultCurrency') Default Currency
+                  select#defaultCurrency.form-select(name='defaultCurrency')
+                    option(value='UGX' selected='') Uganda Shilling (UGX)
+                    option(value='USD') US Dollar (USD)
+                    option(value='EUR') Euro (EUR)
+                  #defaultCurrencyError.showerr
+                .mb-3.form-check
+                  input#emailNotifications.form-check-input(type='checkbox' checked='' name='emailNotifications')
+                  label.form-check-label(for='emailNotifications') Enable Email Notifications
+                .mb-3.form-check
+                  input#autoApproval.form-check-input(type='checkbox' name='autoApproval')
+                  label.form-check-label(for='autoApproval') Auto-approve Small Orders (Under 100,000 UGX)
+                button.btn.btn-primary(type='submit')
+                  i.bi.bi-check
+                  |  Save Settings
+          .col-md-6
+            .form-container
+              h5
+                i.bi.bi-shield-check
+                |  Security Settings
+              form#passwordForm(onsubmit='return validatePasswordForm()' novalidate='')
+                .mb-2
+                  input#currentPassword.form-control(type='password' placeholder='Current Password' required='')
+                  #currentPasswordError.showerr
+                .mb-2
+                  input#newPassword.form-control(type='password' placeholder='New Password' required='')
+                  #newPasswordError.showerr
+                .mb-3
+                  input#confirmNewPassword.form-control(type='password' placeholder='Confirm New Password' required='')
+                  #confirmNewPasswordError.showerr
+                button.btn.btn-warning.btn-sm(type='submit')
+                  i.bi.bi-key
+                  |  Change Password
+              .mb-3.mt-4
+                h6 System Backup
+                p.small.text-muted Last backup: July 28, 2025 at 11:30 PM
+                button#createBackupBtn.btn.btn-info.btn-sm
+                  i.bi.bi-cloud-arrow-up
+                  |  Create Backup Now
+              .mb-3
+                h6 System Information
+                ul.list-unstyled.small
+                  li
+                    strong Version:
+                    |  2.1.0
+                  li
+                    strong Database:
+                    |  MySQL 8.0
+                  li
+                    strong Server:
+                    |  Ubuntu 20.04 LTS
+                  li
+                    strong Last Update:
+                    |  July 15, 2025
+  footer.whole-footer
+    .container
+      .row.text-center.text-md-start
+        .container.mb-3.text-center
+          h3 Quick Links
+        ul.container.list-unstyled.text-center
+          li
+            a.text-white(href='index.html') Home
+          li
+            a.text-white(href='about.html') About
+          li
+            a.text-white(href='chick-request-form.html') Chicks
+          li
+            a.text-white(href='login.html') Login
+          li
+            a.text-white(href='farmer-reg-page.html') Register
+      // social media
+      .container.mb-3.text-center
+        h5 Join Us
+      .d-flex.justify-content-center.justify-content-md-center
+        a(href='#')
+          img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
+hr.border-light
+p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js')
+script.
+  // Simple sidebar navigation
+  document.addEventListener('DOMContentLoaded', () => {
+  // Listen for clicks on sidebar links
+  document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+  e.preventDefault();
+  // Get which section to show
+  const section = link.getAttribute('data-section');
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(s => {
+  s.classList.remove('active');
+  });
+  // Remove active from all nav links
+  document.querySelectorAll('.nav-link').forEach(l => {
+  l.classList.remove('active');
+  });
+  // Show the clicked section
+  document.getElementById(section).classList.add('active');
+  // Make the clicked link active
+  link.classList.add('active');
+  });
+  });
+  });
+  // Show/hide custom date range in report form based on reportPeriod select
+  const reportPeriod = document.getElementById('reportPeriod');
+  const customDateRange = document.getElementById('customDateRange');
+  if(reportPeriod){
+  reportPeriod.addEventListener('change', () => {
+  if(reportPeriod.value === 'custom') {
+  customDateRange.style.display = 'block';
+  } else {
+  customDateRange.style.display = 'none';
+  // Clear custom dates errors and values when hidden
+  document.getElementById('startDateError').textContent = '';
+  document.getElementById('endDateError').textContent = '';
+  }
+  });
+  }
+  // Validation functions for each form, similar style to your login form:
+  function validateProductForm() {
+  clearProductErrors();
+  let valid = true;
+  const name = document.getElementById('productName').value.trim();
+  if(name === '') {
+  document.getElementById('productNameError').textContent = 'Product Name is required';
+  valid = false;
+  }
+  const category = document.getElementById('productCategory').value;
+  if(category === '') {
+  document.getElementById('productCategoryError').textContent = 'Please select a category';
+  valid = false;
+  }
+  const price = document.getElementById('productPrice').value.trim();
+  if(price === '' || isNaN(price) || Number(price) <= 0) {
+  document.getElementById('productPriceError').textContent = 'Enter a valid price greater than zero';
+  valid = false;
+  }
+  const stock = document.getElementById('productStock').value.trim();
+  if(stock === '' || isNaN(stock) || Number(stock) < 0) {
+  document.getElementById('productStockError').textContent = 'Enter a valid stock number (0 or more)';
+  valid = false;
+  }
+  const description = document.getElementById('productDescription').value.trim();
+  if(description === '') {
+  document.getElementById('productDescriptionError').textContent = 'Description is required';
+  valid = false;
+  }
+  return valid;
+  }
+  function clearProductErrors() {
+  document.getElementById('productNameError').textContent = '';
+  document.getElementById('productCategoryError').textContent = '';
+  document.getElementById('productPriceError').textContent = '';
+  document.getElementById('productStockError').textContent = '';
+  document.getElementById('productDescriptionError').textContent = '';
+  }
+  function validateReportForm() {
+  clearReportErrors();
+  let valid = true;
+  const type = document.getElementById('reportType').value;
+  if(type === '') {
+  document.getElementById('reportTypeError').textContent = 'Please select a report type';
+  valid = false;
+  }
+  const period = document.getElementById('reportPeriod').value;
+  if(period === '') {
+  document.getElementById('reportPeriodError').textContent = 'Please select a time period';
+  valid = false;
+  }
+  if(period === 'custom') {
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
+  if(startDate === '') {
+  document.getElementById('startDateError').textContent = 'Start date is required';
+  valid = false;
+  }
+  if(endDate === '') {
+  document.getElementById('endDateError').textContent = 'End date is required';
+  valid = false;
+  }
+  if(startDate !== '' && endDate !== '' && new Date(startDate) > new Date(endDate)) {
+  document.getElementById('startDateError').textContent = 'Start date cannot be after end date';
+  valid = false;
+  }
+  }
+  return valid;
+  }
+  function clearReportErrors() {
+  document.getElementById('reportTypeError').textContent = '';
+  document.getElementById('reportPeriodError').textContent = '';
+  document.getElementById('startDateError').textContent = '';
+  document.getElementById('endDateError').textContent = '';
+  }
+  function validateNotificationForm() {
+  clearNotificationErrors();
+  let valid = true;
+  const type = document.getElementById('notificationType').value;
+  if(type === '') {
+  document.getElementById('notificationTypeError').textContent = 'Please select notification type';
+  valid = false;
+  }
+  const target = document.getElementById('notificationTarget').value;
+  if(target === '') {
+  document.getElementById('notificationTargetError').textContent = 'Please select recipients';
+  valid = false;
+  }
+  const title = document.getElementById('notificationTitle').value.trim();
+  if(title === '') {
+  document.getElementById('notificationTitleError').textContent = 'Title is required';
+  valid = false;
+  }
+  const message = document.getElementById('notificationMessage').value.trim();
+  if(message === '') {
+  document.getElementById('notificationMessageError').textContent = 'Message is required';
+  valid = false;
+  }
+  return valid;
+  }
+  function clearNotificationErrors() {
+  document.getElementById('notificationTypeError').textContent = '';
+  document.getElementById('notificationTargetError').textContent = '';
+  document.getElementById('notificationTitleError').textContent = '';
+  document.getElementById('notificationMessageError').textContent = '';
+  }
+  function validateSettingsForm() {
+  clearSettingsErrors();
+  let valid = true;
+  const siteName = document.getElementById('siteName').value.trim();
+  if(siteName === '') {
+  document.getElementById('siteNameError').textContent = 'Site name is required';
+  valid = false;
+  }
+  const email = document.getElementById('contactEmail').value.trim();
+  if(email === '') {
+  document.getElementById('contactEmailError').textContent = 'Email is required';
+  valid = false;
+  } else if (!validateEmail(email)) {
+  document.getElementById('contactEmailError').textContent = 'Invalid email format';
+  valid = false;
+  }
+  const phone = document.getElementById('contactPhone').value.trim();
+  if(phone === '') {
+  document.getElementById('contactPhoneError').textContent = 'Phone number is required';
+  valid = false;
+  } else if (!validatePhone(phone)) {
+  document.getElementById('contactPhoneError').textContent = 'Invalid phone number';
+  valid = false;
+  }
+  const currency = document.getElementById('defaultCurrency').value;
+  if(currency === '') {
+  document.getElementById('defaultCurrencyError').textContent = 'Please select default currency';
+  valid = false;
+  }
+  return valid;
+  }
+  function clearSettingsErrors() {
+  document.getElementById('siteNameError').textContent = '';
+  document.getElementById('contactEmailError').textContent = '';
+  document.getElementById('contactPhoneError').textContent = '';
+  document.getElementById('defaultCurrencyError').textContent = '';
+  }
+  function validatePasswordForm() {
+  clearPasswordErrors();
+  let valid = true;
+  const currentPass = document.getElementById('currentPassword').value.trim();
+  if(currentPass === '') {
+  document.getElementById('currentPasswordError').textContent = 'Current password is required';
+  valid = false;
+  }
+  const newPass = document.getElementById('newPassword').value.trim();
+  if(newPass === '') {
+  document.getElementById('newPasswordError').textContent = 'New password is required';
+  valid = false;
+  } else if (newPass.length < 6) {
+  document.getElementById('newPasswordError').textContent = 'Password must be at least 6 characters';
+  valid = false;
+  }
+  const confirmPass = document.getElementById('confirmNewPassword').value.trim();
+  if(confirmPass === '') {
+  document.getElementById('confirmNewPasswordError').textContent = 'Please confirm new password';
+  valid = false;
+  } else if (confirmPass !== newPass) {
+  document.getElementById('confirmNewPasswordError').textContent = 'Passwords do not match';
+  valid = false;
+  }
+  return valid;
+  }
+  function clearPasswordErrors() {
+  document.getElementById('currentPasswordError').textContent = '';
+  document.getElementById('newPasswordError').textContent = '';
+  document.getElementById('confirmNewPasswordError').textContent = '';
+  }
+  // Helper email validation
+  function validateEmail(email) {
+  // Simple regex for email validation
+  const re = /^[^\\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+  }
+  // Helper phone validation (basic, digits, +, spaces)
+  function validatePhone(phone) {
+  const re = /^[\\d+\s\-()]{7,}$/;
+  return re.test(phone);
+  }

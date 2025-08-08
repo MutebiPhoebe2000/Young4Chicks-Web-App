@@ -1,0 +1,114 @@
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Farmer Registration - Form
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css')
+  link(rel='stylesheet' href='/css/forms.css')
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4ChickS
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link.active(href='index.html') Home
+        li.nav-item
+          a.nav-link(href='about.html') About
+        li.nav-item
+          a.nav-link(href='contact.html') Contact
+h1 Young4Chicks
+.container.my-5
+  .card.shadow-lg.p-4.mx-auto(style='max-width: 650px;')
+    h4.text-center.mb-4 Farmer Registration
+    form#farmerRegForm(novalidate='')
+      .mb-3
+        label.form-label(for='youthName') Full Name
+        input#farmerName.form-control(type='text' name='farmerName')
+        .invalid-feedback Please enter your full name.
+      .mb-3
+        label.form-label(for='age') Age (20&ndash;30)
+        input#age.form-control(type='number' name='age' min='20' max='30')
+        .invalid-feedback You must be between 20 and 30 years old.
+      .mb-3
+        label.form-label Gender
+        br
+        .form-check.form-check-inline
+          input#male.form-check-input(type='radio' name='gender' value='Male')
+          label.form-check-label(for='male') Male
+        .form-check.form-check-inline
+          input#female.form-check-input(type='radio' name='gender' value='Female')
+          label.form-check-label(for='female') Female
+        .invalid-feedback.d-block Please select your gender.
+      .mb-3
+        label.form-label(for='farmerNIN') Farmer NIN Number
+        input#farmerNIN.form-control(type='text' name='farmerNIN')
+        .invalid-feedback Please enter your NIN number.
+      .mb-3
+        label.form-label(for='email') Email Address
+        input#email.form-control(type='email' name='email')
+        .invalid-feedback Please enter a valid email address.
+      .mb-3
+        label.form-label(for='contactInfo') Phone Number
+        input#contactInfo.form-control(type='tel' name='contactInfo')
+        .invalid-feedback Please enter a valid contact number.
+      .mb-3
+        label.form-label(for='address') Physical Address
+        input#address.form-control(type='text' name='farmerAddress')
+        .invalid-feedback Please enter your physical address.
+      .mb-3
+        label.form-label(for='recommenderName') Recommender&apos;s Name
+        input#recommenderName.form-control(type='text' name='recommenderName')
+        .invalid-feedback Please enter recommender&apos;s name.
+      .mb-3
+        label.form-label(for='recommenderNIN') Recommender&apos;s NIN Number
+        input#recommenderNIN.form-control(type='text' name='recommenderNIN')
+        .invalid-feedback Please enter recommender&apos;s NIN.
+      .mb-3
+        label.form-label(for='password') Password
+        input#password.form-control(type='password' name='password')
+        .invalid-feedback Please enter a password.
+      .mb-3
+        label.form-label(for='confirmPassword') Confirm Password
+        input#confirmPassword.form-control(type='password' name='confirmPassword')
+        .invalid-feedback Please confirm your password.
+      a(href='farmerDashboard.html')
+        button.btn.btn.w-100 Register
+footer.whole-footer
+  .container
+    .row.text-center.text-md-start
+      .container.mb-3.text-center
+        h3 Quick Links
+      ul.container.list-unstyled.text-center
+        li
+          a.text-white(href='home.html') Home
+        li
+          a.text-white(href='about.html') About
+        li
+          a.text-white(href='chicks.html') Chicks
+        li
+          a.text-white(href='login.html') Login
+    .container.mb-3.text-center
+      h5 Join Us
+    .d-flex.justify-content-center.justify-content-md-center
+      a(href='#')
+        img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
+  hr.border-light
+  p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js' integrity='sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q' crossorigin='anonymous')
+script(src='../js/formHandling.js')
+script.
+  const form = document.getElementById('farmerRegForm');
+  form.addEventListener('submit', function (event) {
+  const password = document.getElementById('password').value;
+  const confirm = document.getElementById('confirmPassword').value;
+  if (!form.checkValidity() || password !== confirm) {
+  event.preventDefault();
+  event.stopPropagation();
+  if (password !== confirm) {
+  alert("Passwords do not match!");
+  }
+  }
+  form.classList.add('was-validated');
+  });

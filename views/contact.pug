@@ -1,0 +1,111 @@
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Contact-Young4Chicks
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css')
+  link(rel='stylesheet' href='/css/aboutContact.css')
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4ChickS
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link.active(href='index.html') Home
+        li.nav-item
+          a.nav-link(href='about.html') About
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown')
+            | Accounts
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='login.html') Login
+            li
+              a.dropdown-item(href='farmer-reg-page.html') New Farmer
+            li
+              a.dropdown-item(href='signUp.html') Or just have an Account
+header.bg-light.py-5.text-center
+  .container
+    h1.display-5 Contact Young4Chicks
+    p.lead We&apos;re here to support your poultry journey!
+main.container.py-5
+  section.mb-5
+    h2.mb-4 Send Us a Message
+    form#contactForm.contactForm(action='' method='post' onsubmit='return validateForm()')
+      .mb-3
+        label.form-label(for='name') Full Name
+        input#name.form-control(type='text' name='name')
+        #fullNameErr.showerr
+      .mb-3
+        label.form-label(for='email') Email Address
+        input#email.form-control(type='email' name='email')
+        #emailErr.showerr
+      .mb-3
+        label.form-label(for='subject') Subject
+        input#subject.form-control(type='text' name='subject')
+        #subjectErr.showerr
+      .mb-3
+        label.form-label(for='message') Your Message
+        textarea#message.form-control(name='message' rows='5')
+        #messageErr.showerr
+  section
+    h2.mb-3 Reach Us Directly
+    p
+      strong Address:
+      |  Ntinda, Kampala, Uganda
+    p
+      strong Email:
+      |  info@young4chicks.com
+    p
+      strong Phone:
+      |  +256 770 000 111
+footer.whole-footer
+  .container
+    .row.text-center.text-md-start
+      .container.mb-3.text-center
+        h3 Quick Links
+      ul.container.list-unstyled.text-center
+        li
+          a.text-white(href='index.html') Home
+        li
+          a.text-white(href='about.html') About
+        li
+          a.text-white(href='chick-request-form.html') Chicks
+        li
+          a.text-white(href='login.html') Login
+        li
+          a.text-white(href='farmer-reg-page.html') Register
+    .container.mb-3.text-center
+      h5 Join Us
+    .d-flex.justify-content-center.justify-content-md-center
+      a(href='#')
+        img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
+  hr.border-light
+  p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js' integrity='sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q' crossorigin='anonymous')
+script.
+  function validateForm() {
+  let name = document.getElementById('name').value;
+  let email = document.getElementById('email').value;
+  let subject = document.getElementById('subject').value;
+  let message = document.getElementById('message').value;
+  if (name == '') {
+  document.getElementById('fullNameErr').innerHTML = 'Please enter your name';
+  return false;
+  }
+  if (email == '') {
+  document.getElementById('emailErr').innerHTML = 'Please enter your email';
+  return false;
+  }
+  if (subject == '') {
+  document.getElementById('subjectErr').innerHTML = 'Please enter a subject';
+  return false;
+  }
+  if (message == '') {
+  document.getElementById('messageErr').innerHTML = 'Please enter your message';
+  return false;
+  }
+  return true;
+  }

@@ -1,0 +1,190 @@
+/*  GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* GLOBAL STYLES  */
+body {
+    background: linear-gradient(to right, #C29938, #D9362D, #895129);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #895129;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.nav-link {
+    margin-left: 20px;
+    font-weight: bold;
+    color: white !important;
+    transition: color 0.3s ease;
+}
+.nav-link:hover, .nav-link.active {
+    color: #C29938 !important;
+}
+
+.dropdown-menu {
+    background-color: #895129;
+}
+.dropdown-item {
+    color: white !important;
+    font-family: 'Inter', sans-serif;
+}
+.dropdown-item:hover {
+    background-color: #C29938;
+    color: white !important;
+}
+
+button, .btn {
+    background-color: #D9362D;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    border: 1.5px solid #C29938;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+}
+button:hover, .btn:hover {
+    background-color: #C29938;
+    transform: translateY(-3px);
+}
+
+form {
+    font-family: 'Inter', sans-serif;
+}
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.2s ease;
+}
+.card:hover {
+    transform: scale(1.01);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #444;
+}
+.form-control, .form-select {
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #C29938;
+    box-shadow: 0 0 8px rgba(201, 153, 56, 0.4);
+}
+.invalid-feedback {
+    font-size: 14px;
+    color: #D9362D;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+h1 {
+    color: #D9362D;
+    font-weight: 700;
+}
+
+h1{
+    color: #ffffff !important; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4); 
+}
+
+h2, h3 {
+    color: #C29938;
+}
+
+.whole-footer {
+    background-color: #895129;
+    color: white;
+    padding: 30px 0;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+.whole-footer ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+.whole-footer a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.whole-footer a:hover {
+    color: #C29938;
+}
+
+.image {
+    width: 100%;
+    max-width: 1200px;
+    height: 650px;
+    object-fit: cover;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.accordion-item {
+    border: 1px solid #C29938;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+.accordion-item:hover {
+    transform: scale(1.02);
+}
+.accordion-button {
+    background-color: #895129 !important;
+    color: white !important;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+.accordion-button:not(.collapsed) {
+    background-color: #D9362D !important;
+}
+.accordion-body {
+    background-color: #fdfdfd;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+@media (max-width: 568px) {
+    .card { margin: 1rem; padding: 1.5rem; }
+    .head { font-size: 50px; }
+    .image { height: 400px; }
+    button, .btn { font-size: 16px; padding: 10px 20px; }
+}
+
+    .showerr{
+        color: red;
+        font-size: 15px;
+        font-family: 'Bodoni XT';
+    }
+    .passwordErr{
+        color: red;
+        font-size: 15px;
+        font-family: 'Bodoni XT';
+        }
+

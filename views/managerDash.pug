@@ -1,0 +1,379 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Manager Dashboard - Young For Chicks
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css')
+  link(rel='stylesheet' href='/css/manager.css')
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4ChickS
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link(href='index.html') Home
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown')
+            | Dashboards
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='farmerDashboard.html') Farmer Dashboard
+            li
+              a.dropdown-item(href='salesrepDashboard.html') Sales Rep
+          button#logoutBtn.btn.btn-outline-light(type='button' title='Logout')
+            i.bi.bi-box-arrow-right
+            |  Logout
+// Dashboard Container
+.dashboard-container
+  // Sidebar
+  | ./
+  aside.sidebar
+    h4
+      i.bi.bi-person-badge
+      |  Manager Panel
+    ul
+      li
+        a.sidebar-link.active(href='#' data-section='overview')
+          i.bi.bi-speedometer2
+          |  Overview
+      li
+        a.sidebar-link(href='#' data-section='review-requests')
+          i.bi.bi-clipboard-check
+          |  Review Requests
+      li
+        a.sidebar-link(href='#' data-section='view-payments')
+          i.bi.bi-credit-card-2-front
+          |  Payments
+      li
+        a.sidebar-link(href='#' data-section='product-management')
+          i.bi.bi-box-seam
+          |  Manage Products
+      li
+        a.sidebar-link(href='#' data-section='manage-users')
+          i.bi.bi-people
+          |  Manage Users
+      li
+        a.sidebar-link(href='#' data-section='reports')
+          i.bi.bi-graph-up
+          |  Reports
+      li
+        a.sidebar-link(href='#' data-section='notifications')
+          i.bi.bi-bell
+          |  Notifications
+  // Main Content
+  main.main-content
+    // Overview Section
+    section#overview.dashboard-section.active
+      h2.mb-4
+        | Welcome, 
+        span#managerName Manager
+        | !
+      .stats-cards
+        .stat-card.purple
+          h3 Total Farmers
+          #totalFarmers.number 157
+        .stat-card.blue
+          h3 Total Requests
+          #totalRequests.number 342
+        .stat-card.green
+          h3 Completed Orders
+          #completedOrders.number 289
+        .stat-card.orange
+          h3 Total Revenue
+          #totalPayments.number $45,230
+      .row
+        .col-md-6
+          .card
+            .card-body
+              h5.card-title Recent Activity
+              ul.list-unstyled
+                li.mb-2
+                  i.bi.bi-circle-fill.text-success.me-2
+                  |  New farmer registered
+                li.mb-2
+                  i.bi.bi-circle-fill.text-warning.me-2
+                  |  5 requests pending approval
+                li.mb-2
+                  i.bi.bi-circle-fill.text-info.me-2
+                  |  Payment received from John Doe
+                li.mb-2
+                  i.bi.bi-circle-fill.text-primary.me-2
+                  |  New product added to catalog
+        .col-md-6
+          .card
+            .card-body
+              h5.card-title Quick Actions
+              .d-grid.gap-2
+                button.btn.btn-primary.btn-sm
+                  i.bi.bi-clipboard-check
+                  |  Review Pending Requests
+                button.btn.btn-success.btn-sm
+                  i.bi.bi-plus-circle
+                  |  Add New Product
+                button.btn.btn-info.btn-sm
+                  i.bi.bi-graph-up
+                  |  Generate Report
+    // Review Requests Section
+    section#review-requests.dashboard-section
+      h3.mb-3 Farmer Requests
+      .card
+        .card-body
+          .table-responsive
+            table.table.table-striped
+              thead
+                tr
+                  th Date
+                  th Request ID
+                  th Farmer
+                  th Chick Type
+                  th Quantity
+                  th Status
+                  th Actions
+              tbody#managerRequestsTable
+                tr
+                  td 2025-01-20
+                  td REQ001
+                  td John Farmer
+                  td Broiler
+                  td 100
+                  td
+                    span.badge.bg-warning.status-badge Pending
+                  td.action-buttons
+                    button.btn.btn-sm.btn-success Approve
+                    button.btn.btn-sm.btn-danger Reject
+                    button.btn.btn-sm.btn-info Details
+                tr
+                  td 2025-01-19
+                  td REQ002
+                  td Mary Smith
+                  td Layer
+                  td 50
+                  td
+                    span.badge.bg-success.status-badge Approved
+                  td.action-buttons
+                    button.btn.btn-sm.btn-info Details
+                    button.btn.btn-sm.btn-primary Track
+    // Payments Section
+    section#view-payments.dashboard-section
+      h3.mb-3 Payment Management
+      .card
+        .card-body
+          .table-responsive
+            table.table.table-bordered
+              thead
+                tr
+                  th Date
+                  th Payment ID
+                  th Farmer
+                  th Request ID
+                  th Amount
+                  th Status
+                  th Actions
+              tbody#managerPaymentsTable
+                tr
+                  td 2025-01-18
+                  td PAY001
+                  td John Farmer
+                  td REQ001
+                  td $500
+                  td
+                    span.badge.bg-success.status-badge Completed
+                  td
+                    button.btn.btn-sm.btn-primary Receipt
+                tr
+                  td 2025-01-17
+                  td PAY002
+                  td Mary Smith
+                  td REQ002
+                  td $250
+                  td
+                    span.badge.bg-warning.status-badge Pending
+                  td
+                    button.btn.btn-sm.btn-info Follow Up
+    // Product Management Section
+    section#product-management.dashboard-section
+      h3.mb-3 Manage Products
+      .row
+        .col-md-6
+          .card
+            .card-header
+              h5 Add New Product
+            .card-body
+              form#productForm
+                .mb-3
+                  label.form-label(for='productName') Product Name
+                  input#productName.form-control(type='text' name='productName' required='')
+                .mb-3
+                  label.form-label(for='productCategory') Category
+                  select#productCategory.form-select(name='productCategory' required='')
+                    option(value='') Select Category
+                    option(value='chick-types') Chick Types
+                    option(value='feeds') Feeds
+                    option(value='vaccines') Vaccines &amp; Supplements
+                    option(value='equipment') Equipment
+                .mb-3
+                  label.form-label(for='productPrice') Price ($)
+                  input#productPrice.form-control(type='number' name='productPrice' step='0.01' required='')
+                .mb-3
+                  label.form-label(for='productDescription') Description
+                  textarea#productDescription.form-control(name='productDescription' rows='3')
+                button.btn.btn-primary(type='submit')
+                  i.bi.bi-plus-circle
+                  |  Add Product
+        .col-md-6
+          .card
+            .card-header
+              h5 Current Products
+            .card-body
+              .list-group
+                .list-group-item.d-flex.justify-content-between.align-items-center
+                  | Broiler Chicks
+                  div
+                    span.badge.bg-primary.rounded-pill.me-2 $5.00
+                    button.btn.btn-sm.btn-outline-danger Remove
+                .list-group-item.d-flex.justify-content-between.align-items-center
+                  | Layer Chicks
+                  div
+                    span.badge.bg-primary.rounded-pill.me-2 $4.50
+                    button.btn.btn-sm.btn-outline-danger Remove
+                .list-group-item.d-flex.justify-content-between.align-items-center
+                  | Kuroiler Chicks
+                  div
+                    span.badge.bg-primary.rounded-pill.me-2 $6.00
+                    button.btn.btn-sm.btn-outline-danger Remove
+    // Manage Users Section
+    section#manage-users.dashboard-section
+      h3.mb-3 User Management
+      .card
+        .card-body
+          .table-responsive
+            table.table.table-hover
+              thead
+                tr
+                  th User ID
+                  th Name
+                  th Role
+                  th Email
+                  th Status
+                  th Last Login
+                  th Actions
+              tbody#managerUsersTable
+                tr
+                  td USR001
+                  td John Farmer
+                  td
+                    span.badge.bg-success Farmer
+                  td john@example.com
+                  td
+                    span.badge.bg-success Active
+                  td 2025-01-20
+                  td.action-buttons
+                    button.btn.btn-sm.btn-info View
+                    button.btn.btn-sm.btn-warning Suspend
+                tr
+                  td USR002
+                  td Mary Smith
+                  td
+                    span.badge.bg-success Farmer
+                  td mary@example.com
+                  td
+                    span.badge.bg-success Active
+                  td 2025-01-19
+                  td.action-buttons
+                    button.btn.btn-sm.btn-info View
+                    button.btn.btn-sm.btn-warning Suspend
+    // Reports Section
+    section#reports.dashboard-section
+      h3.mb-3 Reports &amp; Analytics
+      .row
+        .col-md-4.mb-3
+          .card
+            .card-body.text-center
+              i.bi.bi-graph-up.text-primary(style='font-size: 2rem;')
+              h5.mt-2 Sales Report
+              p.text-muted Monthly sales summary
+              button.btn.btn-primary.btn-sm Generate
+        .col-md-4.mb-3
+          .card
+            .card-body.text-center
+              i.bi.bi-people.text-success(style='font-size: 2rem;')
+              h5.mt-2 User Report
+              p.text-muted User activity summary
+              button.btn.btn-success.btn-sm Generate
+        .col-md-4.mb-3
+          .card
+            .card-body.text-center
+              i.bi.bi-box-seam.text-warning(style='font-size: 2rem;')
+              h5.mt-2 Inventory Report
+              p.text-muted Stock levels and movements
+              button.btn.btn-warning.btn-sm Generate
+    // Notifications Section
+    section#notifications.dashboard-section
+      h3.mb-3 Notifications
+      .card
+        .card-body
+          .list-group
+            .list-group-item.d-flex.justify-content-between.align-items-start
+              .ms-2.me-auto
+                .fw-bold New farmer registration
+                |                   John Doe has registered as a new farmer
+              small.text-muted 2 hours ago
+            .list-group-item.d-flex.justify-content-between.align-items-start
+              .ms-2.me-auto
+                .fw-bold Payment received
+                |                   Payment of $500 received from Mary Smith
+              small.text-muted 5 hours ago
+            .list-group-item.d-flex.justify-content-between.align-items-start
+              .ms-2.me-auto
+                .fw-bold Low stock alert
+                |                   Broiler chicks stock is running low
+              small.text-muted 1 day ago
+// Footer
+footer.whole-footer
+  .container
+    .row.text-center.text-md-start
+      .container.mb-3.text-center
+        h3 Quick Links
+      ul.container.list-unstyled.text-center
+        li
+          a.text-white(href='#reports') Reports
+        li
+          a.text-white(href='#agents') Agents
+        li
+          a.text-white(href='#profile') Profile
+    .container.mb-3.text-center
+      h5 Contact IT Support
+    .d-flex.justify-content-center
+      a(href='#')
+        img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
+    hr.border-light
+    p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+// Scripts
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js')
+script.
+  // SIDEBAR NAVIGATION JAVASCRIPT - KEEP THIS ONLY
+  document.addEventListener('DOMContentLoaded', function() {
+  // Listen for clicks on sidebar links
+  document.querySelectorAll('.sidebar-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+  e.preventDefault();
+  // Get which section to show
+  const section = this.getAttribute('data-section');
+  // Hide all sections
+  document.querySelectorAll('.dashboard-section').forEach(s => {
+  s.classList.remove('active');
+  });
+  // Remove active from all sidebar links
+  document.querySelectorAll('.sidebar-link').forEach(l => {
+  l.classList.remove('active');
+  });
+  // Show the clicked section
+  document.getElementById(section).classList.add('active');
+  // Make the clicked link active
+  this.classList.add('active');
+  });
+  });
+  });

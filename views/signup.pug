@@ -1,0 +1,93 @@
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Login
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css')
+  link(rel='stylesheet' href='/css/forms.css')
+  style.
+    .showerr {
+      color: red;
+      font-size: 15px;
+      font-family: 'Bodoni XT';
+    }
+    .passwordErr {
+      color: red;
+      font-size: 15px;
+      font-family: 'Bodoni XT';
+    }
+
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4Chicks
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link.active(href='index.html') Home
+        li.nav-item
+          a.nav-link(href='about.html') About
+        li.nav-item
+          a.nav-link(href='contact.html') Contact
+
+.card.p-4.shadow-sm.mx-auto.mt-5(style='width: 100%; max-width: 400px;')
+  .mb-3.text-center
+    img.img-fluid.rounded-start(src='/images/chicks-drinking.jpg' alt='signup Image')
+  p.mb-3.text-center Please fill out the form below to register
+  form#registerForm(action='/signup', method='post')
+    .row.g-3.mb-3
+      .col-sm-6
+        label.form-label(for='fullname') Full Name
+        input#fullName.form-control(type='text' name='fullname')
+        .invalid-feedback Name is required.
+      .col-sm-6
+        label.form-label(for='age') Age
+        input#age.form-control(type='number' name='age' min='20' max='30')
+        .invalid-feedback Age should be between 20 and 30 years.
+      .col-12
+        label.form-label(for='gender') Gender
+        select#gender.form-select(name='gender' required='')
+          option(value='') --Select Gender--
+          option Male
+          option Female
+          option Other
+        .invalid-feedback Please select your gender.
+    .row.mb-3
+      .col
+        label.form-label(for='nin') National ID Number
+        input#nin.form-control(name='nin' type='text')
+        .invalid-feedback NIN is required.
+      .col
+        label.form-label(for='phone') Phone Number
+        input#phone.form-control(name='phone' type='tel' placeholder='07xxxxxxxx')
+        .invalid-feedback Phone number is required.
+    .mb-3
+      label.form-label(for='location') District / Location
+      input#location.form-control(name='location' type='text')
+      .invalid-feedback Location is required.
+    .mb-3
+      label.form-label(for='email') Email Address (optional)
+      input#email.form-control(name='email' type='email')
+      .invalid-feedback Please enter a valid email address.
+    .mb-3
+      label.form-label(for='role') Role
+      select#role.form-select(name='role')
+        option(value='') --Select your role--
+        option(value='brooderManager') Brooder Manager
+        option(value='farmer') Farmer
+        option(value='salesRep') Sales Rep
+      .invalid-feedback Please select your role.
+    .mb-3.position-relative
+      label.form-label(for='password') Password
+      input#password.form-control(name='password' type='password' minlength='8')
+      i#togglePwd1.fas.fa-eye.password-toggle
+      .invalid-feedback Must be at least 8 characters long.
+    .mb-4.position-relative
+      label.form-label(for='confirmPassword') Confirm Password
+      input#confirmPassword.form-control(name='confirmPassword' type='password' minlength='8')
+      i#togglePwd2.fas.fa-eye.password-toggle
+      .invalid-feedback Passwords do not match.
+    button.btn.w-100.btnlog(type='submit') Register
+  script(src='/js/formHandler.js')
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js' integrity='sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q' crossorigin='anonymous')

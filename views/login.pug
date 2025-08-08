@@ -1,0 +1,95 @@
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Login
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css')
+  link(rel='stylesheet' href='/css/forms.css')
+  style.
+    .showerr{
+    color: red;
+    font-size: 15px;
+    font-family: 'Bodoni XT';
+    }
+    .passwordErr{
+    color: red;
+    font-size: 15px;
+    font-family: 'Bodoni XT';
+    }
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4Chicks
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link.active(href='index.html') Home
+        li.nav-item
+          a.nav-link(href='about.html') About
+        li.nav-item
+          a.nav-link(href='contact.html') Contact
+h1 Young4Chicks
+section#intro
+  #ketra.card.mb-3.mx-auto(style='max-width: 800px;')
+    .row.g-0
+      .col-md-4
+        img.img-fluid.rounded-start(src='/images/login-hero.jpg' alt='Login Image')
+      .col-md-8
+        .card-body
+          h2.card-title Welcome Back
+          h5.text-muted Log in to your Young4Chicks account
+          p.card-text
+            | Access your dashboard, manage your chicks, connect with other farmers, and keep your poultry business
+            | growing.
+          form#loginForm.loginForm(action='' method='post' onsubmit='return validateForm()')
+            .mb-3
+              label.form-label(for='email') Email address
+              input#email.form-control(type='text' name='email' placeholder='Please enter a valid email')
+              #emailErr.showerr
+            .mb-3
+              label.form-label(for='password') Password
+              input#password.form-control(type='password' name='password' minlength='8')
+              #passwordErr.showerr
+            button.btn.btn-primary(type='submit') Login
+footer.whole-footer
+  .container
+    .row.text-center.text-md-start
+      .container.mb-3.text-center
+        h3 Quick Links
+      ul.container.list-unstyled.text-center
+        li
+          a.text-white(href='home.html') Home
+        li
+          a.text-white(href='about.html') About
+        li
+          a.text-white(href='chicks.html') Chicks
+        li
+          a.text-white(href='login.html') Login
+    .container.mb-3.text-center
+      h5 Join Us
+    .d-flex.justify-content-center.justify-content-md-center
+      a(href='#')
+        img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
+  hr.border-light
+  p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js' integrity='sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q' crossorigin='anonymous')
+script.
+  function validateForm(){
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+  let emailErr = document.getElementById('emailErr');
+  let passwordErr = document.getElementById('passwordErr');
+  let errFlag = false;
+  if(email.length === 0){
+  emailErr.innerHTML = "Email is Required!!!";
+  errFlag = true;
+  }
+  if(password.length <= 7){
+  passwordErr.innerHTML = "Password is Required!!!";
+  errFlag = true;
+  }
+  if(errFlag){
+  return false;
+  }
+  }

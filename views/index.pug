@@ -1,0 +1,354 @@
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Young4Chicks
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css')
+  link(rel='stylesheet' href='/css/index.css')
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4Chicks
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link.active(href='index.html') Home
+        li.nav-item
+          a.nav-link(href='about.html') About
+        li.nav-item
+          a.nav-link(href='contact.html') Contact Us
+        li.nav-item.dropdown
+          a#accountDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' aria-label='Account menu')
+            i.bi.bi-person-circle(style='font-size: 1.4rem;')
+          ul.dropdown-menu(aria-labelledby='accountDropdown')
+            li
+              a.dropdown-item(href='login.html') Login
+            li
+              a.dropdown-item(href='farmer-reg-page.html') Signup
+h1.head Young4Chicks
+.container-lg
+  .row.justify-content-center.align-items-center
+    .col-md-5.text-center.text-md-start
+      h3
+        .display-2 Hatch Your Future Today
+        .displat-5.text-muted Empowering Urban Youths to Thrive in Poultry Farming
+      p.lead.my-4.text-muted
+        | Whether you&apos;re starting with a single chick or building your own urban brooder
+        | empire, Young4Chicks gives you the tools, knowledge, and marketplace to grow. Join a new generation of smart
+        | farmers making money, building legacies, and changing the game
+      br
+    .col-md-5.text-center.d-none.d-md-block
+      span.tt(data-bs-placement='bottom' title='Young4Chicks')
+        img.img-fluid(src='/images/hero-image.jpg' alt='youngChicks')
+  #sidebar.offcanvas.offcanvas-start(tabindex='-1' aria-labelledby='sidebar-label')
+    .offcanvas-header
+      h5#sidebar-label.offcanvas-title More from Young4Chicks
+      button.btn-close(type='button' data-bs-dismiss='offcanvas' aria-label='Close')
+    .offcanvas-body
+      p
+        | Explore other helpful sections of Young4Chicks from poultry care tips to managing your sales, tracking stock,
+        | and learning how to grow your farm online. Get the most out of your farming journey!
+  .dropdown.mt-3
+    button#book-dropdown.btn.dropdown-toggle(type='button' data-bs-toggle='dropdown')
+      | Choose a plan
+    ul.dropdown-menu(arias-labelledby='book-dropdown')
+      li
+        a.dropdown-item(href='#') Beginner Farmer
+      li
+        a.dropdown-item(href='#') Most Popular
+      li
+        a.dropdown-item(href='#') Pro Farmer
+section#pricing.bg-light.mt-5
+  .container-lg
+    .text-center
+      h2 Young4Chicks Packages
+      p.lead.text-muted Select a plan that fits your farming goals.
+    .row.my-5.align-items-center.justify-content-center.g-5
+      .col-8.col-lg-4.col-xl-3
+        .card.border-0
+          .card-body.text-center.py-4
+            h4.card-title Beginner Farmer
+            p.lead.card-subtitle Access to basic listings only
+            p.display-5(text-id='pricing') $129
+            p.card.text.mx-5.text-muted.d-none.d-lg-block
+              | Perfect for new farmers starting out. List up to 3 poultry products and get limited visibility.
+            a.btn.btn-lg.mt-3(href='#') Upgrade Now
+      #bigcard.col-9.col-lg-4
+        .card.border-2
+          .card-header.text-center Most Popular
+          .card-body.text-center.py-5
+            h4.card-title Growing Farmer
+            p.lead.card-subtitle Add listings + manage updates
+            p.display-5 $320.89
+            p.card.text.mx-5.text-muted.d-none.d-lg-block
+              | Great for expanding farms. List unlimited products, manage inventory, and receive notifications.
+            a.btn.btn-lg.mt-3(href='#') Choose Plan
+      .col-7.col-lg-3.col-xl-3
+        .card.border-0
+          .card-body.text-center.py-4
+            h4.card-title Pro Farmer
+            p.lead.card-subtitle Listings, analytics &amp; expert tools
+            p.display-5 $499.99
+            p.card.text.mx-5.text-muted.d-none.d-lg-block
+              | Designed for serious farmers. Get full access to insights, expert advice, customer reviews &amp; more.
+            a.btn.btn-lg.mt-3(href='#') Upgrade Now
+section#topics
+  .container-md
+    .text-center
+      h2 Young4Chicks at a Glance
+      p.lead.text-muted
+        | Here&apos;s what you can expect from Young4Chicks and how it can help you buy and sell
+        | poultry with ease.
+    .row.my-5.g-5.justify-content-around.align-items-center
+      .col-6.col-lg-4
+        img.img-fluid(src='/images/hero-for-something.jpg' alt='epig')
+      .col-6.col-lg-4
+        #chapters.accordion
+          .accordion-item
+            h2#heading-1.accordion-header
+              button.accordion-button(type='button' data-bs-toggle='collapse' data-bs-target='#chapter-1' aria-expanded='true' aria-controls='chapter-1')
+                | 1. Getting Started with Young4chicks
+            #chapter-1.accordion-collapse.collapse.show(aria-labelledby='heading-1' data-bs-parent='#chapters')
+              .accordion-body
+                p
+                  | Welcome to Young4chicks! This platform connects poultry buyers and sellers, making it easy to find
+                  | or sell chickens, ducks, turkeys, and more. To get started, simply create an account, browse our
+                  | marketplace, and connect with local farmers or sellers. You can search for specific breeds, prices,
+                  | and locations to find the perfect poultry for your needs.
+                p
+                  | To create an account, simply click on the &quot;Sign Up&quot; button and follow the prompts. You&apos;ll need to
+                  | provide some basic information like your name, email address, and password. Once you&apos;ve created your
+                  | account, you can start exploring the marketplace and connecting with other users. Our platform is
+                  | designed to be user-friendly, so you can easily navigate and find what you&apos;re looking for.
+          .accordion-item
+            h2#heading-2.accordion-header
+              button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#chapter-2' aria-expanded='false' aria-controls='chapter-2')
+                | 2. Buying Poultry Made Easy
+            #chapter-2.accordion-collapse.collapse(aria-labelledby='heading-2' data-bs-parent='#chapters')
+              .accordion-body
+                p
+                  | Buying poultry is simple with Young4chicks! Browse our marketplace to find a wide variety of
+                  | poultry breeds and prices. You can filter your search by location, price, and breed to find the
+                  | perfect birds for your farm or backyard. Once you find a seller you&apos;re interested in, you can send
+                  | them a message or place an order directly through the app.
+                p
+                  | When you find a seller you&apos;re interested in, you can view their profile and read reviews from other
+                  | buyers. This can help you get a sense of their reputation and the quality of their poultry. You can
+                  | also contact the seller directly through the app to ask questions or negotiate prices. Our platform
+                  | makes it easy to communicate with sellers and find the perfect poultry for your needs.
+          .accordion-item
+            h2#heading-3.accordion-header
+              button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#chapter-3' aria-expanded='false' aria-controls='chapter-3')
+                | 3. Selling Poultry with Confidence
+            #chapter-3.accordion-collapse.collapse(aria-labelledby='heading-3' data-bs-parent='#chapters')
+              .accordion-body
+                p
+                  | Selling poultry is easy and secure with Young4chicks! Create a listing for your birds, including
+                  | photos, prices, and descriptions. Buyers can browse your listings and contact you directly through
+                  | the app. We provide tools and resources to help you manage your sales, track payments, and ensure a
+                  | smooth transaction.
+                p
+                  | To create a listing, simply click on the &quot;Create Listing&quot; button and follow the prompts. You&apos;ll
+                  | need to provide some information about your poultry, such as the breed, age, and price. You can also
+                  | add photos and descriptions to make your listing more attractive to buyers. Our platform provides
+                  | tools and resources to help you manage your listings and respond to buyer inquiries.
+          .accordion-item
+            h2#heading-4.accordion-header
+              button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#chapter-4' aria-expanded='false' aria-controls='chapter-4')
+                | 4. Payment and Security
+            #chapter-4.accordion-collapse.collapse(aria-labelledby='heading-4' data-bs-parent='#chapters')
+              .accordion-body
+                p
+                  | At Young4chicks, we prioritize secure payments and transactions. Our platform uses trusted payment
+                  | methods and encryption to protect your financial information. When you make a payment or receive
+                  | funds, you can trust that our system is secure and reliable. We also provide guidance on payment
+                  | best practices to ensure a smooth transaction.
+                p
+                  | We also provide guidance on how to avoid scams and ensure a safe transaction. Our platform is
+                  | designed to protect both buyers and sellers, and we take security seriously. If you have any
+                  | concerns or issues with payments, our support team is here to help. We&apos;re committed to providing a
+                  | secure and trustworthy platform for all our users.
+            .accordion-item
+              h2#heading-5.accordion-header
+                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#chapter-5' aria-expanded='false' aria-controls='chapter-5')
+                  | 5. Support and Resources
+              #chapter-5.accordion-collapse.collapse(aria-labelledby='heading-5' data-bs-parent='#chapters')
+                .accordion-body
+                  p
+                    | Need help or have questions? Our support team is here to assist you! We provide resources and
+                    | guides on poultry care, sales tips, and more. You can contact us through the app or website, and
+                    | we&apos;ll respond promptly to help you with any issues or concerns.
+                  p
+                    | In addition to our support team, we also have a knowledge base and FAQ section that can help you
+                    | find answers to common questions. We&apos;re constantly updating our resources and guides to ensure
+                    | that you have the information you need to succeed. Whether you&apos;re a seasoned poultry farmer or
+                    | just starting out, we&apos;re here to help you every step of the way
+section.container.my-5
+  h2.text-center.mb-4
+    i.bi.bi-stars
+    |  Application Reviews
+  p.lead.text-center What Our Users say about the application...
+  .row.g-4
+    .col-md-6
+      .list-group-item.p-4.shadow-sm.bg-light.rounded
+        .d-flex.align-items-center.mb-3
+          img.rounded-circle.me-3(src='/images/two-guys-testimonial.jpg' alt='Farmer-Sisters' width='80' height='80')
+          div
+            h5.mb-1
+              h5 More customers, more sales!
+            .text-warning
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+        p
+          | Young4chicks has been a game-changer for my poultry business. I can now reach more customers and sell my
+          | products easily. The platform is user-friendly, and I love the support. Highly recommended!
+        small Review by Peshie &amp; Perushia
+    .col-md-6
+      .list-group-item.p-4.shadow-sm.bg-light.rounded
+        .d-flex.align-items-center.mb-3
+          img.rounded-circle.me-3(src='/images/testimonial-guy-eggs.jpg' alt='Youth with profits' width='80' height='80')
+          div
+            h5.mb-1 Changed my life!
+            .text-warning
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+        p
+          | I was struggling to find buyers for my chickens, but Young4chicks helped me connect with people who need
+          | them. Now my business is growing fast! I&apos;m so grateful for this platform.
+        small Review by Apollo Kimera
+    .col-md-6
+      .list-group-item.p-4.shadow-sm.bg-light.rounded
+        .d-flex.align-items-center.mb-3
+          img.rounded-circle.me-3(src='/images/testimonial-man-holding-hen.jpg' alt='Happy-Farmer' width='80' height='80')
+          div
+            h5.mb-1 Best platform ever!
+            .text-warning
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+        p
+          | As a young farmer, I was looking for a platform to buy poultry at affordable prices. Young4chicks is the
+          | best! The prices are fair, and the sellers are reliable. I&apos;m so happy I found this site.
+        small Review by Sam Kiweewa
+    .col-md-6
+      .list-group-item.p-4.shadow-sm.bg-light.rounded
+        .d-flex.align-items-center.mb-3
+          img.rounded-circle.me-3(src='/images/testimonial-white.jpg' alt='Phoebe' width='80' height='80')
+          div
+            h5.mb-1
+              h5 Easy and convenient!
+            .text-warning
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-fill
+              i.bi.bi-star-half
+        p
+          | I love using Young4chicks to buy chicks for my farm. The process is simple, and I get quality birds. The
+          | sellers are trustworthy, and I always get what I want. Thanks, Young4chicks!
+        small Review by Ms. Green Smith
+section#contact.py-5
+  .container-lg
+    .text-center.mb-5
+      h2 Get In Touch
+      p.lead Questions to ask? Fill out the form to contact e directly...
+    .row.justify-content-center.my-5
+      .col-lg-6
+        form
+          label.form-label(for='name') Name:
+          .input-group.mb-4
+            span.input-group-text
+              i.bi.bi-person-fill
+            input#name.form-control(type='name' placeholder='e.g. Kirabo Ketra')
+            span.input-group-text
+              span.tt(data-bs-placement='bottom' title='Pretty self explanatory really...')
+                i.bi.bi-question-circle.text-muted
+          label.form-label(for='email') Email address:
+          .mb-4.input-group
+            span.input-group-text
+              i.bi.bi-envelope-fill
+            input#email.form-control(type='email' placeholder='e.g. ketra014@gmail.com')
+            span.input-group-text
+              span.tt(data-bs-placement='bottom' title='Enter an email address we can reply to')
+                i.bi.bi-question-circle.text-muted
+          label.form-label(for='subject')
+            | What is your question about? 
+            span.required *
+          .input-group.mb-4
+            span.input-group-text
+              i.bi.bi-chat-right-dots-fill
+            select#subject.form-select
+              option(value='pricing' selected='') Pricing query
+              option(value='content') Content query
+              option(value='other') Other query
+          .form-floating.mb-4
+            textarea#query.form-control(name='message' style='height: 140px;' placeholder='Your query...' required='')
+            label(for='query')
+              | Your query... 
+              span.required *
+          .form-check.mb-4
+            input#newsletter.form-check-input(type='checkbox' name='newsletter')
+            label.form-check-label(for='newsletter')
+              | Subscribe to our newsletter for updates
+          .mb-4.text-center
+            button.btn.btn-secondary(type='submit') Submit Message
+section.bg-light.mt-5
+  .container
+    .text-center
+      h2 Stay in the Loop
+      p.lead Be the first to hear about new chicks, farm tools, and promotions!
+    .row.justify-content-center
+      .col-md-8.text-center
+        p.text-muted.my-4
+          | Want updates about our latest poultry services, farming guides, and discounts?
+          | Join our mailing list and never miss out!
+        button.btn.btn-primary(data-bs-toggle='modal' data-bs-target='#reg-modal')
+          | Register for Updates
+#reg-modal.modal.fade(tabindex='-1' aria-labelledby='modal-title' aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5#modal-title.modal-title Join Our Poultry Community
+        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+      .modal-body
+        p
+          | Fill in your email below to get instant updates about poultry products,
+          | farming tips, and exclusive deals from Young4Chicks.
+        label.form-label(for='modal-email') Your Email Address:
+        input#modal-email.form-control(type='email' placeholder='e.g. yourname@young4chicks.com')
+      .modal-footer
+        button#registerBtn.btn.btn-primary(data-bs-dismiss='modal') Submit
+footer.whole-footer
+  .container
+    .row.text-center.text-md-start
+      .container.mb-3.text-center
+        h3 Quick Links
+      ul.container.list-unstyled.text-center
+        li
+          a.text-white(href='index.html') Home
+        li
+          a.text-white(href='about.html') About
+        li
+          a.text-white(href='chick-request-form.html') Chicks
+        li
+          a.text-white(href='login.html') Login
+        li
+          a.text-white(href='farmer-reg-page.html') Register
+    .container.mb-3.text-center
+      h5 Join Us
+    .d-flex.justify-content-center.justify-content-md-center
+      a(href='#')
+        img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
+  hr.border-light
+  p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js' integrity='sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q' crossorigin='anonymous')
+script(src='/js/home.js')

@@ -1,0 +1,439 @@
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sales Representative Dashboard - Young For Chicks
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css')
+  link(rel='stylesheet' href='/public/css/sales.css')
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+  .container
+    a.navbar-brand.fw-bold(href='#') Young4ChickS
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link(href='index.html') Home
+        li.nav-item
+          a.nav-link(href='about.html') About
+      button#logoutBtn.btn.btn-outline-light(type='button' title='Logout')
+        i.bi.bi-box-arrow-right
+        |  Logout
+.dashboard-container
+  aside.sidebar
+    h4
+      i.bi.bi-briefcase
+      |  Sales Panel
+    ul
+      li
+        a.sidebar-link.active(href='#' data-section='overview')
+          i.bi.bi-graph-up
+          |  Sales Overview
+      li
+        a.sidebar-link(href='#' data-section='my-clients')
+          i.bi.bi-people
+          |  My Clients
+      li
+        a.sidebar-link(href='#' data-section='meetings')
+          i.bi.bi-calendar-event
+          |  Meetings
+      li
+        a.sidebar-link(href='#' data-section='orders')
+          i.bi.bi-cart-check
+          |  Orders
+      li
+        a.sidebar-link(href='#' data-section='leads')
+          i.bi.bi-lightning
+          |  New Leads
+  main.main-content
+    section#overview.dashboard-section.active
+      h2.mb-4 Welcome, Sales Representative!
+      .stats-cards
+        .stat-card.red
+          h3 Total Sales This Month
+          .number $18,750
+        .stat-card.orange
+          h3 Monthly Goal
+          .number $25,000
+        .stat-card.green
+          h3 My Clients
+          .number 47
+        .stat-card.blue
+          h3 New Leads
+          .number 12
+      .row
+        .col-md-8
+          .progress-card
+            h5 Monthly Sales Progress
+            .d-flex.justify-content-between.mb-2
+              span Goal: $25,000
+              span 75% Complete
+            .progress(style='height: 20px;')
+              .progress-bar.bg-success(role='progressbar' style='width: 75%')
+            small.text-muted.mt-2.d-block You need $6,250 more to reach your goal!
+          .card
+            .card-header
+              h5 Recent Activities
+            .card-body
+              .activity-item
+                strong Sale Completed
+                |  - ABC Farm - $2,500
+              .activity-item
+                strong Meeting Scheduled
+                |  - XYZ Poultry tomorrow at 10 AM
+              .activity-item
+                strong New Lead Added
+                |  - Green Valley Farm
+              .activity-item
+                strong Follow-up Call
+                |  - Mary&apos;s Poultry needs attention
+        .col-md-4
+          .card
+            .card-header
+              h5 Today&apos;s Schedule
+            .card-body
+              .mb-3
+                strong 10:00 AM
+                br
+                small Visit John&apos;s Farm
+              .mb-3
+                strong 2:00 PM
+                br
+                small Call Mary&apos;s Poultry
+              .mb-3
+                strong 4:30 PM
+                br
+                small Meet Green Fields team
+          .card
+            .card-header
+              h5 Quick Actions
+            .card-body
+              .d-grid.gap-2
+                button.btn.btn-primary.btn-sm
+                  i.bi.bi-plus-circle
+                  |  Add New Lead
+                button.btn.btn-success.btn-sm
+                  i.bi.bi-calendar-plus
+                  |  Schedule Meeting
+                button.btn.btn-info.btn-sm
+                  i.bi.bi-people
+                  |  View My Clients
+    section#my-clients.dashboard-section
+      h3.mb-3 My Clients
+      .row
+        .col-md-4.mb-3
+          .client-card
+            h5.mb-2 John&apos;s Farm
+            p.text-muted.mb-1 john@johnsfarm.com
+            p.text-muted.mb-2 Phone: +256 700 123 456
+            .d-flex.justify-content-between.align-items-center
+              span.badge.bg-success Active Client
+              strong.text-success $5,200 total sales
+            .mt-3
+              button.btn.btn-sm.btn-primary.me-2 Contact
+              button.btn.btn-sm.btn-outline-info View History
+        .col-md-4.mb-3
+          .client-card
+            h5.mb-2 Mary&apos;s Poultry
+            p.text-muted.mb-1 mary@maryspoultry.com
+            p.text-muted.mb-2 Phone: +256 701 234 567
+            .d-flex.justify-content-between.align-items-center
+              span.badge.bg-warning Needs Follow-up
+              strong.text-warning $3,800 total sales
+            .mt-3
+              button.btn.btn-sm.btn-primary.me-2 Contact
+              button.btn.btn-sm.btn-outline-info View History
+        .col-md-4.mb-3
+          .client-card
+            h5.mb-2 Green Valley Farm
+            p.text-muted.mb-1 info@greenvalley.com
+            p.text-muted.mb-2 Phone: +256 702 345 678
+            .d-flex.justify-content-between.align-items-center
+              span.badge.bg-info New Client
+              strong.text-info $1,200 total sales
+            .mt-3
+              button.btn.btn-sm.btn-primary.me-2 Contact
+              button.btn.btn-sm.btn-outline-info View History
+    section#meetings.dashboard-section
+      h3.mb-3 Client Meetings
+      .row.mb-4
+        .col-md-6
+          .card
+            .card-header
+              h5 Schedule New Meeting
+            .card-body
+              form#meetingForm.meetingForm(action='' method='post' onsubmit='return validateForm()')
+                .mb-3
+                  label.form-label(for='clientName') Client Name
+                  input#clientName.form-control(type='text' name='clientName' placeholder='Enter client name')
+                  #clientNameErr.showerr
+                .mb-3
+                  label.form-label(for='meetingDate') Meeting Date &amp; Time
+                  input#meetingDate.form-control(type='datetime-local' name='meetingDate')
+                  #meetingDateErr.showerr
+                .mb-3
+                  label.form-label(for='meetingType') Meeting Type
+                  select#meetingType.form-select(name='meetingType' required='')
+                    option(value='') Choose meeting type
+                    option(value='first-meeting') First Meeting
+                    option(value='follow-up') Follow-up
+                    option(value='farm-visit') Farm Visit
+                    option(value='contract-signing') Contract Signing
+                  #meetingTypeErr.showerr
+                .mb-3
+                  label.form-label(for='meetingNotes') Notes
+                  textarea#meetingNotes.form-control(name='meetingNotes' rows='3' placeholder='Add any notes about this meeting')
+                  #meetingNotesErr.showerr
+                button.btn.btn-success(type='submit')
+                  i.bi.bi-calendar-plus
+                  |  Schedule Meeting
+      .card
+        .card-header
+          h5 Upcoming Meetings
+        .card-body
+          .table-responsive
+            table.table.table-striped
+              thead
+                tr
+                  th Date &amp; Time
+                  th Client Name
+                  th Meeting Type
+                  th Status
+                  th Actions
+              tbody
+                tr
+                  td Jan 25, 2025 - 10:00 AM
+                  td John&apos;s Farm
+                  td Farm Visit
+                  td
+                    span.badge.bg-warning Scheduled
+                  td
+                    button.btn.btn-sm.btn-success Complete
+                tr
+                  td Jan 24, 2025 - 2:00 PM
+                  td Mary&apos;s Poultry
+                  td Follow-up
+                  td
+                    span.badge.bg-success Completed
+                  td
+                    button.btn.btn-sm.btn-info View Notes
+    section#orders.dashboard-section
+      h3.mb-3 Orders
+      .card
+        .card-header
+          h5 Recent Orders
+        .card-body
+          .table-responsive
+            table.table.table-striped
+              thead
+                tr
+                  th Order Number
+                  th Client
+                  th Product
+                  th Quantity
+                  th Total Amount
+                  th Status
+              tbody
+                tr
+                  td #ORD001
+                  td John&apos;s Farm
+                  td Broiler Chicks
+                  td 500 chicks
+                  td $2,500
+                  td
+                    span.badge.bg-success Delivered
+                tr
+                  td #ORD002
+                  td Mary&apos;s Poultry
+                  td Layer Chicks
+                  td 300 chicks
+                  td $1,350
+                  td
+                    span.badge.bg-warning Processing
+                tr
+                  td #ORD003
+                  td Green Valley Farm
+                  td Mixed Chicks
+                  td 200 chicks
+                  td $1,200
+                  td
+                    span.badge.bg-info Confirmed
+    section#leads.dashboard-section
+      h3.mb-3 New Leads
+      .row.mb-4
+        .col-md-6
+          .card
+            .card-header
+              h5 Add New Lead
+            .card-body
+              form#leadForm
+                .mb-3
+                  label.form-label(for='leadName') Farm/Business Name
+                  input#leadName.form-control(type='text' name='leadName' placeholder='Enter farm name' required='')
+                .mb-3
+                  label.form-label(for='leadContact') Contact Person
+                  input#leadContact.form-control(type='text' name='leadContact' placeholder='Contact person name' required='')
+                .mb-3
+                  label.form-label(for='leadPhone') Phone Number
+                  input#leadPhone.form-control(type='tel' name='leadPhone' placeholder='+256 700 000 000' required='')
+                .mb-3
+                  label.form-label(for='leadSource') How did you find this lead?
+                  select#leadSource.form-select(name='leadSource' required='')
+                    option(value='') Select source
+                    option(value='referral') Referral from existing client
+                    option(value='website') Company website
+                    option(value='social-media') Social media
+                    option(value='cold-call') Cold call
+                    option(value='event') Farm event/show
+                button.btn.btn-success(type='submit')
+                  i.bi.bi-plus-circle
+                  |  Add Lead
+      .card
+        .card-header
+          h5 My Leads
+        .card-body
+          .table-responsive
+            table.table.table-hover
+              thead
+                tr
+                  th Farm Name
+                  th Contact Person
+                  th Phone
+                  th Source
+                  th Status
+                  th Actions
+              tbody
+                tr
+                  td Farm Fresh Ltd
+                  td James Mukasa
+                  td +256 700 123 456
+                  td
+                    span.badge.bg-info Referral
+                  td
+                    span.badge.bg-warning New
+                  td
+                    button.btn.btn-sm.btn-primary Call
+                    button.btn.btn-sm.btn-success Convert to Client
+                tr
+                  td Sunrise Poultry
+                  td Sarah Nakato
+                  td +256 701 234 567
+                  td
+                    span.badge.bg-success Website
+                  td
+                    span.badge.bg-info Contacted
+                  td
+                    button.btn.btn-sm.btn-primary Call
+                    button.btn.btn-sm.btn-success Convert to Client
+footer.whole-footer
+  .container.text-center
+    h5.mb-3 Young4ChickS
+    p Your trusted partner for quality chicks
+    hr.border-light
+    p.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js')
+script.
+  document.addEventListener('DOMContentLoaded', function() {
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  const sections = document.querySelectorAll('.dashboard-section');
+  sidebarLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+  e.preventDefault();
+  sidebarLinks.forEach(l => l.classList.remove('active'));
+  sections.forEach(section => section.classList.remove('active'));
+  this.classList.add('active');
+  const targetSection = this.getAttribute('data-section');
+  document.getElementById(targetSection).classList.add('active');
+  });
+  });
+  });
+  function validateForm() {
+  clearErrors();
+  let isValid = true;
+  const clientName = document.getElementById('clientName').value.trim();
+  const meetingDate = document.getElementById('meetingDate').value;
+  const meetingType = document.getElementById('meetingType').value;
+  const meetingNotes = document.getElementById('meetingNotes').value.trim();
+  if (clientName === '') {
+  showError('clientNameErr', 'Client name is required');
+  isValid = false;
+  } else if (clientName.length < 2) {
+  showError('clientNameErr', 'Client name must be at least 2 characters long');
+  isValid = false;
+  } else if (!/^[a-zA-Z\\s'-]+$/.test(clientName)) {
+  showError('clientNameErr', 'Client name can only contain letters, spaces, hyphens, and apostrophes');
+  isValid = false;
+  }
+  if (meetingDate === '') {
+  showError('meetingDateErr', 'Meeting date and time is required');
+  isValid = false;
+  } else {
+  const selectedDate = new Date(meetingDate);
+  const currentDate = new Date();
+  if (selectedDate <= currentDate) {
+  showError('meetingDateErr', 'Meeting date must be in the future');
+  isValid = false;
+  }
+  }
+  if (meetingType === '') {
+  showError('meetingTypeErr', 'Please select a meeting type');
+  isValid = false;
+  }
+  if (meetingNotes.length > 500) {
+  showError('meetingNotesErr', 'Notes cannot exceed 500 characters');
+  isValid = false;
+  }
+  return isValid;
+  }
+  function showError(errorElementId, message) {
+  const errorElement = document.getElementById(errorElementId);
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+  }
+  function clearErrors() {
+  const errorElements = document.querySelectorAll('.showerr');
+  errorElements.forEach(element => {
+  element.textContent = '';
+  element.style.display = 'none';
+  });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('meetingForm');
+  document.getElementById('clientName').addEventListener('blur', function() {
+  const clientName = this.value.trim();
+  if (clientName !== '') {
+  if (clientName.length < 2) {
+  showError('clientNameErr', 'Client name must be at least 2 characters long');
+  } else if (!/^[a-zA-Z\\s'-]+$/.test(clientName)) {
+  showError('clientNameErr', 'Client name can only contain letters, spaces, hyphens, and apostrophes');
+  } else {
+  document.getElementById('clientNameErr').style.display = 'none';
+  }
+  }
+  });
+  document.getElementById('meetingDate').addEventListener('change', function() {
+  const meetingDate = this.value;
+  if (meetingDate !== '') {
+  const selectedDate = new Date(meetingDate);
+  const currentDate = new Date();
+  if (selectedDate <= currentDate) {
+  showError('meetingDateErr', 'Meeting date must be in the future');
+  } else {
+  document.getElementById('meetingDateErr').style.display = 'none';
+  }
+  }
+  });
+  document.getElementById('meetingType').addEventListener('change', function() {
+  if (this.value !== '') {
+  document.getElementById('meetingTypeErr').style.display = 'none';
+  }
+  });
+  document.getElementById('meetingNotes').addEventListener('input', function() {
+  const notesLength = this.value.length;
+  if (notesLength > 500) {
+  showError('meetingNotesErr', 'Notes cannot exceed 500 characters (' + notesLength + '/500)');
+  } else {
+  document.getElementById('meetingNotesErr').style.display = 'none';
+  }
+  });
+  });
