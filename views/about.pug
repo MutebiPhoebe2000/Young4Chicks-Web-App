@@ -1,8 +1,7 @@
-doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Document
+  title About - Young4ChickS
   link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr' crossorigin='anonymous')
   link(rel='stylesheet' href='/css/aboutContact.css')
   link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css')
@@ -14,25 +13,25 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
     #navbarNavDropdown.collapse.navbar-collapse
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
         li.nav-item
-          a.nav-link.active(href='index.html') Home
+          a.nav-link.active(href='/') Home
         li.nav-item
-          a.nav-link(href='about.html') About
+          a.nav-link(href='/aboutPage') About
         li.nav-item
-          a.nav-link(href='contact.html') Contact Us
+          a.nav-link(href='/contactPage') Contact Us
         li.nav-item
-          a.nav-link(href='chick-request-form.html') Chicks
+          a.nav-link(href='/chickRequest') Chicks
         li.nav-item.dropdown
           a#accountDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' aria-label='Account menu')
             i.bi.bi-person-circle(style='font-size: 1.4rem;')
           ul.dropdown-menu(aria-labelledby='accountDropdown')
             li
-              a.dropdown-item(href='login.html') Login
+              a.dropdown-item(href='/login') Login
             li
-              a.dropdown-item(href='farmer-reg-page.html') Signup
+              a.dropdown-item(href='/signup') Signup
 section.position-relative.text-white
   div
     span.tt(data-bs-placement='bottom' data-tooltip='Tap that Button!!!')
-      img.image.d-block(src='/public/images/some-cute-hero.jpg' alt='Young4Chicks')
+      img.image.d-block(src='/images/some-cute-hero.jpg' alt='Young4Chicks')
   .position-absolute.top-50.start-50.translate-middle.text-center.p-3(style='background-color: rgba(0, 0, 0, 0.5);')
     h1 We&apos;re More Than Just Chicks
     h3 Young4Chicks is building a movement of young farmers across Uganda and beyond
@@ -40,7 +39,7 @@ section.position-relative.text-white
       | Founded by youth, for youth, Our platform empowers you to raise, sell, and thrive in the poultry business. We
       | believe in skills, innovation, and community. Learn more about how we started and why we&rsquo;re committed to
       | transforming agriculture for a new generation.
-    a(href='signup.html')
+    a(href='/signup')
       button Register With Us
 section#topics
   .container-md
@@ -85,7 +84,7 @@ section#topics
                   | innovation, sustainability, and mutual growth.
       // Image SECOND (on the right)
       .col-6.col-lg-4
-        img.img-fluid(src='/public/images/hero-for-something.jpg' alt='epig')
+        img.img-fluid(src='/images/hero-for-something.jpg' alt='epig')
 section#topics
   .container-md
     .text-center
@@ -95,7 +94,7 @@ section#topics
         | poultry with ease.
     .row.my-5.g-5.justify-content-around.align-items-center
       .col-6.col-lg-4
-        img.img-fluid(src='/public/images/two-cute-hero.jpg' alt='epig')
+        img.img-fluid(src='/images/two-cute-hero.jpg' alt='epig')
       // accordion
       section#topics
         .container-md
@@ -106,7 +105,7 @@ section#topics
               | platform.
           .row.my-5.g-5.justify-content-around.align-items-center
             .col-6.col-lg-4
-              img.img-fluid(src='/public/images/two-cute-hero.jpg' alt='epig')
+              img.img-fluid(src='/images//two-cute-hero.jpg' alt='epig')
             // accordion
             .col-6.col-lg-4
               #chapters.accordion
@@ -180,15 +179,15 @@ section#topics
               h3 Quick Links
             ul.container.list-unstyled.text-center
               li
-                a.text-white(href='index.html') Home
+                a.text-white(href='/') Home
               li
-                a.text-white(href='about.html') About
+                a.text-white(href='/aboutPage') About
               li
-                a.text-white(href='chick-request-form.html') Chicks
+                a.text-white(href='chickRequest') Chicks
               li
-                a.text-white(href='login.html') Login
+                a.text-white(href='/login') Login
               li
-                a.text-white(href='farmer-reg-page.html') Register
+                a.text-white(href='/signup') Register
           // social media
           .container.mb-3.text-center
             h5 Join Us
@@ -199,4 +198,4 @@ section#topics
   p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
   // https://www.linkedin.com/in/phoebe-mutebi-25844226a
   script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js' integrity='sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q' crossorigin='anonymous')
-  script(src='../pulic/js/aboutContact.js')
+  script(src='/js/aboutContact.js')

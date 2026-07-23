@@ -1,4 +1,3 @@
-doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
@@ -6,30 +5,19 @@ head
   link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css' rel='stylesheet')
   link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css')
   link(rel='stylesheet' href='/css/manager.css')
-nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
+nav.navbar.navbar-expand-lg.navbar-dark.sticky-top.p-4
   .container
-    a.navbar-brand.fw-bold(href='#') Young4ChickS
+    a.navbar-brand.fw-bold(href='/managersDash') Young4ChickS
     button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
       span.navbar-toggler-icon
     #navbarNavDropdown.collapse.navbar-collapse
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+      ul.navbar-nav.me-auto.mb-lg-0
         li.nav-item
-          a.nav-link(href='index.html') Home
-        li.nav-item.dropdown
-          a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown')
-            | Dashboards
-          ul.dropdown-menu
-            li
-              a.dropdown-item(href='farmerDashboard.html') Farmer Dashboard
-            li
-              a.dropdown-item(href='salesrepDashboard.html') Sales Rep
-          button#logoutBtn.btn.btn-outline-light(type='button' title='Logout')
-            i.bi.bi-box-arrow-right
+          a.nav-link(href='/') Home
+      a#logoutBtn.btn.btn-outline-light(type='button' title='Logout' href='/')
+        i.bi.bi-box-arrow-right
             |  Logout
-// Dashboard Container
 .dashboard-container
-  // Sidebar
-  | ./
   aside.sidebar
     h4
       i.bi.bi-person-badge
@@ -48,6 +36,10 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
           i.bi.bi-credit-card-2-front
           |  Payments
       li
+        a.sidebar-link(href='#' data-section='stock-management')
+          i.bi.bi-cart
+          |  Manage Stock
+      li
         a.sidebar-link(href='#' data-section='product-management')
           i.bi.bi-box-seam
           |  Manage Products
@@ -55,17 +47,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
         a.sidebar-link(href='#' data-section='manage-users')
           i.bi.bi-people
           |  Manage Users
-      li
-        a.sidebar-link(href='#' data-section='reports')
-          i.bi.bi-graph-up
-          |  Reports
-      li
-        a.sidebar-link(href='#' data-section='notifications')
-          i.bi.bi-bell
-          |  Notifications
-  // Main Content
   main.main-content
-    // Overview Section
     section#overview.dashboard-section.active
       h2.mb-4
         | Welcome, 
@@ -74,49 +56,16 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
       .stats-cards
         .stat-card.purple
           h3 Total Farmers
-          #totalFarmers.number 157
+          #totalFarmers.number #{totalFarmers}
         .stat-card.blue
           h3 Total Requests
-          #totalRequests.number 342
+          #totalRequests.number #{totalRequests}
         .stat-card.green
           h3 Completed Orders
-          #completedOrders.number 289
+          #completedOrders.number #{completedOrders}
         .stat-card.orange
           h3 Total Revenue
-          #totalPayments.number $45,230
-      .row
-        .col-md-6
-          .card
-            .card-body
-              h5.card-title Recent Activity
-              ul.list-unstyled
-                li.mb-2
-                  i.bi.bi-circle-fill.text-success.me-2
-                  |  New farmer registered
-                li.mb-2
-                  i.bi.bi-circle-fill.text-warning.me-2
-                  |  5 requests pending approval
-                li.mb-2
-                  i.bi.bi-circle-fill.text-info.me-2
-                  |  Payment received from John Doe
-                li.mb-2
-                  i.bi.bi-circle-fill.text-primary.me-2
-                  |  New product added to catalog
-        .col-md-6
-          .card
-            .card-body
-              h5.card-title Quick Actions
-              .d-grid.gap-2
-                button.btn.btn-primary.btn-sm
-                  i.bi.bi-clipboard-check
-                  |  Review Pending Requests
-                button.btn.btn-success.btn-sm
-                  i.bi.bi-plus-circle
-                  |  Add New Product
-                button.btn.btn-info.btn-sm
-                  i.bi.bi-graph-up
-                  |  Generate Report
-    // Review Requests Section
+          #totalPayments.number #{totalRevenue} shs
     section#review-requests.dashboard-section
       h3.mb-3 Farmer Requests
       .card
@@ -129,34 +78,34 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
                   th Request ID
                   th Farmer
                   th Chick Type
-                  th Quantity
+                  th Chick Quantity
+                  th Chick Feeds
+                  th Feeds Quantity(kgs)
                   th Status
                   th Actions
               tbody#managerRequestsTable
-                tr
-                  td 2025-01-20
-                  td REQ001
-                  td John Farmer
-                  td Broiler
-                  td 100
-                  td
-                    span.badge.bg-warning.status-badge Pending
-                  td.action-buttons
-                    button.btn.btn-sm.btn-success Approve
-                    button.btn.btn-sm.btn-danger Reject
-                    button.btn.btn-sm.btn-info Details
-                tr
-                  td 2025-01-19
-                  td REQ002
-                  td Mary Smith
-                  td Layer
-                  td 50
-                  td
-                    span.badge.bg-success.status-badge Approved
-                  td.action-buttons
-                    button.btn.btn-sm.btn-info Details
-                    button.btn.btn-sm.btn-primary Track
-    // Payments Section
+                if farmerRequests && farmerRequests.length > 0
+                  each request in farmerRequests
+                    tr
+                      td= request.createdAt ? new Date(request.createdAt).toLocaleDateString() : 'N/A'
+                      td= request._id.toString().slice(-6)
+                      td= request.farmerName
+                      td= request.typeChicks
+                      td= request.numChicks
+                      td= request.chickFeeds || '-'
+                      td= request.feedsQuantity || '-'
+                      td
+                        span.badge(class=request.status === 'Pending' ? 'bg-warning' : (request.status === 'Approved' ? 'bg-success' : 'bg-danger'))= request.status
+                      td.action-buttons
+                        if request.status === 'Pending'
+                          form(action=`/managersDash/approve-request/${request._id}` method="POST" style="display:inline")
+                            button.btn.btn-sm.btn-success Approve
+                          form(action=`/managersDash/reject-request/${request._id}` method="POST" style="display:inline")
+                            button.btn.btn-sm.btn-danger Reject
+                        button.btn.btn-sm.btn-info Details
+                else
+                  tr
+                    td(colspan="9") No requests found
     section#view-payments.dashboard-section
       h3.mb-3 Payment Management
       .card
@@ -169,31 +118,86 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
                   th Payment ID
                   th Farmer
                   th Request ID
-                  th Amount
+                  th Chicks Amount
+                  th Feeds Amount
                   th Status
                   th Actions
               tbody#managerPaymentsTable
                 tr
                   td 2025-01-18
-                  td PAY001
+                  td P.01
                   td John Farmer
-                  td REQ001
-                  td $500
+                  td R.01
+                  td 100,500shs
+                  td 30,000shs
                   td
                     span.badge.bg-success.status-badge Completed
                   td
                     button.btn.btn-sm.btn-primary Receipt
                 tr
                   td 2025-01-17
-                  td PAY002
+                  td P.02
                   td Mary Smith
-                  td REQ002
-                  td $250
+                  td R.02
+                  td 101,250shs
+                  td 45,000shs
                   td
                     span.badge.bg-warning.status-badge Pending
                   td
                     button.btn.btn-sm.btn-info Follow Up
-    // Product Management Section
+    section#stock-management.dashboard-section
+      h3.mb-3 Stock Management
+      button.btn.btn-success(type='button' style='width: 150px; height: 50px; font-size: 16px; padding: 10px 20px;')
+        i.bi.bi-plus
+        | Add Stock
+      .container.mt-4
+        .row.g-3
+          .col-md-3
+            .card.text
+              .card-body
+                h5.card-title Total Stock Items
+                p#totalStock.card-text 70
+          .col-md-3
+            .card.text-red
+              .card-body
+                h5.card-title Low Stock Alert
+                p#totalStock.card-text 10
+          .col-md-3
+            .card.text-red
+              .card-body
+                h5.card-title Out of Stock
+                p#totalStock.card-text 1
+          .col-md-3
+            .card.text-red
+              .card-body
+                h5.card-title Total Stock Value
+                p#totalStock.card-text 12,700shs
+      .card
+        .card-body
+          .heading Stock Table
+          .table-responsive
+            table.table.table-bordered
+              thead
+                th Item Name
+                th Category
+                th Quantity
+                th Unity Price
+                th Stock Value
+                th Status
+              tbody#manageStockTable
+                if stockItems && stockItems.length > 0
+                  each item in stockItems
+                    tr
+                      td= item.chickType
+                      td= item.category
+                      td= item.quantity
+                      td -
+                      td -
+                      td
+                        span.badge(class=item.quantity > 50 ? 'bg-success' : 'bg-warning')= item.quantity > 50 ? 'In-Stock' : 'Low Stock'
+                else
+                  tr
+                    td(colspan="6") No stock items found
     section#product-management.dashboard-section
       h3.mb-3 Manage Products
       .row
@@ -202,25 +206,31 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
             .card-header
               h5 Add New Product
             .card-body
-              form#productForm
+              form#productForm(action='/managersDash' method='post' onsubmit='return validateForm()')
                 .mb-3
                   label.form-label(for='productName') Product Name
-                  input#productName.form-control(type='text' name='productName' required='')
+                  input#productName.form-control(type='text' name='productName')
+                  #productNameErr.showerr
                 .mb-3
                   label.form-label(for='productCategory') Category
-                  select#productCategory.form-select(name='productCategory' required='')
+                  select#productCategory.form-select(name='productCategory')
                     option(value='') Select Category
                     option(value='chick-types') Chick Types
                     option(value='feeds') Feeds
-                    option(value='vaccines') Vaccines &amp; Supplements
-                    option(value='equipment') Equipment
+                  #productCategoryErr.showerr
                 .mb-3
-                  label.form-label(for='productPrice') Price ($)
-                  input#productPrice.form-control(type='number' name='productPrice' step='0.01' required='')
+                  label.form-label(for='productPrice') Price(shs)
+                  input#productPrice.form-control(type='text' name='productPrice' min='6,000')
+                  #productPriceErr.showerr
+                .mb-3
+                  label.form-label(for='productStock') Initial Stock
+                  input#productStock.form-control(type='number' name='productStock')
+                  #productStockErr.showerr
                 .mb-3
                   label.form-label(for='productDescription') Description
                   textarea#productDescription.form-control(name='productDescription' rows='3')
-                button.btn.btn-primary(type='submit')
+                  #productDescriptionErr.showerr
+                button.btn.btn-primary(type='submit' style='width: 150px; height: 50px; font-size: 14px; padding: 10px 20px;')
                   i.bi.bi-plus-circle
                   |  Add Product
         .col-md-6
@@ -232,106 +242,86 @@ nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
                 .list-group-item.d-flex.justify-content-between.align-items-center
                   | Broiler Chicks
                   div
-                    span.badge.bg-primary.rounded-pill.me-2 $5.00
+                    span.badge.bg-primary.rounded-pill.me-2 15,000shs
                     button.btn.btn-sm.btn-outline-danger Remove
                 .list-group-item.d-flex.justify-content-between.align-items-center
                   | Layer Chicks
                   div
-                    span.badge.bg-primary.rounded-pill.me-2 $4.50
+                    span.badge.bg-primary.rounded-pill.me-2 25,000shs
                     button.btn.btn-sm.btn-outline-danger Remove
                 .list-group-item.d-flex.justify-content-between.align-items-center
                   | Kuroiler Chicks
                   div
-                    span.badge.bg-primary.rounded-pill.me-2 $6.00
+                    span.badge.bg-primary.rounded-pill.me-2 10,000shs
                     button.btn.btn-sm.btn-outline-danger Remove
-    // Manage Users Section
-    section#manage-users.dashboard-section
-      h3.mb-3 User Management
-      .card
-        .card-body
-          .table-responsive
-            table.table.table-hover
-              thead
+                .list-group-item.d-flex.justify-content-between.align-items-center
+                  | Starter Feeds
+                  div
+                    span.badge.bg-primary.rounded-pill.me-2 5,000shs
+                    button.btn.btn-sm.btn-outline-danger Remove
+                .list-group-item.d-flex.justify-content-between.align-items-center
+                  | Grower Feeds
+                  div
+                    span.badge.bg-primary.rounded-pill.me-2 6,000shs
+                    button.btn.btn-sm.btn-outline-danger Remove
+                .list-group-item.d-flex.justify-content-between.align-items-center
+                  | Finisher Feeds
+                  div
+                    span.badge.bg-primary.rounded-pill.me-2 7,000shs
+                    button.btn.btn-sm.btn-outline-danger Remove
+                .list-group-item.d-flex.justify-content-between.align-items-center
+                  | Layer Feeds
+                  div
+                    span.badge.bg-primary.rounded-pill.me-2 8,000shs
+                    button.btn.btn-sm.btn-outline-danger Remove
+                .list-group-item.d-flex.justify-content-between(class='align-items-form> <div> <span class=' badge='' bg-primary='' rounded-pill='')
+                  | 9,000shs
+                  button.btn.btn-sm.btn-outline-danger Remove
+              .list-group-item.d-flex.justify-content-between.align-items-center
+                | Organic Feeds
+                div
+                  span.badge.bg-primary.rounded-pill.me-2 10,000shs
+                  button.btn.btn-sm.btn-outline-danger Remove
+              .list-group-item.d-flex.justify-content-between.align-items-center
+                | Supplimentary Feeds
+                div
+                  span.badge.bg-primary.rounded-pill.me-2 11,000shs
+                  button.btn.btn-sm.btn-outline-danger Remove
+section#manage-users.dashboard-section
+  h3.mb-3 User Management
+  .card
+    .card-body
+      .table-responsive
+        table.table.table-hover
+          thead
+            tr
+              th User ID
+              th Name
+              th Role
+              th Email
+              th Status
+              th Last Login
+              th Actions
+          tbody#managerUsersTable
+            if users && users.length > 0
+              each u in users
                 tr
-                  th User ID
-                  th Name
-                  th Role
-                  th Email
-                  th Status
-                  th Last Login
-                  th Actions
-              tbody#managerUsersTable
-                tr
-                  td USR001
-                  td John Farmer
+                  td= u._id.toString().slice(-6)
+                  td= u.farmerFName
                   td
-                    span.badge.bg-success Farmer
-                  td john@example.com
+                    span.badge.bg-success= u.userFRole
+                  td= u.farmerFEmail
                   td
-                    span.badge.bg-success Active
-                  td 2025-01-20
+                    span.badge(class=u.status === 'Suspended' ? 'bg-danger' : 'bg-success')= u.status || 'Active'
+                  td= u.lastLogin ? u.lastLogin.toLocaleDateString() : 'Never'
                   td.action-buttons
                     button.btn.btn-sm.btn-info View
-                    button.btn.btn-sm.btn-warning Suspend
-                tr
-                  td USR002
-                  td Mary Smith
-                  td
-                    span.badge.bg-success Farmer
-                  td mary@example.com
-                  td
-                    span.badge.bg-success Active
-                  td 2025-01-19
-                  td.action-buttons
-                    button.btn.btn-sm.btn-info View
-                    button.btn.btn-sm.btn-warning Suspend
-    // Reports Section
-    section#reports.dashboard-section
-      h3.mb-3 Reports &amp; Analytics
-      .row
-        .col-md-4.mb-3
-          .card
-            .card-body.text-center
-              i.bi.bi-graph-up.text-primary(style='font-size: 2rem;')
-              h5.mt-2 Sales Report
-              p.text-muted Monthly sales summary
-              button.btn.btn-primary.btn-sm Generate
-        .col-md-4.mb-3
-          .card
-            .card-body.text-center
-              i.bi.bi-people.text-success(style='font-size: 2rem;')
-              h5.mt-2 User Report
-              p.text-muted User activity summary
-              button.btn.btn-success.btn-sm Generate
-        .col-md-4.mb-3
-          .card
-            .card-body.text-center
-              i.bi.bi-box-seam.text-warning(style='font-size: 2rem;')
-              h5.mt-2 Inventory Report
-              p.text-muted Stock levels and movements
-              button.btn.btn-warning.btn-sm Generate
-    // Notifications Section
-    section#notifications.dashboard-section
-      h3.mb-3 Notifications
-      .card
-        .card-body
-          .list-group
-            .list-group-item.d-flex.justify-content-between.align-items-start
-              .ms-2.me-auto
-                .fw-bold New farmer registration
-                |                   John Doe has registered as a new farmer
-              small.text-muted 2 hours ago
-            .list-group-item.d-flex.justify-content-between.align-items-start
-              .ms-2.me-auto
-                .fw-bold Payment received
-                |                   Payment of $500 received from Mary Smith
-              small.text-muted 5 hours ago
-            .list-group-item.d-flex.justify-content-between.align-items-start
-              .ms-2.me-auto
-                .fw-bold Low stock alert
-                |                   Broiler chicks stock is running low
-              small.text-muted 1 day ago
-// Footer
+                    if u.status !== 'Suspended'
+                      form(action=`/managersDash/suspend-user/${u._id}` method="POST" style="display:inline")
+                        button.btn.btn-sm.btn-warning Suspend
+            else
+              tr
+                td(colspan="7") No users found
 footer.whole-footer
   .container
     .row.text-center.text-md-start
@@ -339,11 +329,9 @@ footer.whole-footer
         h3 Quick Links
       ul.container.list-unstyled.text-center
         li
-          a.text-white(href='#reports') Reports
+          a.text-white(href='/salesDash') Sales Representative 
         li
-          a.text-white(href='#agents') Agents
-        li
-          a.text-white(href='#profile') Profile
+          a.text-white(href='/managersDash') Dashboard
     .container.mb-3.text-center
       h5 Contact IT Support
     .d-flex.justify-content-center
@@ -351,29 +339,67 @@ footer.whole-footer
         img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=' alt='LinkedIn')
     hr.border-light
     p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
-// Scripts
 script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js')
 script.
-  // SIDEBAR NAVIGATION JAVASCRIPT - KEEP THIS ONLY
-  document.addEventListener('DOMContentLoaded', function() {
-  // Listen for clicks on sidebar links
+  document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.sidebar-link').forEach(link => {
-  link.addEventListener('click', function(e) {
+  link.addEventListener('click', function (e) {
   e.preventDefault();
-  // Get which section to show
   const section = this.getAttribute('data-section');
-  // Hide all sections
   document.querySelectorAll('.dashboard-section').forEach(s => {
   s.classList.remove('active');
   });
-  // Remove active from all sidebar links
   document.querySelectorAll('.sidebar-link').forEach(l => {
   l.classList.remove('active');
   });
-  // Show the clicked section
   document.getElementById(section).classList.add('active');
-  // Make the clicked link active
   this.classList.add('active');
   });
   });
   });
+  const productForm = document.getElementById('productForm');
+  function validateForm() {
+  let productName = document.getElementById('productName').value.trim();
+  let productCategory = document.getElementById('productCategory').value.trim();
+  let productPrice = document.getElementById('productPrice').value.trim();
+  let productStock = document.getElementById('productStock').value.trim();
+  let productDescription = document.getElementById('productDescription').value.trim();
+  let productNameErr = document.getElementById('productNameErr');
+  let productCategoryErr = document.getElementById('productCategoryErr');
+  let productPriceErr = document.getElementById('productPriceErr');
+  let productStockErr = document.getElementById('productStockErr');
+  let productDescriptionErr = document.getElementById('productDescriptionErr');
+  let errFlag = false;
+  if (productName === '') {
+  productNameErr.innerHTML = 'Enter Product!';
+  errFlag = true;
+  } else {
+  productNameErr.innerHTML = '';
+  }
+  if (productCategory === '') {
+  productCategoryErr.innerHTML = 'Select Product Category!'
+  errFlag = true;
+  } else {
+  productCategoryErr.innerHTML = '';
+  }
+  if (productPrice === '') {
+  productPriceErr.innerHTML = 'Price is Required!'
+  errFlag = true;
+  } else {
+  productPriceErr.innerHTML = '';
+  }
+  if (productStock === '') {
+  productStockErr.innerHTML = "Stock can't be empty!";
+  errFlag = true;
+  } else {
+  productStockErr.innerHTML = '';
+  }
+  if (productDescription === '') {
+  productDescriptionErr.innerHTML = 'Description is Required!'
+  errFlag = true;
+  } else {
+  productDescriptionErr.innerHTML = '';
+  }
+  return !errFlag;
+  }
+script(src='/public/js/dashboards.js')

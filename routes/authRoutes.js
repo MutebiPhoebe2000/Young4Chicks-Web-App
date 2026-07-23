@@ -10,12 +10,13 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', async (req, res) => {
     try {
+        console.log(req.body)
         const user = new User(req.body);
-        let existingUser = await User.findOne({ email: req.body.email });// to check if the email is the same as the one that is coming
+        let existingUser = await User.findOne({ farmerFEmail: req.body.farmerFEmail });// to check if the email is the same as the one that is coming
         if (existingUser) {
             return res.status(400).send('Email already Exists');
         } else {
-            await User.register(user, req.body.password, (err) => {
+            await User.register(user, req.body.farmerFPassword, (err) => {
                 if (err) {
                     throw err;
                 }
@@ -33,11 +34,11 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
     req.session.user = req.user;
-    if (req.user.role == 'farmer') {
-        res.redirect("/farmersDash")
-    } else if (req.user.role == 'salesRep') {
-        res.send("This is the Sales Representative dashboard")
-    } else if (req.user.role == 'brooderManager') {
+    if (req.user.userFRole === 'Farmer') {
+        res.redirect("/farmerDash")
+    } else if (req.user.userFRole === 'SalesRep') {
+        res.redirect('/salesDash')
+    } else if (req.user.userFRole === 'BrooderManager') {
         res.redirect("/managersDash")
     } else {
         res.send("You don't have a role in the System")
@@ -51,7 +52,7 @@ router.get('/logout', (req, res) => {
             if(error){
                 return res.status(500).send('Error Logging Out!');
             }
-            res.redirect('/');
+            res.redirect('/index');
         });
     }
 });

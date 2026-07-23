@@ -7,25 +7,25 @@ head
   link(rel='stylesheet' href='/css/index.css')
 nav.navbar.navbar-expand-lg.navbar-dark.sticky-top
   .container
-    a.navbar-brand.fw-bold(href='#') Young4Chicks
+    a.navbar-brand.fw-bold(href='/') Young4Chicks
     button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown')
       span.navbar-toggler-icon
     #navbarNavDropdown.collapse.navbar-collapse
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
         li.nav-item
-          a.nav-link.active(href='index.html') Home
+          a.nav-link.active(href='/') Home
         li.nav-item
-          a.nav-link(href='about.html') About
+          a.nav-link(href='aboutPage') About
         li.nav-item
-          a.nav-link(href='contact.html') Contact Us
+          a.nav-link(href='/contactPage') Contact Us
         li.nav-item.dropdown
           a#accountDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' aria-label='Account menu')
             i.bi.bi-person-circle(style='font-size: 1.4rem;')
           ul.dropdown-menu(aria-labelledby='accountDropdown')
             li
-              a.dropdown-item(href='login.html') Login
+              a.dropdown-item(href='/login') Login
             li
-              a.dropdown-item(href='farmer-reg-page.html') Signup
+              a.dropdown-item(href='/signup') Signup
 h1.head Young4Chicks
 .container-lg
   .row.justify-content-center.align-items-center
@@ -54,11 +54,11 @@ h1.head Young4Chicks
       | Choose a plan
     ul.dropdown-menu(arias-labelledby='book-dropdown')
       li
-        a.dropdown-item(href='#') Beginner Farmer
+        a.dropdown-item(href='#beginnerFarmer') Beginner Farmer
       li
-        a.dropdown-item(href='#') Most Popular
+        a.dropdown-item(href='#growingFarmer') Most Popular
       li
-        a.dropdown-item(href='#') Pro Farmer
+        a.dropdown-item(href='#proFarmer') Pro Farmer
 section#pricing.bg-light.mt-5
   .container-lg
     .text-center
@@ -70,29 +70,29 @@ section#pricing.bg-light.mt-5
           .card-body.text-center.py-4
             h4.card-title Beginner Farmer
             p.lead.card-subtitle Access to basic listings only
-            p.display-5(text-id='pricing') $129
+            p.display-5(text-id='pricing') 129,000shs
             p.card.text.mx-5.text-muted.d-none.d-lg-block
               | Perfect for new farmers starting out. List up to 3 poultry products and get limited visibility.
-            a.btn.btn-lg.mt-3(href='#') Upgrade Now
+            a.btn.btn-lg.mt-3#beginnerFarmer Upgrade Now
       #bigcard.col-9.col-lg-4
         .card.border-2
           .card-header.text-center Most Popular
           .card-body.text-center.py-5
             h4.card-title Growing Farmer
             p.lead.card-subtitle Add listings + manage updates
-            p.display-5 $320.89
+            p.display-5 320,000shs
             p.card.text.mx-5.text-muted.d-none.d-lg-block
               | Great for expanding farms. List unlimited products, manage inventory, and receive notifications.
-            a.btn.btn-lg.mt-3(href='#') Choose Plan
+            a.btn.btn-lg.mt-3#growingFarmer Choose Plan
       .col-7.col-lg-3.col-xl-3
         .card.border-0
           .card-body.text-center.py-4
             h4.card-title Pro Farmer
             p.lead.card-subtitle Listings, analytics &amp; expert tools
-            p.display-5 $499.99
+            p.display-5 499,000shs
             p.card.text.mx-5.text-muted.d-none.d-lg-block
               | Designed for serious farmers. Get full access to insights, expert advice, customer reviews &amp; more.
-            a.btn.btn-lg.mt-3(href='#') Upgrade Now
+            a.btn.btn-lg.mt-3#proFarmer Upgrade Now
 section#topics
   .container-md
     .text-center
@@ -263,7 +263,7 @@ section#contact.py-5
       p.lead Questions to ask? Fill out the form to contact e directly...
     .row.justify-content-center.my-5
       .col-lg-6
-        form
+        form#contactForm(action='/' method='post' onsubmit='return validateForm()')
           label.form-label(for='name') Name:
           .input-group.mb-4
             span.input-group-text
@@ -272,6 +272,7 @@ section#contact.py-5
             span.input-group-text
               span.tt(data-bs-placement='bottom' title='Pretty self explanatory really...')
                 i.bi.bi-question-circle.text-muted
+          #nameErr.showerr
           label.form-label(for='email') Email address:
           .mb-4.input-group
             span.input-group-text
@@ -280,6 +281,7 @@ section#contact.py-5
             span.input-group-text
               span.tt(data-bs-placement='bottom' title='Enter an email address we can reply to')
                 i.bi.bi-question-circle.text-muted
+          #emailErr.showerr
           label.form-label(for='subject')
             | What is your question about? 
             span.required *
@@ -290,11 +292,13 @@ section#contact.py-5
               option(value='pricing' selected='') Pricing query
               option(value='content') Content query
               option(value='other') Other query
+          #subjectErr.showerr
           .form-floating.mb-4
-            textarea#query.form-control(name='message' style='height: 140px;' placeholder='Your query...' required='')
+            textarea#query.form-control(name='message' style='height: 140px;' placeholder='Your query...')
             label(for='query')
               | Your query... 
               span.required *
+          #queryErr.showerr
           .form-check.mb-4
             input#newsletter.form-check-input(type='checkbox' name='newsletter')
             label.form-check-label(for='newsletter')
@@ -334,15 +338,15 @@ footer.whole-footer
         h3 Quick Links
       ul.container.list-unstyled.text-center
         li
-          a.text-white(href='index.html') Home
+          a.text-white(href='/') Home
         li
-          a.text-white(href='about.html') About
+          a.text-white(href='/aboutPage') About
         li
-          a.text-white(href='chick-request-form.html') Chicks
+          a.text-white(href='/chickRequest') Chicks
         li
-          a.text-white(href='login.html') Login
+          a.text-white(href='/login') Login
         li
-          a.text-white(href='farmer-reg-page.html') Register
+          a.text-white(href='/signup') Register
     .container.mb-3.text-center
       h5 Join Us
     .d-flex.justify-content-center.justify-content-md-center
@@ -352,3 +356,45 @@ footer.whole-footer
   p.text-center.mb-0 &copy; 2025 Young4Chicks. All rights reserved.
 script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js' integrity='sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q' crossorigin='anonymous')
 script(src='/js/home.js')
+script.
+  const contactForm = document.getElementById('contactForm');
+  function validateForm() {
+  let name = document.getElementById('name').value.trim();
+  let email = document.getElementById('email').value.trim();
+  let subject = document.getElementById('subject').value.trim();
+  let query = document.getElementById('query').value.trim();
+  let nameErr = document.getElementById('nameErr');
+  let emailErr = document.getElementById('emailErr');
+  let subjectErr = document.getElementById('subjectErr');
+  let queryErr = document.getElementById('queryErr');
+  let errFlag = false;
+  if (name === '') {
+  nameErr.innerHTML = 'Name is required!';
+  errFlag = true;
+  } else {
+  nameErr.innerHTML = '';
+  }
+  if (email === '') {
+  emailErr.innerHTML = 'Email is required!';
+  errFlag = true;
+  } else {
+  emailErr.innerHTML = '';
+  }
+  if (subject === '') {
+  subjectErr.innerHTML = 'Please select a subject!';
+  errFlag = true;
+  } else {
+  subjectErr.innerHTML = '';
+  }
+  if (query === '') {
+  queryErr.innerHTML = 'Your query is required!';
+  errFlag = true;
+  } else {
+  queryErr.innerHTML = '';
+  }
+  if (!errFlag) {
+  alert('Message sent successfully!');
+  contactForm.reset();
+  }
+  return false;
+  }

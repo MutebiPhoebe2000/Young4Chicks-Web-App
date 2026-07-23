@@ -192,6 +192,23 @@
       color: #895129;
       font-family: 'Inter', sans-serif;
     }
+
+    button,
+.btn {
+    
+    background-color: #D9362D;
+    color: white;
+    border: 1.0px solid #C29938;
+    border-radius: 8px;
+    width: 100px;
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
    
     @media (max-width: 768px) {
       .dashboard-container {
@@ -219,6 +236,16 @@
      
       .action-buttons {
         justify-content: center;
+      }
+
+      button, .btn {
+        height: 45px;
+        width: 100px;
+        padding-right: 2px;
+        padding-left: 2px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        font-size: 12px;
       }
     }
 

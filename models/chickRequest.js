@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const requestSchema = new mongoose.Schema({
     User: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+       // type: mongoose.Schema.Types.ObjectId,
+       // ref: 'User',
+       type:String,
         require: true,
     },
     chicksNum: {
@@ -17,21 +18,21 @@ const requestSchema = new mongoose.Schema({
     farmerType: {
         type: String,
         required: true,
-        enum: ['starter', 'returning'],
+       // enum: ['starter', 'returning'],
     },
     unitPrice: {
         type: Number,
-        require: true
+        //require: true
     },
     totalPrice: {
         type: Number,
-        require: true
+       // require: true
     },
     status: {
         type: String,
-        enum: ['pending', 'approved', 'dispatched', 'canceled'],
-        default: 'pending',
+       // enum: ['pending', 'approved', 'dispatched', 'canceled'],
+       // default: 'pending',
     },
     approvedDate: Date
 });
-module.exports = mongoose.model("chickStock", requestSchema) 
+module.exports = mongoose.model("chickRequest", requestSchema) ``

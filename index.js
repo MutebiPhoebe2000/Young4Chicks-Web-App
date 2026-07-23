@@ -16,16 +16,17 @@ require('dotenv').config();
 const User = require('./models/User');
 
 //IMPORT ROUTE
+const addChickRoutes = require('./routes/addChickRoutes')
 const indexRoutes = require('./routes/indexRoutes');
-const chickRoutes = require('./routes/chickRoutes');
-const farmerRegRoutes = require('./routes/farmerRegRoutes');
+//const chickRoutes = require('./routes/chickRoutes');
 const managerDashRoutes = require('./routes/managerDashRoutes');
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
-// const salesRoutes = require('./routes/salesRegRoutes');
-// const adminDashboardRoutes = require('./routes/adminDashRoutes');
-// const farmerDashboardRoutes = require('./routes/farmerBoardRoutes');
-// const adminDashboardRoutes = require('./routes/dashBoardRoutes');
+const farmerDash = require('./routes/farmerDashRoutes');
+const salesDashRoutes = require('./routes/salesDashRoutes');
+const aboutRoutes = require('./routes/aboutRoutes');
+const feedsRoutes = require('./routes/feedsRoutes');
+//const sDashRoutes = require('./routes/sDashRoutes');
 
 
 //INSTANTIATIONS
@@ -55,32 +56,33 @@ mongoose.connection
   // });
 
   app.use(express.urlencoded({extended: false}));
-  app.use(express.static(path.join(__dirname,
-    'public')));
+  //app.use(express.json()); 
+  app.use(express.static(path.join(__dirname, 'public')));
 
 //Express Session Configs
 app.use(expressSession);
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session());//
 
 //Passport Configs
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//USE IMPORTED ROUTES
+//USE IMPORTED ROUTESpassport.deserializeUser(User.deserializeUser());
 app.use('/', indexRoutes);
-app.use('/', chickRoutes);
-app.use('/', farmerRegRoutes);
-app.use('/', managerDashRoutes);
+app.use('/', aboutRoutes);
+// app.use('/', chickRoutes);
+app.use('/managersDash', managerDashRoutes);
 app.use('/', authRoutes);
 app.use('/', contactRoutes);
-// app.use('/', salesRegRoutes);
-// app.use('/', adminDashRoutes);
-// app.use('/', farmerDashRoutes);
-// app.use('/', adminDashRoutes);
-
-
+app.use('/farmerDash', farmerDash);
+app.use('/salesDash', salesDashRoutes);
+app.use('/chickRequest', addChickRoutes);
+app.use('/feedsRequest', feedsRoutes);
+//app.use('/', chickRoutes);
+// app.use('/', contactRoutes);
+// app.use('/', contactRoutes);
 //For Non-Existing Routes
 app.use((req, res) => {
     res.status(404).send('Oops! Route not found!');

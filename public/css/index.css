@@ -27,7 +27,7 @@ body {
 .btn:hover {
     background-color: #C29938;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn::after {
@@ -280,8 +280,8 @@ ul.list-unstyled li {
     top: 20px;
 }
 
-.form-floating textarea:focus + label,
-.form-floating textarea:not(:placeholder-shown) + label {
+.form-floating textarea:focus+label,
+.form-floating textarea:not(:placeholder-shown)+label {
     color: #C29938;
     font-weight: 600;
     font-size: 13px;
@@ -400,7 +400,7 @@ ul.list-unstyled li {
 }
 
 .btn-close {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     width: 35px;
     height: 35px;
@@ -430,27 +430,33 @@ ul.list-unstyled li {
     border: none;
 }
 
+.showerr {
+    color: red;
+    font-size: 15px;
+    font-family: 'Bodoni XT';
+}
+
 /* Responsive improvements */
 @media (max-width: 768px) {
     #contact {
         margin: 20px 10px;
         padding: 30px 20px;
     }
-    
+
     #contact h2 {
         font-size: 2rem;
     }
-    
+
     .head {
         font-size: 3rem;
     }
-    
+
     .input-group-text {
         padding: 12px 14px;
     }
-    
+
     .form-control,
     .form-select {
         padding: 12px 14px;
     }
-} 
+}

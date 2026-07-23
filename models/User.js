@@ -2,58 +2,63 @@ const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new mongoose.Schema({
-  fullname: {
+  farmerFName: {
     type: String,
-    required: true,
     trim: true
   },
   age: {
-    type: Number,
-    required: true
+    type: Number
   },
   gender: {
     type: String,
     enum: ['Male', 'Female'],
-    required: true,
   },
-  phone: {
+
+  farmerFAddress: {
+    type: String
+  },
+
+  farmerFNumber: {
     type: String,
-    required: true,
     trim: true
   },
 
-  nin: {
+  farmerFType: {
+    type: String
+  },
+
+  farmerFNIN: {
     type: String,
-    required: true,
-    unique: true,
     trim: true
   },
-  
-  location: {
+
+  farmerFRecommenderName: {
     type: String,
-    required: true
   },
-  email: {
+  farmerFRecommenderNIN: {
     type: String,
-    required: true,
-    unique: true,
+    trim: true
+  },
+
+  farmerFEmail: {
+    type: String,
     lowercase: true,
     trim: true
   },
-  role: {
+  userFRole: {
     type: String,
     required: true
   },
-  password: {
+  farmerFPassword: {
     type: String,
     required: true,
   },
-  confirmPassword: {
+  farmerFConfirmPassword: {
     type: String,
     required: true,
   }
 });
 userSchema.plugin(passportLocalMongoose, {
-  usernameField: "email",
+  usernameField: "farmerFEmail",
 });
 module.exports = mongoose.model("User", userSchema);
