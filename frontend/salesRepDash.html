@@ -1,0 +1,277 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Representative Dashboard - Young For Chicks</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/sales.css">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">Young4ChickS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarNavDropdown" class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+      </ul>
+      <a id="logoutBtn" class="btn btn-outline-light" type="button" title="Logout" href="/">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <h4><i class="bi bi-briefcase"></i> Sales Panel</h4>
+    <ul>
+      <li><a class="sidebar-link active" href="#" data-section="overview"><i class="bi bi-graph-up"></i> Sales Overview</a></li>
+      <li><a class="sidebar-link" href="#" data-section="clients"><i class="bi bi-people"></i> My Clients</a></li>
+      <li><a class="sidebar-link" href="#" data-section="orders"><i class="bi bi-cart-check"></i> Orders</a></li>
+      <li><a class="sidebar-link" href="#" data-section="newlead"><i class="bi bi-person-plus"></i> New Lead</a></li>
+      <li><a class="sidebar-link" href="#" data-section="myleads"><i class="bi bi-list-check"></i> My Leads</a></li>
+    </ul>
+  </aside>
+  <main class="main-content">
+    <section id="overview" class="dashboard-section active">
+      <h2 class="mb-4">Welcome, Sales Representative!</h2>
+      <div class="stats-cards">
+        <div class="stat-card red">
+          <h3>Total Sales</h3>
+          <div id="totalSales" class="number">0 shs</div>
+        </div>
+        <div class="stat-card orange">
+          <h3>Monthly Goal</h3>
+          <div class="number">1,525,000shs</div>
+        </div>
+        <div class="stat-card green">
+          <h3>My Clients</h3>
+          <div id="totalClients" class="number">0</div>
+        </div>
+        <div class="stat-card blue">
+          <h3>New Leads</h3>
+          <div id="newLeadsCount" class="number">0</div>
+        </div>
+      </div>
+    </section>
+    <section id="clients" class="dashboard-section">
+      <h3 class="mb-3">My Clients</h3>
+
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <input id="clientSearch" class="form-control" type="text" placeholder="Search clients by name, email, or phone...">
+            <button class="btn btn-primary" type="button" style="padding-bottom: 10px"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <select id="statusFilter" class="form-select">
+            <option value="">All Status</option>
+            <option value="Active">Active Clients</option>
+            <option value="To Be Followed-up">Follow-up Needed</option>
+            <option value="New Client">New Clients</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <button id="addClientBtn" class="btn btn-success" type="button" style="padding-top: 2px; padding-bottom: 10px; padding-left: 20px; padding-right: 20px; font-size: 12px;">
+            <i class="bi bi-person-plus me-2"></i> Add New Client
+          </button>
+        </div>
+      </div>
+
+      <div id="clientsList" class="row">
+        <div class="col-12"><p>Loading...</p></div>
+      </div>
+    </section>
+    <section id="orders" class="dashboard-section">
+      <h3 class="mb-3">Orders</h3>
+      <div class="card mb-4">
+        <div class="card-header"><h5>Farmer Requests</h5></div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Farm Name</th>
+                  <th>Chick Type</th>
+                  <th>Quantity</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTable">
+                <tr><td colspan="6">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h5>Recent Orders</h5></div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Order Number</th>
+                  <th>Client</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ORD.01</td>
+                  <td>John's Farm</td>
+                  <td>Broiler Chicks</td>
+                  <td>400 chicks</td>
+                  <td>102,500</td>
+                  <td><span class="badge bg-success">Delivered</span></td>
+                </tr>
+                <tr>
+                  <td>ORD.02</td>
+                  <td>Mary's Poultry</td>
+                  <td>Layer Chicks</td>
+                  <td>200 chicks</td>
+                  <td>201,350</td>
+                  <td><span class="badge bg-warning">Processing</span></td>
+                </tr>
+                <tr>
+                  <td>ORD.03</td>
+                  <td>Green Valley Farm</td>
+                  <td>Mixed Chicks</td>
+                  <td>100 chicks</td>
+                  <td>301,200</td>
+                  <td><span class="badge bg-info">Confirmed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="newlead" class="dashboard-section">
+      <h3 class="mb-3">Add New Lead</h3>
+      <div class="card">
+        <div class="card-body">
+          <form id="leadForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Farm/Business Name</label>
+                <input id="farmName" class="form-control" type="text" name="farmName" placeholder="Enter farm name">
+                <div id="farmNameErr" class="showerr"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Owner's Name</label>
+                <input id="ownerName" class="form-control" type="text" name="ownerName" placeholder="Enter owner's name">
+                <div id="ownerNameErr" class="showerr"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Phone Number</label>
+                <input id="phoneNumber" class="form-control" type="text" name="phoneNumber" placeholder="+256 7XX XXX XXX">
+                <div id="phoneNumberErr" class="showerr"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">How did you find this lead?</label>
+                <select id="leadSource" class="form-control" name="leadSource">
+                  <option value="">Select source</option>
+                  <option value="Referral">Referral</option>
+                  <option value="Website">Website</option>
+                  <option value="Social Media">Social Media</option>
+                  <option value="Cold Call">Cold Call</option>
+                  <option value="Event">Event/Fair</option>
+                </select>
+                <div id="leadSourceErr" class="showerr"></div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Notes (Optional)</label>
+              <textarea id="leadNotes" class="form-control" name="notes" rows="3" placeholder="Any additional information about the lead"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit"><i class="bi bi-plus-circle me-2"></i> Add Lead</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section id="myleads" class="dashboard-section">
+      <h3 class="mb-3">My Leads</h3>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Farm Name</th>
+                  <th>Owner Name</th>
+                  <th>Phone</th>
+                  <th>Source</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTable">
+                <tr><td colspan="6">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<footer class="whole-footer">
+  <div class="container text-center">
+    <h5 class="mb-3">Young4ChickS</h5>
+    <p>Your trusted partner for quality chicks</p>
+    <hr class="border-light">
+    <p class="mb-0">&copy; 2025 Young4Chicks. All rights reserved.</p>
+  </div>
+</footer>
+
+<div id="addClientModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Client</h5>
+        <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addClientForm">
+          <div class="mb-3">
+            <label class="form-label" for="clientFarmName">Farm Name</label>
+            <input id="clientFarmName" class="form-control" type="text" name="clientFarmName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="clientOwnerName">Owner Name</label>
+            <input id="clientOwnerName" class="form-control" type="text" name="clientOwnerName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="clientEmail">Email</label>
+            <input id="clientEmail" class="form-control" type="email" name="clientEmail" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="clientPhone">Phone Number</label>
+            <input id="clientPhone" class="form-control" type="tel" name="clientPhone" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+        <button id="saveClientBtn" class="btn btn-primary" type="submit" form="addClientForm">Save Client</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/config.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/salesDash.js"></script>

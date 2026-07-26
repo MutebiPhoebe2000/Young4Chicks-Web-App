@@ -1,0 +1,118 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login-Form</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/css/forms.css">
+<style>
+  .showerr {
+    color: red;
+    font-size: 15px;
+    font-family: 'Bodoni XT';
+  }
+  .passwordErr {
+    color: red;
+    font-size: 15px;
+    font-family: 'Bodoni XT';
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">Young4Chicks</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarNavDropdown" class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h1>Young4Chicks</h1>
+<section id="intro">
+  <div id="ketra" class="card mb-3 mx-auto" style="max-width: 800px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="img-fluid rounded-start" src="/images/login-hero.jpg" alt="Login Image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2 class="card-title">Welcome Back</h2>
+          <h5 class="text-muted">Log in to your Young4Chicks account</h5>
+          <p class="card-text">
+            Access your dashboard, manage your chicks, connect with other farmers, and keep your poultry business
+            growing.
+          </p>
+          <form id="loginForm" class="loginForm">
+            <div class="mb-3">
+              <label class="form-label" for="email">Email address</label>
+              <input id="email" class="form-control" type="text" name="farmerFEmail" placeholder="Please enter a valid email">
+              <div id="emailErr" class="showerr"></div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input id="password" class="form-control" type="password" name="password">
+              <div id="passwordErr" class="showerr"></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="whole-footer">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="container mb-3 text-center">
+        <h3>Quick Links</h3>
+      </div>
+      <ul class="container list-unstyled text-center">
+        <li><a class="text-white" href="/">Home</a></li>
+        <li><a class="text-white" href="/about.html">About</a></li>
+        <li><a class="text-white" href="/chicksRequestForm.html">Chicks</a></li>
+        <li><a class="text-white" href="/login.html">Login</a></li>
+      </ul>
+    </div>
+    <div class="container mb-3 text-center">
+      <h5>Join Us</h5>
+    </div>
+    <div class="d-flex justify-content-center justify-content-md-center">
+      <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=" alt="LinkedIn"></a>
+    </div>
+  </div>
+  <hr class="border-light">
+  <p class="text-center mb-0">&copy; 2025 Young4Chicks. All rights reserved.</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script>
+  function validateForm() {
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let emailErr = document.getElementById('emailErr');
+    let passwordErr = document.getElementById('passwordErr');
+    let errFlag = false;
+    if (email.length === 0) {
+      emailErr.innerHTML = "Email is Required!!!";
+      errFlag = true;
+    } else {
+      emailErr.innerHTML = "";
+    }
+    if (password.length <= 7) {
+      passwordErr.innerHTML = "Password is Required!!!";
+      errFlag = true;
+    } else {
+      passwordErr.innerHTML = "";
+    }
+    if (errFlag) {
+      return false;
+    }
+    return true;
+  }
+</script>
+<script src="/js/config.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>

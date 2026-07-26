@@ -1,0 +1,333 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manager Dashboard - Young For Chicks</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/manager.css">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top p-4">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/managerDash.html">Young4ChickS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarNavDropdown" class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+      </ul>
+      <a id="logoutBtn" class="btn btn-outline-light" type="button" title="Logout" href="/">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <h4><i class="bi bi-person-badge"></i> Manager Panel</h4>
+    <ul>
+      <li><a class="sidebar-link active" href="#" data-section="overview"><i class="bi bi-speedometer2"></i> Overview</a></li>
+      <li><a class="sidebar-link" href="#" data-section="review-requests"><i class="bi bi-clipboard-check"></i> Review Requests</a></li>
+      <li><a class="sidebar-link" href="#" data-section="view-payments"><i class="bi bi-credit-card-2-front"></i> Payments</a></li>
+      <li><a class="sidebar-link" href="#" data-section="stock-management"><i class="bi bi-cart"></i> Manage Stock</a></li>
+      <li><a class="sidebar-link" href="#" data-section="product-management"><i class="bi bi-box-seam"></i> Manage Products</a></li>
+      <li><a class="sidebar-link" href="#" data-section="manage-users"><i class="bi bi-people"></i> Manage Users</a></li>
+    </ul>
+  </aside>
+  <main class="main-content">
+    <section id="overview" class="dashboard-section active">
+      <h2 class="mb-4">Welcome, <span id="managerName">Manager</span>!</h2>
+      <div class="stats-cards">
+        <div class="stat-card purple">
+          <h3>Total Farmers</h3>
+          <div id="totalFarmers" class="number">0</div>
+        </div>
+        <div class="stat-card blue">
+          <h3>Total Requests</h3>
+          <div id="totalRequests" class="number">0</div>
+        </div>
+        <div class="stat-card green">
+          <h3>Completed Orders</h3>
+          <div id="completedOrders" class="number">0</div>
+        </div>
+        <div class="stat-card orange">
+          <h3>Total Revenue</h3>
+          <div id="totalPayments" class="number">0 shs</div>
+        </div>
+      </div>
+    </section>
+    <section id="review-requests" class="dashboard-section">
+      <h3 class="mb-3">Farmer Requests</h3>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Request ID</th>
+                  <th>Farmer</th>
+                  <th>Chick Type</th>
+                  <th>Chick Quantity</th>
+                  <th>Chick Feeds</th>
+                  <th>Feeds Quantity(kgs)</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="managerRequestsTable">
+                <tr><td colspan="9">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="view-payments" class="dashboard-section">
+      <h3 class="mb-3">Payment Management</h3>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Payment ID</th>
+                  <th>Farmer</th>
+                  <th>Request ID</th>
+                  <th>Chicks Amount</th>
+                  <th>Feeds Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-01-18</td>
+                  <td>P.01</td>
+                  <td>John Farmer</td>
+                  <td>R.01</td>
+                  <td>100,500shs</td>
+                  <td>30,000shs</td>
+                  <td><span class="badge bg-success status-badge">Completed</span></td>
+                  <td><button class="btn btn-sm btn-primary">Receipt</button></td>
+                </tr>
+                <tr>
+                  <td>2025-01-17</td>
+                  <td>P.02</td>
+                  <td>Mary Smith</td>
+                  <td>R.02</td>
+                  <td>101,250shs</td>
+                  <td>45,000shs</td>
+                  <td><span class="badge bg-warning status-badge">Pending</span></td>
+                  <td><button class="btn btn-sm btn-info">Follow Up</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="stock-management" class="dashboard-section">
+      <h3 class="mb-3">Stock Management</h3>
+      <button class="btn btn-success" type="button" style="width: 150px; height: 50px; font-size: 16px; padding: 10px 20px;">
+        <i class="bi bi-plus"></i> Add Stock
+      </button>
+      <div class="container mt-4">
+        <div class="row g-3">
+          <div class="col-md-3">
+            <div class="card text">
+              <div class="card-body">
+                <h5 class="card-title">Total Stock Items</h5>
+                <p class="card-text">70</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-red">
+              <div class="card-body">
+                <h5 class="card-title">Low Stock Alert</h5>
+                <p class="card-text">10</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-red">
+              <div class="card-body">
+                <h5 class="card-title">Out of Stock</h5>
+                <p class="card-text">1</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-red">
+              <div class="card-body">
+                <h5 class="card-title">Total Stock Value</h5>
+                <p class="card-text">12,700shs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="heading">Stock Table</div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Item Name</th>
+                  <th>Category</th>
+                  <th>Quantity</th>
+                  <th>Unity Price</th>
+                  <th>Stock Value</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="manageStockTable">
+                <tr><td colspan="6">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="product-management" class="dashboard-section">
+      <h3 class="mb-3">Manage Products</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header"><h5>Add New Product</h5></div>
+            <div class="card-body">
+              <form id="productForm">
+                <div class="mb-3">
+                  <label class="form-label" for="productName">Product Name</label>
+                  <input id="productName" class="form-control" type="text" name="productName">
+                  <div id="productNameErr" class="showerr"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="productCategory">Category</label>
+                  <select id="productCategory" class="form-select" name="productCategory">
+                    <option value="">Select Category</option>
+                    <option value="chick-types">Chick Types</option>
+                    <option value="feeds">Feeds</option>
+                  </select>
+                  <div id="productCategoryErr" class="showerr"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="productPrice">Price(shs)</label>
+                  <input id="productPrice" class="form-control" type="text" name="productPrice" min="6,000">
+                  <div id="productPriceErr" class="showerr"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="productStock">Initial Stock</label>
+                  <input id="productStock" class="form-control" type="number" name="productStock">
+                  <div id="productStockErr" class="showerr"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="productDescription">Description</label>
+                  <textarea id="productDescription" class="form-control" name="productDescription" rows="3"></textarea>
+                  <div id="productDescriptionErr" class="showerr"></div>
+                </div>
+                <button class="btn btn-primary" type="submit" style="width: 150px; height: 50px; font-size: 14px; padding: 10px 20px;">
+                  <i class="bi bi-plus-circle"></i> Add Product
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header"><h5>Current Products</h5></div>
+            <div class="card-body">
+              <div class="list-group">
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                  Broiler Chicks
+                  <div><span class="badge bg-primary rounded-pill me-2">15,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                  Layer Chicks
+                  <div><span class="badge bg-primary rounded-pill me-2">25,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                  Kuroiler Chicks
+                  <div><span class="badge bg-primary rounded-pill me-2">10,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                  Starter Feeds
+                  <div><span class="badge bg-primary rounded-pill me-2">5,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                  Grower Feeds
+                  <div><span class="badge bg-primary rounded-pill me-2">6,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                  Finisher Feeds
+                  <div><span class="badge bg-primary rounded-pill me-2">7,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                  Layer Feeds
+                  <div><span class="badge bg-primary rounded-pill me-2">8,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+                </div>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                Organic Feeds
+                <div><span class="badge bg-primary rounded-pill me-2">10,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                Supplimentary Feeds
+                <div><span class="badge bg-primary rounded-pill me-2">11,000shs</span><button class="btn btn-sm btn-outline-danger">Remove</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="manage-users" class="dashboard-section">
+      <h3 class="mb-3">User Management</h3>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Last Login</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="managerUsersTable">
+                <tr><td colspan="7">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<footer class="whole-footer">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="container mb-3 text-center">
+        <h3>Quick Links</h3>
+      </div>
+      <ul class="container list-unstyled text-center">
+        <li><a class="text-white" href="/salesRepDash.html">Sales Representative</a></li>
+        <li><a class="text-white" href="/managerDash.html">Dashboard</a></li>
+      </ul>
+    </div>
+    <div class="container mb-3 text-center">
+      <h5>Contact IT Support</h5>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+vPXzD/6Yfv/+2nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=" alt="LinkedIn"></a>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/config.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/managerDash.js"></script>

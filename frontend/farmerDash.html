@@ -1,0 +1,412 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmer Dashboard - Young For Chicks</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/farmer.css">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">Young4ChickS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarNavDropdown" class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact.html">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/chicksRequestForm.html">Chicks</a></li>
+      </ul>
+      <a id="logoutBtn" class="btn btn-outline-light" type="button" title="Logout" href="/">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <h4><i class="bi bi-person-circle"></i> Farmer Panel</h4>
+    <ul>
+      <li><a class="sidebar-link active" href="#" data-section="overview"><i class="bi bi-house-door"></i> Overview</a></li>
+      <li><a class="sidebar-link" href="#" data-section="my-requests"><i class="bi bi-clipboard-check"></i> My Requests</a></li>
+      <li><a class="sidebar-link" href="#" data-section="new-request"><i class="bi bi-plus-circle"></i> New Request</a></li>
+      <li><a class="sidebar-link" href="#" data-section="my-payments"><i class="bi bi-credit-card"></i> My Payments</a></li>
+      <li><a class="sidebar-link" href="#" data-section="my-deliveries"><i class="bi bi-truck"></i> My Deliveries</a></li>
+      <li><a class="sidebar-link" href="#" data-section="profile"><i class="bi bi-person-gear"></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <section id="overview" class="dashboard-section active">
+      <h2 class="mb-4">Welcome, <span id="farmerName">Farmer</span>!</h2>
+      <div class="stats-cards">
+        <div class="stat-card red">
+          <h3>Total Requests</h3>
+          <div id="totalRequestsCount" class="number">0</div>
+        </div>
+        <div class="stat-card orange">
+          <h3>Pending Requests</h3>
+          <div id="pendingRequestsCount" class="number">0</div>
+        </div>
+        <div class="stat-card green">
+          <h3>Completed Orders</h3>
+          <div id="completedOrdersCount" class="number">0</div>
+        </div>
+        <div class="stat-card blue">
+          <h3>Total Spent</h3>
+          <div id="totalSpentAmount" class="number">0</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="my-requests" class="dashboard-section">
+      <h3 class="mb-3">My Requests</h3>
+
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <input id="requestSearch" class="form-control" type="text" placeholder="Search requests by ID, chick type, or status...">
+            <button class="btn btn-primary" type="button"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <select id="statusFilter" class="form-select">
+            <option value="">All Status</option>
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Dispatched">Dispatched</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Request ID</th>
+                  <th>Chick Type</th>
+                  <th>Chicks Quantity</th>
+                  <th>Chick Feeds</th>
+                  <th>Feeds Quantity</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="farmerRequestsTable">
+                <tr><td colspan="8">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="new-request" class="dashboard-section">
+      <h3 class="mb-3">Submit New Request</h3>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <button id="quickRequestBtn" class="btn btn-success" type="button">
+            <i class="bi bi-lightning me-2"></i> Quick Request (Most Popular)
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <form id="newRequestForm" class="farmerReg">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="chickType">Chick Type</label>
+                <select id="chickType" class="form-select" name="typeChicks" required>
+                  <option value="">Select Type</option>
+                  <option value="Broilers">Broilers</option>
+                  <option value="Layers">Layers</option>
+                </select>
+                <div id="chickTypeErr" class="showerr"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="chickFeeds">Chick Feeds</label>
+                <select id="chickFeeds" class="form-select" name="chickFeeds">
+                  <option value="">Select Feeds</option>
+                  <option value="Starter">Starter Feeds</option>
+                  <option value="Grower">Grower Feeds</option>
+                  <option value="Finisher">Finisher Feeds</option>
+                  <option value="Layer">Layer Feeds</option>
+                  <option value="Medicated">Medicated Feeds</option>
+                  <option value="Organic">Organic Feeds</option>
+                  <option value="Supplementary">Supplementary Feeds</option>
+                </select>
+                <div id="chickFeedsErr" class="showerr"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="chicksQuantity">Chicks Quantity</label>
+                <input id="chicksQuantity" class="form-control" type="number" name="numChicks" min="100" max="500">
+                <div id="chicksQuantityErr" class="showerr"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="feedsQuantity">Feeds Quantity</label>
+                <input id="feedsQuantity" class="form-control" type="number" name="feedsQuantity" min="1" max="500">
+                <div id="feedsQuantityErr" class="showerr"></div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="farmerType">Farmer Type</label>
+              <select id="farmerType" class="form-select" name="farmerType">
+                <option value="">Select Type</option>
+                <option value="Starter">Starter</option>
+                <option value="Returning">Returning</option>
+              </select>
+              <div id="farmerTypeErr" class="showerr"></div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="deliveryDate">Preferred Delivery Date</label>
+              <input id="deliveryDate" class="form-control" type="date" name="deliveryDate">
+              <div id="deliveryDateErr" class="showerr"></div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="notes">Additional Notes</label>
+              <textarea id="notes" class="form-control" name="notes" rows="3"></textarea>
+              <div id="notesErr" class="showerr"></div>
+            </div>
+            <button class="btn btn-success" type="submit"><i class="bi bi-send"></i> Submit Request</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="my-payments" class="dashboard-section">
+      <h3 class="mb-3">My Payments</h3>
+
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="card bg-success text-white">
+            <div class="card-body text-center">
+              <h5 class="card-title">Total Paid</h5>
+              <h3 id="totalPaidAmount" class="card-text">0 shs</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-warning text-dark">
+            <div class="card-body text-center">
+              <h5 class="card-title">Pending Payment</h5>
+              <h3 id="pendingPaymentAmount" class="card-text">0 shs</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-info text-white">
+            <div class="card-body text-center">
+              <h5 class="card-title">Next Due</h5>
+              <h3 id="nextDueAmount" class="card-text">0 shs</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Payment ID</th>
+                  <th>Request ID</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="farmerPaymentsTable">
+                <tr><td colspan="5">No payments found</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="my-deliveries" class="dashboard-section">
+      <h3 class="mb-3">My Deliveries</h3>
+
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <div class="text-center">
+            <i class="bi bi-truck text-primary fs-1"></i>
+            <h5>Pending</h5>
+            <h3 id="pendingDeliveriesCount" class="text-primary">0</h3>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center">
+            <i class="bi bi-box-seam text-warning fs-1"></i>
+            <h5>In Transit</h5>
+            <h3 id="inTransitCount" class="text-warning">0</h3>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center">
+            <i class="bi bi-check-circle text-success fs-1"></i>
+            <h5>Delivered</h5>
+            <h3 id="deliveredCount" class="text-success">0</h3>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center">
+            <i class="bi bi-calendar-event text-info fs-1"></i>
+            <h5>Scheduled</h5>
+            <h3 id="scheduledCount" class="text-info">0</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Delivery Date</th>
+                  <th>Chicken Products</th>
+                  <th>Chick Quantity</th>
+                  <th>Feeds Products</th>
+                  <th>Feeds Quantity</th>
+                  <th>Status</th>
+                  <th>Tracking</th>
+                </tr>
+              </thead>
+              <tbody id="farmerDeliveriesTable">
+                <tr><td colspan="7">No deliveries found</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profile" class="dashboard-section">
+      <h3 class="mb-3">My Profile</h3>
+
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <i class="bi bi-person-circle text-primary fs-1"></i>
+              <h5 id="profileName" class="card-title mt-2">Farmer Name</h5>
+              <p id="profileEmail" class="card-text text-muted">email@example.com</p>
+              <button id="editProfileBtn" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-pencil me-1"></i> Edit Profile
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <form id="profileForm" class="profileForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label" for="fullName">Full Name</label>
+                    <input id="fullName" class="form-control" type="text" name="farmerFName">
+                    <div id="fullNameErr" class="showerr"></div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input id="email" class="form-control" type="email" name="farmerFEmail">
+                    <div id="emailErr" class="showerr"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input id="phone" class="form-control" type="tel" name="farmerFNumber">
+                    <div id="phoneErr" class="showerr"></div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label" for="location">Farm Location</label>
+                    <input id="location" class="form-control" type="text" name="farmerFAddress">
+                    <div id="locationErr" class="showerr"></div>
+                  </div>
+                </div>
+                <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Update Profile</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="whole-footer">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="container mb-3 text-center">
+        <h3>Quick Links</h3>
+      </div>
+      <ul class="container list-unstyled text-center">
+        <li><a class="text-white" href="/">Home</a></li>
+        <li><a class="text-white" href="/about.html">About</a></li>
+        <li><a class="text-white" href="/chicksRequestForm.html">Chicks</a></li>
+        <li><a class="text-white" href="/login.html">Login</a></li>
+      </ul>
+    </div>
+    <div class="container mb-3 text-center">
+      <h5>Join Us</h5>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAm0lEQVR4AWP4//8/RRhMyLfs3sNQvOk/KRikB24ATNB2yhEQJtoQuAEwzVAAYtPVAMJe4Cjf8l+0bsd/RkIGQAGc/ej9t/+TDt/7/+3nHSXWAAT49P33/z9//4HZl559JM2Aqm3XwXyXGcfA/H///pFmgFj9DjCfp3IrTIgkA5ADbbAbQA6mKDPp9x7YBTOAIgwAVba5DGceMlQAAAAASUVORK5CYII=" alt="LinkedIn"></a>
+    </div>
+    <hr class="border-light">
+    <p class="text-center mb-0">&copy; 2025 Young4Chicks. All rights reserved.</p>
+  </div>
+</footer>
+
+<div id="quickRequestModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Quick Request - Most Popular</h5>
+        <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quickRequestForm">
+          <div class="mb-3">
+            <label class="form-label" for="quickChickType">Chick Type</label>
+            <select id="quickChickType" class="form-select" name="quickChickType" required>
+              <option value="">Select Type</option>
+              <option value="Broilers">Broilers (Most Popular)</option>
+              <option value="Layers">Layers</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="quickQuantity">Quantity</label>
+            <input id="quickQuantity" class="form-control" type="number" name="quickQuantity" min="100" max="500" value="100" required>
+            <small class="text-muted">Minimum 100 chicks</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="quickDeliveryDate">Delivery Date</label>
+            <input id="quickDeliveryDate" class="form-control" type="date" name="quickDeliveryDate" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+        <button id="saveQuickRequestBtn" class="btn btn-success" type="submit" form="quickRequestForm">Submit Quick Request</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/config.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/farmerDash.js"></script>
