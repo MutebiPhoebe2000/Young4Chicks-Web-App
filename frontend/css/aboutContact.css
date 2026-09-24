@@ -171,6 +171,21 @@ button:hover, .btn:hover {
         font-size: 16px;
         padding: 10px 20px;
     }
+
+    /* Hero: stack text below the image so the section grows to fit it */
+    section.position-relative.text-white > .position-absolute {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        background-color: rgba(0, 0, 0, 0.75) !important;
+    }
+
+    /* Let images/accordions use the full width instead of two cramped half-columns */
+    #topics .row > .col-6 {
+        flex: 0 0 100%;
+        width: 100%;
+    }
 }
 
 .showerr{
