@@ -18,6 +18,8 @@ const managerDashRoutes = require('./routes/managerDashRoutes');
 const salesDashRoutes = require('./routes/salesDashRoutes');
 const chickRequestRoutes = require('./routes/chickRequestRoutes');
 const feedsRoutes = require('./routes/feedsRoutes');
+const contactRoutes = require('./routes/contactRoutes');
+const adminDashRoutes = require('./routes/adminDashRoutes');
 
 // INSTANTIATIONS
 const app = express();
@@ -64,6 +66,8 @@ app.use('/api/manager', managerDashRoutes);
 app.use('/api/sales', salesDashRoutes);
 app.use('/api/chick-requests', chickRequestRoutes);
 app.use('/api/feeds-requests', feedsRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/admin', adminDashRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

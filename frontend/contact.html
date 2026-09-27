@@ -91,6 +91,8 @@
   <p class="text-center mb-0">&copy; 2025 Young4Chicks. All rights reserved.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="/js/config.js"></script>
+<script src="/js/api.js"></script>
 <script>
   const contactForm = document.getElementById('contactForm');
   function validateForm() {
@@ -128,8 +130,15 @@
       messageErr.innerHTML = '';
     }
     if (!errFlag) {
-      alert('Message sent successfully!');
-      contactForm.reset();
+      apiFetch('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, subject, message })
+      })
+        .then(() => {
+          alert('Message sent successfully!');
+          contactForm.reset();
+        })
+        .catch(err => alert(err.message || 'Failed to send message, please try again'));
     }
     return false;
   }

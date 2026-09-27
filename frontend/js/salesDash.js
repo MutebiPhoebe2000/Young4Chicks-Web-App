@@ -138,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+let currentOrders = [];
+
 async function loadDashboard() {
   let data;
   try {
@@ -155,8 +157,10 @@ async function loadDashboard() {
   document.getElementById('totalClients').textContent = data.totalClients || 0;
   document.getElementById('newLeadsCount').textContent = data.newLeadsCount || 0;
 
+  currentOrders = data.orders || [];
+
   renderClients(data.clients || []);
-  renderOrders(data.orders || []);
+  renderOrders(currentOrders);
   renderLeads(data.leads || []);
 }
 
@@ -177,8 +181,8 @@ function renderClients(clients) {
           <span class="badge bg-success">${client.status || 'Active'}</span>
         </div>
         <div class="mt-3">
-          <button class="btn btn-sm btn-primary me-2">Contact</button>
-          <button class="btn btn-sm btn-outline-info">History</button>
+          <button class="btn btn-sm btn-primary me-2" onclick="contactClient('${client.farmerFEmail}')">Contact</button>
+          <button class="btn btn-sm btn-outline-info" onclick="viewClientHistory('${(client.farmerFName || '').replace(/'/g, "\\'")}')">History</button>
         </div>
       </div>
     </div>
@@ -235,4 +239,20 @@ function convertLead(id) {
   apiFetch(`/api/sales/leads/${id}/convert`, { method: 'POST' })
     .then(() => loadDashboard())
     .catch(err => alert(err.message || 'Failed to convert lead'));
+}
+
+function contactClient(email) {
+  window.location.href = `mailto:${email}`;
+}
+
+function viewClientHistory(farmerName) {
+  const history = currentOrders.filter(o => o.farmerName === farmerName);
+  if (history.length === 0) {
+    alert(`No request history found for ${farmerName}.`);
+    return;
+  }
+  const lines = history.map(o =>
+    `${new Date(o.createdAt).toLocaleDateString()} - ${o.typeChicks} x${o.numChicks} - ${o.status}`
+  );
+  alert(`Request history for ${farmerName}:\n\n${lines.join('\n')}`);
 }

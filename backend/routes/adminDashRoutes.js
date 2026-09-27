@@ -4,14 +4,19 @@ const router = express.Router();
 const User = require('../models/User');
 const request = require('../models/request');
 const Stock = require('../models/chickStockModels');
-const { ensureBrooderManager } = require('../middleware/authMiddleware');
+const Contact = require('../models/Contact');
+const { ensureAdmin } = require('../middleware/authMiddleware');
 
 // Main dashboard route
-router.get('/dashboard', ensureBrooderManager, async (req, res) => {
+router.get('/dashboard', ensureAdmin, async (req, res) => {
   try {
     const totalFarmers = await User.countDocuments({ userFRole: 'Farmer' });
+    const totalSalesReps = await User.countDocuments({ userFRole: 'SalesRep' });
+    const totalBrooderManagers = await User.countDocuments({ userFRole: 'BrooderManager' });
     const totalRequests = await request.countDocuments();
     const completedOrders = await request.countDocuments({ status: 'Completed' });
+    const totalMessages = await Contact.countDocuments();
+    const unreadMessages = await Contact.countDocuments({ status: 'New' });
 
     const allRequests = await request.find();
     const totalRevenue = allRequests.reduce((total, req) => {
@@ -25,28 +30,34 @@ router.get('/dashboard', ensureBrooderManager, async (req, res) => {
 
     const farmerRequests = await request.find().sort({ createdAt: -1 });
     const users = await User.find()
-      .select('farmerFName farmerFEmail userFRole status createdAt')
+      .select('farmerFName farmerFEmail farmerFNumber farmerFAddress userFRole status createdAt')
       .sort({ createdAt: -1 });
     const stockItems = await Stock.find();
+    const messages = await Contact.find().sort({ createdAt: -1 });
 
     res.json({
       user: req.user,
       totalFarmers,
+      totalSalesReps,
+      totalBrooderManagers,
       totalRequests,
       completedOrders,
       totalRevenue,
+      totalMessages,
+      unreadMessages,
       farmerRequests,
       users,
-      stockItems
+      stockItems,
+      messages
     });
   } catch (error) {
-    console.error('Manager dashboard error:', error);
+    console.error('Admin dashboard error:', error);
     res.status(500).json({ error: 'Server Error' });
   }
 });
 
 // Approve Request
-router.post('/requests/:id/approve', ensureBrooderManager, async (req, res) => {
+router.post('/requests/:id/approve', ensureAdmin, async (req, res) => {
   try {
     await request.findByIdAndUpdate(req.params.id, { status: 'Approved' });
     res.json({ success: true, message: 'Request approved' });
@@ -56,7 +67,7 @@ router.post('/requests/:id/approve', ensureBrooderManager, async (req, res) => {
 });
 
 // Reject Request
-router.post('/requests/:id/reject', ensureBrooderManager, async (req, res) => {
+router.post('/requests/:id/reject', ensureAdmin, async (req, res) => {
   try {
     await request.findByIdAndUpdate(req.params.id, { status: 'Rejected' });
     res.json({ success: true, message: 'Request rejected' });
@@ -66,7 +77,7 @@ router.post('/requests/:id/reject', ensureBrooderManager, async (req, res) => {
 });
 
 // Add Stock
-router.post('/stock', ensureBrooderManager, async (req, res) => {
+router.post('/stock', ensureAdmin, async (req, res) => {
   try {
     const { category, chickType, age, quantity } = req.body;
     const newStock = new Stock({
@@ -83,32 +94,32 @@ router.post('/stock', ensureBrooderManager, async (req, res) => {
   }
 });
 
-// Suspend User
-router.post('/users/:id/suspend', ensureBrooderManager, async (req, res) => {
+// Add Product
+router.post('/products', ensureAdmin, async (req, res) => {
+  try {
+    const { productName, productCategory, productStock } = req.body;
+    const newProduct = new Stock({
+      category: productCategory === 'chick-types' ? 'exotic' : 'local',
+      chickType: productName,
+      age: 0,
+      quantity: Number(productStock),
+      stockDate: new Date()
+    });
+    await newProduct.save();
+    res.json({ success: true, message: 'Product added' });
+  } catch (error) {
+    res.status(400).json({ error: 'Failed to add product' });
+  }
+});
+
+// Suspend / Unsuspend User
+router.post('/users/:id/suspend', ensureAdmin, async (req, res) => {
   try {
     await User.findByIdAndUpdate(req.params.id, { status: 'Suspended' });
     res.json({ success: true, message: 'User suspended' });
   } catch (error) {
     res.status(400).json({ error: 'Failed to suspend user' });
   }
-});
-
-// Add Product (Same as stock for now or you can create a Product model)
-router.post('/products', ensureBrooderManager, async (req, res) => {
-    try {
-        const { productName, productCategory, productPrice, productStock, productDescription } = req.body;
-        const newProduct = new Stock({
-            category: productCategory === 'chick-types' ? 'exotic' : 'local',
-            chickType: productName,
-            age: 0,
-            quantity: Number(productStock),
-            stockDate: new Date()
-        });
-        await newProduct.save();
-        res.json({ success: true, message: 'Product added' });
-    } catch (error) {
-        res.status(400).json({ error: 'Failed to add product' });
-    }
 });
 
 module.exports = router;

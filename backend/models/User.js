@@ -47,17 +47,15 @@ const userSchema = new mongoose.Schema({
   },
   userFRole: {
     type: String,
-    required: true
-  },
-  farmerFPassword: {
-    type: String,
     required: true,
+    enum: ['Farmer', 'SalesRep', 'BrooderManager', 'Admin']
   },
-  farmerFConfirmPassword: {
+  status: {
     type: String,
-    required: true,
+    enum: ['Active', 'Suspended'],
+    default: 'Active'
   }
-});
+}, { timestamps: true });
 userSchema.plugin(passportLocalMongoose, {
   usernameField: "farmerFEmail",
 });

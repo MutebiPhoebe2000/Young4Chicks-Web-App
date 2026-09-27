@@ -8,7 +8,9 @@ const { ensureSalesRep } = require('../middleware/authMiddleware');
 
 router.get('/dashboard', ensureSalesRep, async (req, res) => {
     try {
-        const clients = await User.find({ userFRole: 'Farmer' }).sort({ createdAt: -1 });
+        const clients = await User.find({ userFRole: 'Farmer' })
+            .select('farmerFName farmerFEmail farmerFNumber farmerFAddress userFRole status createdAt')
+            .sort({ createdAt: -1 });
         const leads = await Lead.find({ salesRep: req.user._id }).sort({ createdAt: -1 });
         const orders = await request.find().sort({ createdAt: -1 });
 

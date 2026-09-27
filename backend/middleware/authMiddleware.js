@@ -15,3 +15,4 @@ exports.ensureRole = (roleName) => {
 exports.ensureFarmer = exports.ensureRole('Farmer');
 exports.ensureSalesRep = exports.ensureRole('SalesRep');
 exports.ensureBrooderManager = exports.ensureRole('BrooderManager');
+exports.ensureAdmin = exports.ensureRole('Admin');
