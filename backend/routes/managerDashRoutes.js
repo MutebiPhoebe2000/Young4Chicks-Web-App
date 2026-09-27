@@ -25,7 +25,7 @@ router.get('/dashboard', ensureBrooderManager, async (req, res) => {
 
     const farmerRequests = await request.find().sort({ createdAt: -1 });
     const users = await User.find()
-      .select('farmerFName farmerFEmail userFRole status createdAt')
+      .select('farmerFName farmerFEmail farmerFNumber userFRole status createdAt')
       .sort({ createdAt: -1 });
     const stockItems = await Stock.find();
 
@@ -90,6 +90,32 @@ router.post('/users/:id/suspend', ensureBrooderManager, async (req, res) => {
     res.json({ success: true, message: 'User suspended' });
   } catch (error) {
     res.status(400).json({ error: 'Failed to suspend user' });
+  }
+});
+
+// Delete User
+router.delete('/users/:id', ensureBrooderManager, async (req, res) => {
+  try {
+    const deleted = await User.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({ success: true, message: 'User deleted' });
+  } catch (error) {
+    res.status(400).json({ error: 'Failed to delete user' });
+  }
+});
+
+// Delete Stock / Product
+router.delete('/stock/:id', ensureBrooderManager, async (req, res) => {
+  try {
+    const deleted = await Stock.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'Stock item not found' });
+    }
+    res.json({ success: true, message: 'Stock item removed' });
+  } catch (error) {
+    res.status(400).json({ error: 'Failed to remove stock item' });
   }
 });
 

@@ -21,11 +21,18 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
     });
 
     const allRequests = await request.find({ farmerName: farmer.farmerFName });
-    const totalSpent = allRequests.reduce((total, req) => {
-      const chickCost = (req.numChicks || 0) * 2500;
-      const feedsCost = (req.feedsQuantity || 0) * 5000;
-      return total + chickCost + feedsCost;
-    }, 0);
+    const costOf = (req) => (req.numChicks || 0) * 2500 + (req.feedsQuantity || 0) * 5000;
+
+    const dueRequests = allRequests.filter(req => !['Cancelled', 'Rejected'].includes(req.status));
+    const totalDue = dueRequests.reduce((total, req) => total + costOf(req), 0);
+    const paidAmount = dueRequests
+      .filter(req => req.status === 'Completed')
+      .reduce((total, req) => total + costOf(req), 0);
+    const outstandingBalance = totalDue - paidAmount;
+    const totalSpent = totalDue;
+
+    const scheduled = allRequests.filter(req => req.status === 'Approved').length;
+    const inTransit = allRequests.filter(req => req.status === 'Dispatched').length;
 
     const chickRequests = await request.find({ farmerName: farmer.farmerFName })
       .sort({ createdAt: -1 })
@@ -38,13 +45,13 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
       completedOrders,
       totalSpent,
       chickRequests,
-      totalPaid: Math.floor(totalSpent * 0.6),
-      pendingPayment: Math.floor(totalSpent * 0.4),
-      nextDue: Math.floor(totalSpent * 0.1),
+      totalDue,
+      paidAmount,
+      outstandingBalance,
       pendingDeliveries: pendingRequests,
-      inTransit: 0,
+      inTransit,
       delivered: completedOrders,
-      scheduled: Math.floor(pendingRequests * 0.5)
+      scheduled
     });
 
   } catch (error) {

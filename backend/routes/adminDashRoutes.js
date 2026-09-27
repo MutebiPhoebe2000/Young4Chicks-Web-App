@@ -122,4 +122,17 @@ router.post('/users/:id/suspend', ensureAdmin, async (req, res) => {
   }
 });
 
+// Delete User
+router.delete('/users/:id', ensureAdmin, async (req, res) => {
+  try {
+    const deleted = await User.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({ success: true, message: 'User deleted' });
+  } catch (error) {
+    res.status(400).json({ error: 'Failed to delete user' });
+  }
+});
+
 module.exports = router;

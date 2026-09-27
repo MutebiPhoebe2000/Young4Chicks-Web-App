@@ -123,7 +123,10 @@ function renderUsersTable(users) {
         <td>${u.farmerFEmail}</td>
         <td><span class="badge ${statusBadge}">${u.status || 'Active'}</span></td>
         <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</td>
-        <td class="action-buttons">${suspendBtn}</td>
+        <td class="action-buttons">
+          ${suspendBtn}
+          <button class="btn btn-sm btn-danger" onclick="deleteUser('${u._id}')">Delete</button>
+        </td>
       </tr>
     `;
   }).join('');
@@ -228,6 +231,13 @@ function suspendUser(id) {
   apiFetch(`/api/admin/users/${id}/suspend`, { method: 'POST' })
     .then(() => loadDashboard())
     .catch(err => alert(err.message || 'Failed to suspend user'));
+}
+
+function deleteUser(id) {
+  if (!confirm('Are you sure you want to delete this user? This cannot be undone.')) return;
+  apiFetch(`/api/admin/users/${id}`, { method: 'DELETE' })
+    .then(() => loadDashboard())
+    .catch(err => alert(err.message || 'Failed to delete user'));
 }
 
 function markMessageRead(id) {

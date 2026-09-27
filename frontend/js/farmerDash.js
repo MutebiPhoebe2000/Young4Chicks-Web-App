@@ -236,9 +236,9 @@ async function loadDashboard() {
   document.getElementById('completedOrdersCount').textContent = data.completedOrders || 0;
   document.getElementById('totalSpentAmount').textContent = data.totalSpent || 0;
 
-  document.getElementById('totalPaidAmount').textContent = `${data.totalPaid || 0} shs`;
-  document.getElementById('pendingPaymentAmount').textContent = `${data.pendingPayment || 0} shs`;
-  document.getElementById('nextDueAmount').textContent = `${data.nextDue || 0} shs`;
+  document.getElementById('totalDueAmount').textContent = `${data.totalDue || 0} shs`;
+  document.getElementById('paidAmount').textContent = `${data.paidAmount || 0} shs`;
+  document.getElementById('outstandingBalanceAmount').textContent = `${data.outstandingBalance || 0} shs`;
 
   document.getElementById('pendingDeliveriesCount').textContent = data.pendingDeliveries || 0;
   document.getElementById('inTransitCount').textContent = data.inTransit || 0;
@@ -259,35 +259,84 @@ async function loadDashboard() {
 
   if (requests.length === 0) {
     tbody.innerHTML = '<tr><td colspan="8">No requests found</td></tr>';
+  } else {
+    tbody.innerHTML = requests.map(request => {
+      const badgeClass = request.status === 'Pending' ? 'bg-warning'
+        : request.status === 'Approved' ? 'bg-success'
+        : request.status === 'Cancelled' ? 'bg-danger'
+        : 'bg-info';
+
+      const cancelBtn = request.status === 'Pending'
+        ? `<button class="btn btn-sm btn-danger" onclick="cancelRequest('${request._id}')">Cancel</button>`
+        : '';
+
+      return `
+        <tr>
+          <td>${new Date(request.createdAt).toLocaleDateString()}</td>
+          <td>${request._id.toString().slice(-6)}</td>
+          <td>${request.typeChicks}</td>
+          <td>${request.numChicks}</td>
+          <td>${request.chickFeeds || '-'}</td>
+          <td>${request.feedsQuantity || '-'}</td>
+          <td><span class="badge ${badgeClass}">${request.status}</span></td>
+          <td class="action-buttons">
+            <button class="btn btn-sm btn-info me-1" onclick="viewRequest('${request._id}')">View</button>
+            ${cancelBtn}
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  renderPaymentsTable(requests);
+  renderDeliveriesTable(requests);
+}
+
+function renderPaymentsTable(requests) {
+  const tbody = document.getElementById('farmerPaymentsTable');
+  const payable = requests.filter(r => !['Cancelled', 'Rejected'].includes(r.status));
+
+  if (payable.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5">No records found</td></tr>';
     return;
   }
 
-  tbody.innerHTML = requests.map(request => {
-    const badgeClass = request.status === 'Pending' ? 'bg-warning'
-      : request.status === 'Approved' ? 'bg-success'
-      : request.status === 'Cancelled' ? 'bg-danger'
-      : 'bg-info';
-
-    const cancelBtn = request.status === 'Pending'
-      ? `<button class="btn btn-sm btn-danger" onclick="cancelRequest('${request._id}')">Cancel</button>`
-      : '';
-
+  tbody.innerHTML = payable.map(r => {
+    const amount = (r.numChicks || 0) * 2500 + (r.feedsQuantity || 0) * 5000;
+    const isPaid = r.status === 'Completed';
+    const statusBadge = isPaid ? 'bg-success' : 'bg-warning';
+    const statusLabel = isPaid ? 'Paid' : 'Outstanding';
     return `
       <tr>
-        <td>${new Date(request.createdAt).toLocaleDateString()}</td>
-        <td>${request._id.toString().slice(-6)}</td>
-        <td>${request.typeChicks}</td>
-        <td>${request.numChicks}</td>
-        <td>-</td>
-        <td>-</td>
-        <td><span class="badge ${badgeClass}">${request.status}</span></td>
-        <td class="action-buttons">
-          <button class="btn btn-sm btn-info me-1" onclick="viewRequest('${request._id}')">View</button>
-          ${cancelBtn}
-        </td>
+        <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+        <td>${r._id.toString().slice(-6)}</td>
+        <td>${r._id.toString().slice(-6)}</td>
+        <td>${amount} shs</td>
+        <td><span class="badge ${statusBadge}">${statusLabel}</span></td>
       </tr>
     `;
   }).join('');
+}
+
+function renderDeliveriesTable(requests) {
+  const tbody = document.getElementById('farmerDeliveriesTable');
+
+  if (requests.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7">No deliveries found</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = requests.map(r => `
+    <tr>
+      <td>${r.deliveryDate ? new Date(r.deliveryDate).toLocaleDateString() : '-'}</td>
+      <td>${r.typeChicks}</td>
+      <td>${r.numChicks}</td>
+      <td>${r.chickFeeds || '-'}</td>
+      <td>${r.feedsQuantity || '-'}</td>
+      <td><span class="badge bg-info">${r.status}</span></td>
+      <td>${r.status}</td>
+    </tr>
+  `).join('');
 }
 
 function viewRequest(id) {

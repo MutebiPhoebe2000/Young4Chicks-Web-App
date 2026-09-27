@@ -207,7 +207,7 @@ function renderOrders(orders) {
         <td>${order.typeChicks}</td>
         <td>${order.numChicks}</td>
         <td><span class="badge ${badgeClass}">${order.status}</span></td>
-        <td><button class="btn btn-sm btn-info">View</button></td>
+        <td><button class="btn btn-sm btn-info" onclick="viewOrder('${order._id}')">View</button></td>
       </tr>
     `;
   }).join('');
@@ -228,7 +228,7 @@ function renderLeads(leads) {
       <td>${lead.leadSource}</td>
       <td><span class="badge bg-primary">${lead.status}</span></td>
       <td>
-        <button class="btn btn-sm btn-success me-1" type="button"><i class="bi bi-telephone"></i> Call</button>
+        <button class="btn btn-sm btn-success me-1" type="button" onclick="window.location.href='tel:${lead.phoneNumber}'"><i class="bi bi-telephone"></i> Call</button>
         <button class="btn btn-sm btn-primary" type="button" onclick="convertLead('${lead._id}')"><i class="bi bi-arrow-up-circle"></i> Convert</button>
       </td>
     </tr>
@@ -243,6 +243,15 @@ function convertLead(id) {
 
 function contactClient(email) {
   window.location.href = `mailto:${email}`;
+}
+
+function viewOrder(id) {
+  const order = currentOrders.find(o => o._id === id);
+  if (!order) {
+    alert('Order not found');
+    return;
+  }
+  alert(`Order Details:\nID: ${order._id.slice(-6)}\nFarmer: ${order.farmerName}\nChick Type: ${order.typeChicks}\nQuantity: ${order.numChicks}\nFeeds: ${order.chickFeeds || '-'}\nFeeds Quantity: ${order.feedsQuantity || '-'}\nStatus: ${order.status}`);
 }
 
 function viewClientHistory(farmerName) {
