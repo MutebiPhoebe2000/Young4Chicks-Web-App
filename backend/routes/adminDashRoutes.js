@@ -5,6 +5,7 @@ const User = require('../models/User');
 const request = require('../models/request');
 const Stock = require('../models/chickStockModels');
 const Contact = require('../models/Contact');
+const Lead = require('../models/Lead');
 const { ensureAdmin } = require('../middleware/authMiddleware');
 
 // Main dashboard route
@@ -122,14 +123,21 @@ router.post('/users/:id/suspend', ensureAdmin, async (req, res) => {
   }
 });
 
-// Delete User
+// Delete User (cascades to their own requests and, if a Sales Rep, their leads)
 router.delete('/users/:id', ensureAdmin, async (req, res) => {
   try {
-    const deleted = await User.findByIdAndDelete(req.params.id);
-    if (!deleted) {
+    const userId = req.params.id;
+    const existing = await User.findById(userId);
+    if (!existing) {
       return res.status(404).json({ error: 'User not found' });
     }
-    res.json({ success: true, message: 'User deleted' });
+
+    const deletedRequests = await request.deleteMany({ farmer: userId });
+    const deletedLeads = await Lead.deleteMany({ salesRep: userId });
+    await User.findByIdAndDelete(userId);
+
+    const relatedCount = deletedRequests.deletedCount + deletedLeads.deletedCount;
+    res.json({ success: true, message: `User and ${relatedCount} related record(s) deleted` });
   } catch (error) {
     res.status(400).json({ error: 'Failed to delete user' });
   }

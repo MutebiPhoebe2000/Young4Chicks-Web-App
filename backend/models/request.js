@@ -5,6 +5,10 @@ const requestSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    farmer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     farmerNIN: {
         type: String,
         // required: true

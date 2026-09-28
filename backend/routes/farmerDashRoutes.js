@@ -67,6 +67,7 @@ router.post('/new-request', ensureAuthenticated, async (req, res) => {
 
     const newRequest = new request({
       farmerName: req.user.farmerFName,
+      farmer: req.user._id,
       typeChicks: typeChicks,
       numChicks: Number(numChicks),
       chickFeeds: chickFeeds,
@@ -94,6 +95,7 @@ router.post('/quick-request', ensureAuthenticated, async (req, res) => {
 
       const newRequest = new request({
         farmerName: req.user.farmerFName,
+        farmer: req.user._id,
         typeChicks: quickChickType,
         numChicks: Number(quickQuantity),
         farmerType: 'Returning',
